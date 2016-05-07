@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+
+  #get 'admin/dashboard'
+
+  get 'help' => 'static_pages#help'
+  get 'about'=>'static_pages#about'
+
+  devise_for :users
+
+  authenticate :user do
+    get 'home' => 'static_pages#home'
+    get 'admin' => 'admin#dashboard'
+    get 'offsprings' => 'admin#offsprings'
+    resources :users, only: [:show, :index]
+    resources :offsprings, only: [:new, :create, :destroy]
+    resources :rooms, only: [:index]
+    root to: "static_pages#home"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

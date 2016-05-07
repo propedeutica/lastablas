@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Lastablas</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<!--[if IE 9]><html class="ie9"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="es">
+<!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title><%=full_title(yield(:title))%></title>
+
+    <%= render 'layouts/shim' %>
+
 </head>
-<body>
+  <body>
+    <%= render 'layouts/header' %>
 
-<%= yield %>
 
-</body>
+    <% flash.each do |message_type, message| %>
+      <div class="<%= flash_class(message_type) + " alert-dismissable"%>">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+          <span class="pficon pficon-close"></span>
+        </button>
+        <span class="<%= flash_icon(message_type) %>"></span>
+        <%= message %>
+      </div>
+    <% end %>
+    .<div class="container-fluid">
+      <%= yield %>
+    </div>
+    <div class="well-lg">
+       <%= debug(params) if Rails.env.development? %>
+   </div>
+  </body>
 </html>

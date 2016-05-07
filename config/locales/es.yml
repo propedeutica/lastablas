@@ -1,0 +1,105 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+es:
+  hello: "Hola mundo"
+  log_in: "Autenticarse"
+  sign_up: "Darse de alta"
+  forgot_your_password?: "¿Olvidó su password?"
+  characters_minimum: "caractéres como mínimo"
+  create: "Alta"
+  we_need_your_current_password_to_confirm_your_changes: "hola"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              one: "Nombre"
+              blank: "no puede estar vacío"
+              too_short: "demasiado corto"
+              too_long: "demasiado largo"
+            last_name:
+              blank: "no puede estar vacío"
+              too_short: "demasiado corto"
+              too_long: "demasiado largo"
+            phone:
+              blank: "no puede estar vacío"
+              too_short: "demasiado corto"
+              too_long: "demasiado largo"
+              invalid: "no es válido"
+            password:
+              blank: "no puede estar vacío"
+              too_short: "demasiado corto"
+              too_long: "demasiado largo"
+            password_confirmation:
+              confirmation: "no coincide"
+            email:
+              blank: "no puede estar vacío"
+              too_short: "demasiado corto"
+              too_long: "demasiado largo"
+              invalid: "no es válido"
+              taken: "ya existe"
+            remember_me: "Recordarle"
+        offspring:
+          attributes:
+            first_name:
+              blank: "no puede estar vacío"
+              too_short: "demasiado corto"
+              too_long: "demasiado largo"
+            last_name:
+              blank: "no puede estar vacío"
+              too_short: "demasiado corto"
+              too_long: "demasiado largo"
+            age:
+              blank: "no puede estar vacío"
+              not_an_integer: "tiene que ser entero"
+              less_than_or_equal_to: "tiene que ser menor o igual a %{count}"
+              greater_than_or_equal_to: "tiene que ser mayor o igual a %{count}"
+        room:
+          attributes:
+            name:
+              blank: "no puede estar vacío"
+            capacity:
+              greater_than: "debe ser positivo"
+        shift:
+          attributes:
+            day_of_week:
+              less_than_or_equal_to: "tiene que ser menor o igual a %{count}"
+              greater_than_or_equal_to: "tiene que ser mayor o igual a %{count}"
+            start_time:
+              blank: "no puede estar vacío"
+            end_time:
+              blank: "no puede estar vacío"
+
+      messages:
+        record_invalid: "no es válido"
+    attributes:
+      user:
+        first_name: "Nombre"
+        last_name: "Apellidos"
+        email: "Email"
+        phone: "Teléfono"
+        password: "Password"
+        password_confirmation: "Confirmar password"
+        current_password: "Password actual"
+        remember_me: "Recordarle"

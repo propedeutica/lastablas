@@ -1,0 +1,29 @@
+
+<div class="list-group list-view-pf">
+  <div class="list-group-item list-view-pf-stacked">
+    <div class="list-view-pf-main-info">
+          <div class="list-view-pf-checkbox">
+      <input type="checkbox">
+    </div>
+
+      <div class="list-view-pf-body">
+      <%= offspring.first_name %>
+      </div>
+    </div>
+    <div class="list-view-pf-main-info">
+      <%= offspring.last_name %>
+    </div>
+    <div class="list-view-pf-main-info">
+      <%= offspring.age %>
+    </div>
+    <div class="list-view-pf-main-info">
+      <%= link_to full_name_for(offspring.user),offspring.user %>
+    </div>
+    <div class="list-view-pf-actions">
+      <button class="btn btn-default">Asignar horario</button>
+      <%= button_to "Borrar", { action: "destroy", controller: 'offsprings', id: offspring.id} , method: :delete, data: { confirm: '¿Está seguro?'} , class:"btn btn-primary"%>
+
+    </div>
+  </div>
+</div>
+

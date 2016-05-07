@@ -1,0 +1,39 @@
+
+<h1>
+<div>
+  <div class="container-fluid">
+    <lu class="list-group">
+      <li class="img-thumbnail"><%= gravatar_for @user %> </li>
+      <li class="list-group-item"><%= @user.first_name %></li>
+      <li class="list-group-item"><%= @user.last_name %></li>
+      <li class="list-group-item"><%= @user.email%></li>
+      <li class="list-group-item"><%= @user.phone%></li>
+    </lu>
+  </div>
+  <div class="list-group">
+  <% if @user.offsprings.any? %>
+      <h3>Niños: (<%= @user.offsprings.count %>)</h3>
+      <div class="list-group list-view-pf">
+        <%= render @user.offsprings %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="container-fluid">
+    <%= link_to "Añadir niño", new_offspring_path  %>
+  </div>
+</div>
+
+
+<script>
+  // Row Checkbox Selection
+  $(document).ready(function () {
+    $("input[type='checkbox']").change(function (e) {
+      if ($(this).is(":checked")) {
+        $(this).closest('.list-group-item').addClass("active");
+      } else {
+        $(this).closest('.list-group-item').removeClass("active");
+      }
+    });
+  });
+<script>
