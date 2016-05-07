@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.3'
+gem 'rails', '~>4.1'
 
 ### OpenShift Online changes:
 
@@ -89,7 +89,7 @@ end
 # Add rack specific version to fix deployment error
 # in OpenShift online
 
-gem 'rack'
+gem 'rack', '1.5.2'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
