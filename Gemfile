@@ -22,7 +22,7 @@ gem 'rake'
 
 #gems for development
 group :devel do
-  gem 'web-console'
+  gem 'web-console', "~>2.0"
   gem 'guard-rspec', :require => false
   gem 'listen', "~> 3.0.0" # Because of ruby 2.0
 end
