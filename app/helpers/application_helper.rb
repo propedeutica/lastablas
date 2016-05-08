@@ -39,15 +39,14 @@ module ApplicationHelper
 
   def week_day_convert(day)
     case day
-      when 1 then "Lunes"
-      when 2 then "Martes"
-      when 3 then "Miécoles"
-      when 4 then "Jueves"
-      when 5 then "Viernes"
-      when 6 then "Sábado"
-      when 7 then "Domingo"
-      else "Ninguno"
+    when 1 then 'Lunes'
+    when 2 then 'Martes'
+    when 3 then 'Miércoles'
+    when 4 then 'Jueves'
+    when 5 then 'Viernes'
+    when 6 then 'Sábado'
+    when 7 then 'Domingo'
+    else 'Ninguno'
     end
   end
-
 end

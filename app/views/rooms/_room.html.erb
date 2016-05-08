@@ -3,7 +3,17 @@
     <h3 class="panel-title"><%="Aula #{room.name}, capacidad: #{room.capacity}"%></h3>
   </div>
   <div class="panel-body">
-    <%= render room.shifts %>
+    <%= week_calendar number_of_weeks: 2, events: room.shifts  do |date, events| %>
+    <%= week_day_convert(date.wday) %>
+    <% events.each do |event| %>
+        <div>
+          <%= event.start_time.to_formatted_s(:time) %>
+          ,
+          <%= event.room.capacity - event.prebooked %>
+          plazas
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
