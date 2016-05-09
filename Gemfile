@@ -117,7 +117,5 @@ gem 'devise', "~> 3.0" # 4.0 needs ruby 2.2
 # Generating guides requires Redcarpet 2.1.1+.
 gem 'redcarpet', '~> 2.1.1'
 
-# Simple calendar to show calendars
-gem "simple_calendar", "~> 2.0"
 
 

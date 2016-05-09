@@ -23,7 +23,6 @@ module ApplicationHelper
   end
 
   def flash_icon(level)
-
     case level
       when "notice" then "pficon pficon-info"
       when "default" then "pficon pficon-default"
@@ -36,7 +35,6 @@ module ApplicationHelper
       else "pficon pficon-info"
     end
   end
-
   def week_day_convert(day)
     case day
     when 1 then 'Lunes'

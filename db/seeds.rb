@@ -21,5 +21,16 @@ end
  end
 
 1.times do |n|
-  FactoryGirl.create(:room, :name => "Virgen del Pilar", :capacity => 30)
+  r=FactoryGirl.create(:room, name: "Virgen del Pilar", capacity: 30)
+  (1..3).each do |a|
+    t = 15 + a
+    FactoryGirl.create(:shift, start_time: "#{t}:00", end_time: "#{t + 1}:00",
+                               prebooked: 2, room: r)
+    FactoryGirl.create(:shift, start_time: "#{t}:00", end_time: "#{t + 1}:00",
+                               day_of_week: 2, prebooked: 2, room: r)
+    FactoryGirl.create(:shift, start_time: "#{t}:00", end_time: "#{t + 1}:00",
+                               day_of_week: 3, prebooked: 2, room: r)
+  end
+
 end
+

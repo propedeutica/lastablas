@@ -216,8 +216,6 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     shellany (0.0.1)
-    simple_calendar (2.1.1)
-      rails (>= 3.0)
     slop (3.6.0)
     spring (1.7.1)
     sprockets (3.6.0)
@@ -282,7 +280,6 @@ DEPENDENCIES
   sass-rails (>= 3.3)
   sdoc (~> 0.4.0)
   selenium-webdriver
-  simple_calendar (~> 2.0)
   spring
   sqlite3
   thor

@@ -67,12 +67,12 @@
       <%end%>
         <%= link_to "Principal",root_path %>
       </li>
-      <%if url_for=="Horarios" %>
+      <%if url_for==rooms_path %>
         <li class="active">
       <% else %>
         <li>
       <%end%>
-        <a href="#">Horarios</a>
+        <%= link_to "Horarios", rooms_path %>
       </li>
       <%if url_for==help_path %>
         <li class="active">
