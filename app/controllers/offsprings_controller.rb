@@ -1,9 +1,7 @@
+# Offsprings are dependent on users and are the ones that get assigned to shifts
+# They can't be assigned themselves, and need the process to be done by the user
 class OffspringsController < ApplicationController
-    before_action :authenticate_user!
-
- # def index
- #  @offsprings=Offspring.paginate(page: params[:page])
- # end
+  before_action :authenticate_user!
 
   def show
   end
@@ -15,7 +13,7 @@ class OffspringsController < ApplicationController
   def create
     @offspring = current_user.offsprings.build(offsprings_params)
     if @offspring.save
-      flash[:success]="Niño añadido"
+      flash[:success] = "Niño añadido"
       redirect_to root_url
     else
       render 'static_pages/home'
@@ -23,16 +21,15 @@ class OffspringsController < ApplicationController
   end
 
   def destroy
-    offspring=Offspring.find_by_id(params[:id])
+    offspring = Offspring.find_by_id(params[:id])
     offspring.destroy
     flash[:warning] = "Niño borrado"
     redirect_to request.referrer || root_url
   end
 
   private
-    def offsprings_params
-      params.require(:offspring).permit(:first_name, :last_name, :age)
-    end
 
-
+  def offsprings_params
+    params.require(:offspring).permit(:first_name, :last_name, :age)
+  end
 end

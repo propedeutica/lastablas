@@ -1,3 +1,6 @@
+# Admin users can see and act upon all the informatoin in the database
+# and not only in their information
+# They have an speicific layout to reflec this
 class AdminController < ApplicationController
   layout 'admin'
 
