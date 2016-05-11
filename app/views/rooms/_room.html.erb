@@ -12,7 +12,7 @@
               <li class="list-group-item-text">
                 <%= shift.start_time.to_formatted_s(:time) %>
                 ,
-                <%= shift.room.capacity - shift.prebooked %>
+                <%= shift.room.capacity - shift.prebooked - shift.offsprings.count%>
                 plazas</li>
               <% end %>
             </ul>

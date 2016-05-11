@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160430162544) do
+ActiveRecord::Schema.define(version: 20160511065405) do
 
   create_table "offsprings", force: true do |t|
     t.string   "first_name"
@@ -20,13 +20,15 @@ ActiveRecord::Schema.define(version: 20160430162544) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shift_id"
   end
 
+  add_index "offsprings", ["shift_id"], name: "index_offsprings_on_shift_id"
   add_index "offsprings", ["user_id"], name: "index_offsprings_on_user_id"
 
   create_table "rooms", force: true do |t|
-    t.string   "name", default: ""
-    t.integer  "capacity", default: 0, null: false
+    t.string   "name",       default: ""
+    t.integer  "capacity",   default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
