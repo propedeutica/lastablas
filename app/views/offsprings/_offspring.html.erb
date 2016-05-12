@@ -20,8 +20,14 @@
       <%= link_to full_name_for(offspring.user),offspring.user %>
     </div>
     <div class="list-view-pf-actions">
-      <button class="btn btn-default">Asignar horario</button>
-      <%= button_to "Borrar", { action: "destroy", controller: 'offsprings', id: offspring.id} , method: :delete, data: { confirm: '¿Está seguro?'} , class:"btn btn-primary"%>
+      <% if offspring.shift.nil? %>
+      <%= link_to "Asignar horario", assignments_new_path(offspring), class: "btn btn-default"%>
+      <% else %>
+      <button class="btn btn-warning">
+        <%= "#{week_day_convert(offspring.shift.day_of_week)}: #{offspring.shift.start_time.to_formatted_s(:time)}" %>
+      </button>
+      <% end %>
+      <%= button_to "Borrar niño", { action: "destroy", controller: 'offsprings', id: offspring.id} , method: :delete, data: { confirm: '¿Está seguro?'} , class:"btn btn-primary"%>
 
     </div>
   </div>

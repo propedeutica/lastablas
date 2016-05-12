@@ -33,7 +33,6 @@ group :development, :test do
   gem "rspec-rails",    "~>3.4"
   gem 'byebug'
   gem 'capybara',       "~>2.5.0"
-#  gem 'factory_girl',   "~>4.5"
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'faker'
@@ -59,7 +58,7 @@ end
 
 ### / OpenShift changes
 
-# Use SCSS for stylesheets
+# Use SCSS for stylesheets and patternfly
 
 gem 'patternfly-sass', '~> 3.3.0'
 gem 'sass-rails', '>= 3.3'
@@ -110,12 +109,13 @@ gem 'bcrypt', '~> 3.1.7'
 # Paginate helper gem
 gem 'bootstrap-will_paginate'
 # Devise
-
 gem 'devise', "~> 3.0" # 4.0 needs ruby 2.2
 
 # Let's get a copy of documentation
 # Generating guides requires Redcarpet 2.1.1+.
 gem 'redcarpet', '~> 2.1.1'
 
+# Introducing Angular UI
+gem "angular-ui-bootstrap-rails",     "~>0.13.0"
 
 
