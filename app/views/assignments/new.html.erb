@@ -1,33 +1,5 @@
-<%= render @rooms%>
-<div>
 <h2>
-  Seleccione una fecha
+  Seleccione un turno para <%= @offspring.first_name %>
 </h2>
 
-  <select class="selectpicker">
-  <% @rooms.each do |x| %>
-    <option><%= x.name %></option>
-  </select>
-  <% end %>
-
-
-<select class="selectpicker" name="selDay">
-  <% (1..7).each do |y| %>
-  <option><%= week_day_convert(y) %></option>
-  <% end %>
-</select>
-
-<select class="selectpicker" name="selHour">
-</select>
-
-<p>
-
-  </p>
-</div>
-
-
-
-<script selRoom=$('select[name=selRoom]').val(1);
-        $('.selectpicker').selectpicker('refresh') </script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<%= render partial: 'selection', collection: @rooms, as: :room %>

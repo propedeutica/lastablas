@@ -20,4 +20,3 @@
 //= require bootstrap
 //= require patternfly
 
-//= require_tree .

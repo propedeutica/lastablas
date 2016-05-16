@@ -21,13 +21,11 @@
     </div>
     <div class="list-view-pf-actions">
       <% if offspring.shift.nil? %>
-      <%= link_to "Asignar horario", assignments_new_path(offspring), class: "btn btn-default"%>
+      <%= link_to "Asignar horario", new_assignment_path(offspring), class: "btn btn-default"%>
       <% else %>
-      <button class="btn btn-warning">
-        <%= "#{week_day_convert(offspring.shift.day_of_week)}: #{offspring.shift.start_time.to_formatted_s(:time)}" %>
-      </button>
+      <%= button_to "#{week_day_convert(offspring.shift.day_of_week)}: #{offspring.shift.start_time.to_formatted_s(:time)}", assignment_path(offspring), method: :delete, data: { confirm: 'Esto borrará la asignación, ¿Está seguro?'}, class: "btn btn-warning" %>
       <% end %>
-      <%= button_to "Borrar niño", { action: "destroy", controller: 'offsprings', id: offspring.id} , method: :delete, data: { confirm: '¿Está seguro?'} , class:"btn btn-primary"%>
+      <%= button_to "Borrar niño", { action: "destroy", controller: 'offsprings', id: offspring.id} , method: :delete, data: { confirm: 'Esta acción no puede cancelarse, ¿Está seguro?'} , class:"btn btn-primary"%>
 
     </div>
   </div>

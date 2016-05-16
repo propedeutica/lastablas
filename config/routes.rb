@@ -13,8 +13,9 @@ Rails.application.routes.draw do
     resources :offsprings, only: [:new, :create, :destroy]
     resources :rooms, only: [:index]
     root to: "static_pages#home"
-    get 'assignments/new'
-    get 'assignments/index'
+    resources :assignments, only: [:new, :create, :index, :destroy]
+#    get 'assignments/new'
+#    get 'assignments/index'
 
   end
 
