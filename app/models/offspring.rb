@@ -13,9 +13,7 @@ class Offspring < ActiveRecord::Base
                              less_than_or_equal_to: 18 }
   validates :user, presence: true
   validates_each :shift do |offspring|
-    if offspring.shift.nil?
-      return
-    else
+    if !offspring.shift.nil?
       offspring.errors.add(:shift, "no hay espacio") if !offspring.shift.sites_available?
     end
   end
