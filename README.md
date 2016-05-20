@@ -4,20 +4,21 @@ This application tries to make it possible to reserve places in a school or simi
 
 
 ##TODO
+* Validations of models, users should not be able to assign shifts that are full
 * Create new rspec that covers 100% of the tool
 * Move erb to haml
 * Allow the admin to create shifts and rooms
 * Allow the users to assign offpsring to shifts
 * Allow the user to delete assignments to shifts
-* Update admin to use Ajax
+* Update Admin to use Ajax
 * Update Admin dashboard to AngularJS
-* Configure devise to use email
+* Configure devise to use email from an external provider
 * Configure devise to send onboarding email to active accounts
 * Configure devise to reset password
 * Make admin capable of knowing which offspring is assigned to each shift.
 * Improve documentation
 * Comment code
-* Localize
+* Localize? Perhaps it is not needed
 
 ## Description
 Catequesis is a simple program to make it possible distributed assignment of shifts to students that can not do it by themselves, so their parents do it in their behalf

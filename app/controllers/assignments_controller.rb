@@ -4,13 +4,11 @@ class AssignmentsController < ApplicationController
     @rooms = Room.all
   end
 
-  def index
-  end
-
   def create
     of=Offspring.find_by_id(params["format"])
     of.shift=Shift.find_by_id(params["shift"])
     of.save!
+    end
     redirect_to root_url
   end
 
