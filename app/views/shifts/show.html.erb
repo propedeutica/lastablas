@@ -1,0 +1,14 @@
+<h1>
+  <%=" #{@shift.room.name}, #{week_day_convert(@shift.day_of_week)} de #{@shift.start_time.to_formatted_s(:time)} a
+#{@shift.end_time.to_formatted_s(:time)} " %>
+</h1>
+
+<h2>
+  Catecúmenos
+</h2>
+<section class="container-fluid">
+        <div class="list-group list-view-pf">
+          <%= render @offsprings %>
+
+      </div>
+</section>

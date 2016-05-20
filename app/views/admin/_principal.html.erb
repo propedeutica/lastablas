@@ -45,7 +45,7 @@
     <%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
   </div>
   <div id="menu3" class="tab-pane" role="tabpanel">
-    <%= render @rooms %>
+    <%= render partial: 'shift_view', collection: @rooms, as: :room %>
   </div>
 </div>
 

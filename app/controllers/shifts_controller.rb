@@ -4,6 +4,6 @@ class ShiftsController < ApplicationController
     if @shift==nil
       redirect_to home_path
     end
-    render @shift
+    @offsprings=@shift.offsprings
   end
 end
