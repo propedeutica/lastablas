@@ -6,17 +6,15 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticate :user do
+    root to: "static_pages#home"
     get 'home' => 'static_pages#home'
-    get 'admin' => 'admin#dashboard'
-    get 'offsprings' => 'admin#offsprings'
     resources :users, only: [:show, :index]
     resources :offsprings, only: [:new, :create, :destroy]
     resources :rooms, only: [:index]
-    root to: "static_pages#home"
     resources :assignments, only: [:new, :create, :destroy]
     resources :shifts, only: [:show]
-#    get 'assignments/new'
-#    get 'assignments/index'
+    get 'admin' => 'admin#dashboard'
+    get 'offsprings' => 'admin#offsprings'
 
   end
 

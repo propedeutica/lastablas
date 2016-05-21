@@ -4,11 +4,12 @@ This application tries to make it possible to reserve places in a school or simi
 
 
 ##TODO
-* Validations of models, users should not be able to assign shifts that are full
+* Validations of models, ~~users should not be able to assign shifts that are full~~
 * Create new rspec that covers 100% of the tool
+* Make sure that only admins has access to the admin tab
 * Move erb to haml
 * Allow the admin to create shifts and rooms
-* Allow the users to assign offpsring to shifts
+* ~~Allow the users to assign offpsring to shifts~~
 * Allow the user to delete assignments to shifts
 * Update Admin to use Ajax
 * Update Admin dashboard to AngularJS
