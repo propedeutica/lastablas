@@ -16,7 +16,7 @@ This application tries to make it possible to reserve places in a school or simi
 * Configure devise to use email from an external provider
 * Configure devise to send onboarding email to active accounts
 * Configure devise to reset password
-* Make admin capable of knowing which offspring is assigned to each shift.
+* ~~Make admin capable of knowing which offspring is assigned to each shift.~~
 * Improve documentation
 * Comment code
 * Localize? Perhaps it is not needed

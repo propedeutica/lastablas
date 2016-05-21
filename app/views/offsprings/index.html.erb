@@ -15,12 +15,13 @@
       <%= render @offsprings %>
   </tbody>
 </table>
+
 <script src="/components/patternfly/components/datatables/media/js/jquery.dataTables.js"></script>
-  <script>
-    // Initialize Datatables
-    $(document).ready(function() {
-      $('.datatable').dataTable();
-    });
-  </script>
+<script>
+  // Initialize Datatables
+  $(document).ready(function() {
+    $('.datatable').dataTable();
+  });
+</script>
 
 <%= will_paginate :previous_label => "Previo", :next_label => "Siguiente"%>
