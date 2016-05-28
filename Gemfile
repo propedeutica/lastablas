@@ -32,7 +32,7 @@ group :development, :test do
   gem 'thor'
   gem "rspec-rails",    "~>3.4"
   gem 'byebug'
-  gem 'capybara',       "~>2.5.0"
+  gem 'capybara',       "~>2.7.0"
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'faker'
@@ -60,8 +60,8 @@ end
 
 # Use SCSS for stylesheets and patternfly
 
-gem 'patternfly-sass', '~> 3.3.0'
-gem 'sass-rails', '>= 3.3'
+gem 'patternfly-sass', '~> 3.4.0'
+gem 'sass-rails', '>= 3.4'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
