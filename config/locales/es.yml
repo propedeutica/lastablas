@@ -27,6 +27,10 @@ es:
   characters_minimum: "caractéres como mínimo"
   create: "Alta"
   we_need_your_current_password_to_confirm_your_changes: "hola"
+  primary_first: "1º de Primaria"
+  primary_second: "2º de Primaria"
+  primary_third: "3º de Primaria"
+  others: "Otros"
 
   activerecord:
     errors:
