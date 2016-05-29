@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'static_pages/intructions'
+
   get 'help' => 'static_pages#help'
   get 'about'=>'static_pages#about'
 

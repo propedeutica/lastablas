@@ -18,7 +18,7 @@
 
       <div class="form-group">
         <%= f.label :grade %>
-        <%= f.select :grade, Offspring.grades.map { |w,y| [I18n.t(w)] }, class: 'form-control' %>
+        <%= f.select :grade, Offspring.grades.map { |w,y| [I18n.t(w), w] }, class: 'form-control' %>
       </div>
 
       <div class="actions">

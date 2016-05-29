@@ -12,6 +12,10 @@ class OffspringsController < ApplicationController
 
   def create
     @offspring = current_user.offsprings.build(offsprings_params)
+    if !@offspring.primary_first?
+      redirect_to static_pages_intructions_path and return
+    end
+
     if @offspring.save
       flash[:success] = "Niño añadido"
       redirect_to root_url
@@ -30,6 +34,6 @@ class OffspringsController < ApplicationController
   private
 
   def offsprings_params
-    params.require(:offspring).permit(:first_name, :last_name, :age)
+    params.require(:offspring).permit(:first_name, :last_name, :grade)
   end
 end
