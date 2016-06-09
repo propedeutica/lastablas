@@ -1,6 +1,6 @@
 # Catequesis
 ## Introduction
-This application tries to make it possible to reserve places in a school or similar system, for parents
+This application tries to make it possible to reserve places in aurch school or similar system. Parents can sign up and then add their offspring, and then ask for a particular shift where they want to be assigned.
 
 
 ##TODO
