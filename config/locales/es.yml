@@ -74,7 +74,7 @@ es:
               blank: "no puede estar vacío"
               too_short: "demasiado corto"
               too_long: "demasiado largo"
-            age:
+            grade:
               blank: "no puede estar vacío"
               not_an_integer: "tiene que ser entero"
               less_than_or_equal_to: "tiene que ser menor o igual a %{count}"

@@ -12,7 +12,7 @@
   </div>
   <div class="list-group">
   <% if @user.offsprings.any? %>
-      <h3>Niños: (<%= @user.offsprings.count %>)</h3>
+      <h2>Niños: (<%= @user.offsprings.count %>)</h2>
       <div class="list-group list-view-pf">
         <%= render @user.offsprings %>
       </div>

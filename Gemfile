@@ -65,7 +65,7 @@ gem 'sass-rails', '>= 3.4'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -116,6 +116,6 @@ gem 'devise', "~> 3.0" # 4.0 needs ruby 2.2
 gem 'redcarpet', '~> 2.1.1'
 
 # Introducing Angular UI
-gem "angular-ui-bootstrap-rails",     "~>0.13.0"
+gem "angular-ui-bootstrap-rails",     "~>1.3.0"
 
 
