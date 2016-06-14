@@ -18,6 +18,7 @@ class Shift < ActiveRecord::Base
   private
 
     def always_same_week
+      self.day_of_week ||= 8 # Esto no tiene sentido
       self.start_time ||= "00:00"
       self.end_time ||= "01:00"
       self.start_time=DateTime.new(year=2001, month=1, day=self.day_of_week, hour=self.start_time.hour, min=self.start_time.min)
