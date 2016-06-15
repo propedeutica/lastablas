@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528214344) do
+ActiveRecord::Schema.define(version: 20160615125116) do
 
   create_table "offsprings", force: true do |t|
     t.string   "first_name"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20160528214344) do
 
   create_table "shifts", force: true do |t|
     t.integer  "day_of_week", default: 1, null: false
-    t.datetime "start_time",              null: false
-    t.datetime "end_time",                null: false
+    t.string   "start_time",              null: false
+    t.string   "end_time",                null: false
     t.integer  "prebooked",   default: 0, null: false
     t.integer  "room_id"
     t.datetime "created_at"

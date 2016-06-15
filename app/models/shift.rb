@@ -22,8 +22,8 @@ class Shift < ActiveRecord::Base
       #day=1 unless (1..7).include?(day)
       self.start_time ||= "00:00"
       self.end_time ||= "01:00"
-      self.start_time=DateTime.new(2001, 1, day, self.start_time.hour, self.start_time.min)
-      self.end_time=DateTime.new(2001, 1, day, self.end_time.hour, self.end_time.min)
+      #self.start_time=DateTime.new(2001, 1, day, self.start_time.hour, self.start_time.min)
+      #self.end_time=DateTime.new(2001, 1, day, self.end_time.hour, self.end_time.min)
     end
 
 end
