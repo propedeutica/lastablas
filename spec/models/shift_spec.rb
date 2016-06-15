@@ -41,9 +41,6 @@ RSpec.describe Shift, type: :model do
     expect(shift.errors[:end_time]).to include "no puede estar vacío"
   end
 
-
-  pending "start_time is earlier than end_time"
-
   it "prebooked is an integer" do
     shift.prebooked="seven"
     shift.valid?
@@ -54,4 +51,9 @@ RSpec.describe Shift, type: :model do
   pending "prebooked is lower than the capacity of the room it belongs to"
   pending "relations are nullified whtn the shift is detroyed"
   pending "it gives back the number of spaces available"
+  pending "start_time is defined as HH:MM"
+  pending "start_time is between 00:00 and 23:59"
+  pending "end_time is defined as HH:MM"
+  pending "start_time is earlier than end_time"
+  pending "end_time is between 00:00 and 23:59"
 end
