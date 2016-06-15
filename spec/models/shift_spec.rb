@@ -10,8 +10,8 @@ RSpec.describe Shift, type: :model do
   it "has a day of the week" do
     shift.day_of_week=nil
     shift.valid?
-    expect(shift).to be_valid
-    expect(shift.day_of_week).to be(1)
+    expect(shift).not_to be_valid
+    expect(shift.errors[:day_of_week]).to include "no puede estar vacío"
   end
   it "day is an integer greater or equal to 1" do
     shift.day_of_week=0
@@ -48,7 +48,7 @@ RSpec.describe Shift, type: :model do
     shift.prebooked="seven"
     shift.valid?
     expect(shift).not_to be_valid
-    expect(shift.errors[:prebooked]).to include "no puede estar vacío"
+    expect(shift.errors[:prebooked]).to include "tiene que ser un número entero"
   end
 
   pending "prebooked is lower than the capacity of the room it belongs to"
