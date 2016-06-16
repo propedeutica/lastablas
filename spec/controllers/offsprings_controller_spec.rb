@@ -8,6 +8,8 @@ RSpec.describe OffspringsController, type: :controller do
         FactoryGirl.create(:offspring)
       end
     end
+
+
     context "When not authenticated" do
       pending "redirects to authentication" do
         @request.env["devise.mapping"] = Devise.mappings[:user]
@@ -23,4 +25,32 @@ RSpec.describe OffspringsController, type: :controller do
       end
     end
   end
+
+  describe "get CREATE" do
+    let(:user) {FactoryGirl.create(:user)}
+
+    context "When create new offspring" do
+      it "allows primary_first children" do
+        sign_in user 
+        expect{
+          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
+        }.to change(user.offsprings, :count).by(1)
+          
+      end
+
+      it "does not allow any other grade than first" do
+        sign_in user 
+        expect{
+          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_second}
+        }.to change(user.offsprings, :count).by(0)
+        expect{
+          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_third}
+        }.to change(user.offsprings, :count).by(0)
+        expect{
+          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :others}
+        }.to change(user.offsprings, :count).by(0)
+          
+      end
+    end  
+  end  
 end
