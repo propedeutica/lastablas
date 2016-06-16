@@ -9,6 +9,7 @@
 <div class="tab-content">
   <div id="menu1" class="tab-pane active" role="tabpanel">
     <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
+    <div class="table-responsive">
     <table class="datatable table table-striped table-bordered table-hover">
       <thead>
         <tr>
@@ -24,6 +25,7 @@
           <%= render @users %>
       </tbody>
   </table>
+</div>
     <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
   </div>
   <div id="menu2" class="tab-pane" role="tabpanel">
@@ -66,4 +68,10 @@ $(function() {
         $('[href="' + lastTab + '"]').tab('show');
     }
 });</script>
-
+<script src="assets/javascripts/patternfly.js"></script>
+<script>
+  // Initialize Datatables
+  $(document).ready(function() {
+    $('.datatable').dataTable();
+  });
+</script>
