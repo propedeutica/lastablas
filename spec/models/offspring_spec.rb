@@ -21,21 +21,32 @@ RSpec.describe Offspring, type: :model do
     expect(child.errors[:last_name]).to include("no puede estar vacío")
   end
 
-  it "should have the same surname than the brothers" do
-    child = FactoryGirl.create(:offspring)
-    brother = FactoryGirl.build(:offspring, user: child.user, last_name:"aaassssddd")
-    brother.valid?
-    expect(brother.errors[:last_name]).to include("tiene que coincidir con el de sus hermanos")
-  end
-
-  it "is invalid wihout a grade" do
-    child = FactoryGirl.build(:offspring, grade:nil)
+  it "is invalid wihout an course" do
+    child=FactoryGirl.build(:offspring, grade:nil)
     expect(child).not_to be_valid
     child.valid?
     expect(child.errors[:grade]).to include("no puede estar vacío")
   end
 
-  pending "grades should belong to the grade list"
+  
+  it "is in the first grade " do
+    child=FactoryGirl.build(:offspring, :grade => :primary_first)
+    expect(child).to be_valid
+    #expect(child.errors[:grade]).to include("tiene que ser mayor o igual a 10")
+  end
+
+  it "is in any other grade " do
+    child=FactoryGirl.build(:offspring, :grade => :primary_second)
+    expect(child).to be_valid
+
+    child=FactoryGirl.build(:offspring, :grade => :primary_third)
+    expect(child).to be_valid
+
+    child=FactoryGirl.build(:offspring, :grade => :others)
+    expect(child).to be_valid
+    #expect(child.errors[:grade]).to include("tiene que ser mayor o igual a 10")
+  end
+
 
   it "is invalid without a user associated" do
     child = FactoryGirl.build(:offspring, user:nil)
