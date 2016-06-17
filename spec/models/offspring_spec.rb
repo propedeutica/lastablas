@@ -28,25 +28,12 @@ RSpec.describe Offspring, type: :model do
     expect(child.errors[:grade]).to include("no puede estar vacío")
   end
 
-  
-  it "is in the first grade " do
-    child=FactoryGirl.build(:offspring, :grade => :primary_first)
-    expect(child).to be_valid
-    #expect(child.errors[:grade]).to include("tiene que ser mayor o igual a 10")
-  end
-
-  it "is in any other grade " do
-    child=FactoryGirl.build(:offspring, :grade => :primary_second)
-    expect(child).to be_valid
-
-    child=FactoryGirl.build(:offspring, :grade => :primary_third)
-    expect(child).to be_valid
-
-    child=FactoryGirl.build(:offspring, :grade => :others)
-    expect(child).to be_valid
-    #expect(child.errors[:grade]).to include("tiene que ser mayor o igual a 10")
-  end
-
+  it 'is in any grade' do 
+    Offspring.grades.keys.each do |i|
+      child=FactoryGirl.build(:offspring, :grade => i)
+      expect(child).to be_valid
+    end 
+  end 
 
   it "is invalid without a user associated" do
     child = FactoryGirl.build(:offspring, user:nil)
