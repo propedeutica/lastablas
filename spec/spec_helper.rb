@@ -39,7 +39,12 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-
+  
+  #config.color = true
+  # Use color not only in STDOUT but also in pagers and files
+  #config.tty = true
+  # Use the specified formatter
+  #config.formatter = :documentation # :progress, :html, :textmate
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
