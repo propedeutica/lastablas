@@ -15,12 +15,19 @@ class Shift < ActiveRecord::Base
   end
 
   def sites_available
-    spare_seats = self.room.capacity- self.prebooked-self.offsprings.count
-    #return self.room.capacity- self.prebooked-self.offsprings.count
-    return spare_seats
+    return self.room.capacity- self.prebooked-self.offsprings.count
   end
 
   private
+    #Custom validation to ensure sites_available greater than prebooked
+    def sites_available_gt_0
+      if sites_available?
+        return true
+      else
+        errors.add(:prebooked, 'More prebooked than sites_available')
+        return false
+      end
+    end
 
     def always_same_week
       day=self.day_of_week

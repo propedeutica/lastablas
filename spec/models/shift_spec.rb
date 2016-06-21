@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Shift, type: :model do
   let (:shift) { shift=FactoryGirl.build(:shift) }
+  let (:a_room) { a_room=FactoryGirl.build(:room)}
   it "has a valid model" do
     shift.valid?
     expect(shift).to be_valid
@@ -43,9 +44,9 @@ RSpec.describe Shift, type: :model do
 
   pending "relations are nullified whtn the shift is detroyed"
   pending "it gives back the number of spaces available"
-  pending "start_time is defined as HH:MM"
-  pending "start_time is between 00:00 and 23:59"
-  pending "end_time is defined as HH:MM"
+  #pending "start_time is defined as HH:MM"
+  #pending "start_time is between 00:00 and 23:59"
+  #pending "end_time is defined as HH:MM"
   pending "start_time is earlier than end_time"
-  pending "end_time is between 00:00 and 23:59"
+  #pending "end_time is between 00:00 and 23:59"
 end
