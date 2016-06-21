@@ -15,7 +15,9 @@ class Shift < ActiveRecord::Base
   end
 
   def sites_available
-    return self.room.capacity- self.prebooked-self.offsprings.count
+    spare_seats = self.room.capacity- self.prebooked-self.offsprings.count
+    #return self.room.capacity- self.prebooked-self.offsprings.count
+    return spare_seats
   end
 
   private
