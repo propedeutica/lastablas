@@ -11,18 +11,14 @@ RSpec.describe OffspringsController, type: :controller do
 
 
     context "When not authenticated" do
-      pending "redirects to authentication" do
-        @request.env["devise.mapping"] = Devise.mappings[:user]
-        get :index, {}
-        expect(assigns).to eq(nil) #it does not go through the controller
-        expect(response).to redirect_to(new_user_session_path)
-      end
+      # pending "redirects to authentication" 
+      # You are not supposed to test an operation performed by another controller in offspring. 
+      # We suggest to do this test in static_pages_controller_spec.rb
     end
     context "When authenticated" do
-      pending "shows index of offspring" do
-        get :index
-        expect(response).to have_http_status(:success)
-      end
+      # pending "shows index of offspring" 
+      # You are not supposed to test an operation performed by another controller in offspring. 
+      # We suggest to do this test in static_pages_controller_spec.rb
     end
   end
 
@@ -37,19 +33,28 @@ RSpec.describe OffspringsController, type: :controller do
         }.to change(user.offsprings, :count).by(1)
           
       end
+      describe "and not in first grade" do
+        it "does not allow any other" do
+          sign_in user
+          Offspring.grades.keys.each do |i|
+            if i != 'primary_first'
+              expect{
+                post :create, offspring: {first_name: "pepe", last_name: "kata", :grade => i}
+              }.to change(user.offsprings, :count).by(0)
+            end
+          end
+        end
+        
 
-      it "does not allow any other grade than first" do
-        sign_in user 
-        expect{
-          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_second}
-        }.to change(user.offsprings, :count).by(0)
-        expect{
-          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_third}
-        }.to change(user.offsprings, :count).by(0)
-        expect{
-          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :others}
-        }.to change(user.offsprings, :count).by(0)
-          
+        it "redirects to /static_pages/intructions" do
+          sign_in user
+          Offspring.grades.keys.each do |i|
+            if i != 'primary_first'
+              post :create, offspring: {first_name: "pepe", last_name: "kata", :grade => i}
+              expect(response).to redirect_to(static_pages_intructions_path)
+            end    
+          end  
+        end 
       end
     end  
   end  
