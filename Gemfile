@@ -59,9 +59,9 @@ end
 ### / OpenShift changes
 
 # Use SCSS for stylesheets and patternfly
-
-gem 'patternfly-sass', '~> 3.4.0'
-gem 'sass-rails', '>= 3.4'
+# Install it wil bower, not as a gem, to install JS dependencies
+gem 'patternfly-sass', '~> 3.5.0'
+gem 'sass-rails', '>= 3.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
