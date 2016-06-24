@@ -5,7 +5,6 @@ sudo: false
 cache: bundler
 install: 
   - bundle install
-  - bower install patternfly-sass
 addons:
   postgresql: '9.4'
 script:
