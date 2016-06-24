@@ -28,14 +28,14 @@ RSpec.describe Shift, type: :model do
   end
 
   it "start_time is a time" do
-    shift.start_time="lunes"
+    shift.start_time="1"
     shift.valid?
     expect(shift).not_to be_valid
     expect(shift.errors[:start_time]).to include "no puede estar vacío"
   end
 
   it "end_time is a time" do
-    shift.end_time="lunes"
+    shift.end_time="1"
     shift.valid?
     expect(shift).not_to be_valid
     expect(shift.errors[:end_time]).to include "no puede estar vacío"
