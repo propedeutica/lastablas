@@ -24,14 +24,13 @@ es:
   log_in: "Autenticarse"
   sign_up: "Darse de alta"
   forgot_your_password?: "¿Olvidó su password?"
-  characters_minimum: "caractéres como mínimo"
-  create: "Alta"
-  we_need_your_current_password_to_confirm_your_changes: "hola"
+  characters_minimum: "caracteres como mínimo"
+  create: "Darse de alta"
+  we_need_your_current_password_to_confirm_your_changes: "Necesitamos su password actual para confirmar los cambios"
   primary_first: "1º de Primaria"
   primary_second: "2º de Primaria"
   primary_third: "3º de Primaria"
   others: "Otros"
-
   activerecord:
     errors:
       models:
@@ -111,3 +110,7 @@ es:
         password_confirmation: "Confirmar password"
         current_password: "Password actual"
         remember_me: "Recordarle"
+      offspring:
+        first_name: "Nombre"
+        last_name: "Apellidos"
+        grade: "Curso"
