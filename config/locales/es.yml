@@ -25,7 +25,7 @@ es:
   sign_up: "Darse de alta"
   forgot_your_password?: "¿Olvidó su password?"
   characters_minimum: "caracteres como mínimo"
-  create: "Darse de alta"
+  create: "Dar de alta"
   we_need_your_current_password_to_confirm_your_changes: "Necesitamos su password actual para confirmar los cambios"
   primary_first: "1º de Primaria"
   primary_second: "2º de Primaria"

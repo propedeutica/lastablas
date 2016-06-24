@@ -30,20 +30,15 @@
   </div>
   <div id="menu2" class="tab-pane" role="tabpanel">
         <%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
-    <table class="datatable table table-striped table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Apellidos</th>
-          <th>Edad</th>
-          <th>Padre</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-          <%= render @offsprings %>
-      </tbody>
-  </table>
+
+            <div class="panel panel-default">
+
+                <div class="list-group list-view-pf">
+                  <%= render @offsprings %>
+
+              </div>
+            </div>
+
     <%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
   </div>
   <div id="menu3" class="tab-pane" role="tabpanel">
