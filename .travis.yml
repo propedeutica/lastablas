@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- '2.0.0'
+sudo: false
+cache: bundler
+install: 
+  - bundle install
+addons:
+  postgresql: '9.4'
+script:
+- bundle exec rpec
+notifications:
+  webhooks:
+    on_success: change
+    on_failure: always
+    on_start: never
