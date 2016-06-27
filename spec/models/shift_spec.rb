@@ -27,20 +27,6 @@ RSpec.describe Shift, type: :model do
     expect(shift.errors[:day_of_week]).to include "tiene que ser menor o igual a 7"
   end
 
-  it "start_time is a time" do
-    shift.start_time="1"
-    shift.valid?
-    expect(shift).not_to be_valid
-    expect(shift.errors[:start_time]).to include "no puede estar vacío"
-  end
-
-  it "end_time is a time" do
-    shift.end_time="1"
-    shift.valid?
-    expect(shift).not_to be_valid
-    expect(shift.errors[:end_time]).to include "no puede estar vacío"
-  end
-
   it "prebooked is an integer" do
     shift.prebooked="seven"
     shift.valid?
@@ -48,7 +34,13 @@ RSpec.describe Shift, type: :model do
     expect(shift.errors[:prebooked]).to include "tiene que ser un número entero"
   end
 
-  pending "prebooked is lower than the capacity of the room it belongs to"
+  it "prebooked is lower than the capacity of the room it belongs to" do
+    shift.prebooked=shift.room.capacity+1
+    shift.valid?
+    expect(shift).not_to be_valid
+    expect(shift.errors[:shift]).to include "no puede ser mayor que la capacidad de la sala"
+  end
+
   pending "relations are nullified whtn the shift is detroyed"
   pending "it gives back the number of spaces available"
   pending "start_time is defined as HH:MM"

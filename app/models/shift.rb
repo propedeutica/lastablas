@@ -5,6 +5,9 @@ class Shift < ActiveRecord::Base
   validates :start_time, :presence => true
   validates :end_time, :presence => true
   validates :prebooked, :presence => true, numericality: { only_integer:true }
+  validates_each :prebooked do |shift,room|
+      shift.errors.add(:shift, "no puede ser mayor que la capacidad de la sala") unless shift.sites_available?
+  end
   before_save :always_same_week
 
   def sites_available?
@@ -22,8 +25,5 @@ class Shift < ActiveRecord::Base
       #day=1 unless (1..7).include?(day)
       self.start_time ||= "00:00"
       self.end_time ||= "01:00"
-      #self.start_time=DateTime.new(2001, 1, day, self.start_time.hour, self.start_time.min)
-      #self.end_time=DateTime.new(2001, 1, day, self.end_time.hour, self.end_time.min)
     end
-
 end
