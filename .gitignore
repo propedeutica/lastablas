@@ -16,6 +16,3 @@
 !/log/.keep
 /tmp
 /.byebug_history
-
-# Ignore spec_helper.rb 
-/spec/spec_helper.rb
