@@ -35,24 +35,25 @@ RSpec.describe Offspring, type: :model do
     expect(child.errors[:grade]).to include("no puede estar vacío")
   end
 
-  it "has a grade higher than or equal to 1 " do
-    child=FactoryGirl.build(:offspring, grade:0)
-    expect(child).not_to be_valid
-    expect(child.errors[:grade]).to include("tiene que ser un curso válido")
-  end
+  #it "has a grade higher than or equal to 1 " do
+  #  child=FactoryGirl.build(:offspring, grade:0)
+  #  expect(child).not_to be_valid
+  #  expect(child.errors[:grade]).to include("tiene que ser un curso válido")
+  #end
 
-  it "has a grade less than or equal to 3 " do
-    child=FactoryGirl.build(:offspring, grade:4)
-    expect(child).not_to be_valid
-    expect(child.errors[:grade]).to include("tiene que ser menor o válido")
-  end
+  #it "has a grade less than or equal to 3 " do
+  #  child=FactoryGirl.build(:offspring, grade:4)
+  #  expect(child).not_to be_valid
+  #  expect(child.errors[:grade]).to include("tiene que ser menor o válido")
+  #end
 
-  it "has a grade that is an integer" do
-    child=FactoryGirl.build(:offspring, grade:7.2)
-    expect(child).not_to be_valid
-    expect(child.errors[:grade]).to include("tiene que ser entero")
+  #it "has a grade that is an integer" do
+  #  child=FactoryGirl.build(:offspring, grade:7.2)
+  #  expect(child).not_to be_valid
+  #  expect(child.errors[:grade]).to include("tiene que ser entero")
+  #end
 
-  end
+  pending "grades should belong to the grade list"
 
   it "is invalid without a user associated" do
     child=FactoryGirl.build(:offspring, user:nil)
