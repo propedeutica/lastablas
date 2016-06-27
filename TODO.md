@@ -1,15 +1,16 @@
 #TODO
+* Configure devise to use email from an external provider
+* Configure devise to send onboarding email to active accounts
+* Configure devise to reset password
 * Validations of models, ~~users should not be able to assign shifts that are full~~
 * Create new rspec that covers 100% of the tool
 * Make sure that only admins has access to the admin tab
 * Create new admin users type, instead of using an admin attribute, as admins won't use the tool
 * Allow administrator to update rooms and shifts. (i.e. change the number of prebooked with a slider)
 * Allow the user to delete assignments to shifts #done only changing it to other
-* Configure devise to use email from an external provider
-* Configure devise to send onboarding email to active accounts
-* Configure devise to reset password
 * Allow the admin to create shifts and rooms graphically
-* Validate that children have the same surname among them so all children are brothers (or similar)
+* ~Validate that children have the same surname among them so all children are brothers (or similar)~
+* Add error message explaining the reason when somebody tries to add a child with different surname
 * Make a message explaining that only legal tutors can add offspring in help
 * Move erb to haml
 * Improve documentation
@@ -20,8 +21,3 @@
 * ~~Change age of children to course~~
 * ~~Allow the users to assign offpsring to shifts~~
 * ~~Make admin capable of knowing which offspring is assigned to each shift.~~
-
-
-
-
-
