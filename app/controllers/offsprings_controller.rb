@@ -20,7 +20,8 @@ class OffspringsController < ApplicationController
       flash[:success] = "Niño añadido"
       redirect_to root_url
     else
-      render 'static_pages/home'
+      flash[:alert] = "No se pudo añadir al niño"
+      redirect_to home_path
     end
   end
 

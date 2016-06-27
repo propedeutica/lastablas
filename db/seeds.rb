@@ -12,7 +12,7 @@
   a.email="ana@example.com"
   a.save
   2.times do |o|
-    a.offsprings << FactoryGirl.build(:offspring, :user => a)
+    a.offsprings << FactoryGirl.build(:offspring, :user => a, :last_name => "Forcada")
   end
 end
 
