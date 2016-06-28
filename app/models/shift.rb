@@ -8,6 +8,8 @@ class Shift < ActiveRecord::Base
   validates_each :prebooked do |shift,room|
       shift.errors.add(:shift, "no puede ser mayor que la capacidad de la sala") unless shift.sites_available?
   end
+  validate :sites_available_gt_0
+  validate :regexed_time
   before_save :always_same_week
 
   def sites_available?
@@ -27,6 +29,17 @@ class Shift < ActiveRecord::Base
         errors.add(:prebooked, 'More prebooked than sites_available')
         return false
       end
+    end
+
+    def regexed_time
+      regex = /^\d{0,4}-(0[123456789]|1[012])-(0[123456789]|[12]\d|3[01])\s([01]\d|2[0123]):[012345]\d:[012345]\d$/
+      if (start_time =~ regex) and (end_time =~ regex)
+        checker = true
+      else
+        checker = false
+      end
+    return checker
+
     end
 
     def always_same_week
