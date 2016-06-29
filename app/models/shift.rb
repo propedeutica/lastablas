@@ -33,12 +33,16 @@ class Shift < ActiveRecord::Base
 
     def regexed_time
       regex = /^\d{0,4}-(0[123456789]|1[012])-(0[123456789]|[12]\d|3[01])\s([01]\d|2[0123]):[012345]\d:[012345]\d$/
-      if (start_time =~ regex) and (end_time =~ regex)
-        checker = true
-      else
-        checker = false
+      if (start_time !~ regex)
+        errors.add(:start_time, 'Wrong start time')
+        return false
       end
-    return checker
+
+      if (end_time !~ regex)
+        errors.add(:end_time, 'Wrong end time')
+        return false
+      end
+      return true
 
     end
 
