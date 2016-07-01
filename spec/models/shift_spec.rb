@@ -107,7 +107,19 @@ RSpec.describe Shift, type: :model do
     }.to raise_exception("no es válido")
   end
 
+  it "start_time is earlier than end_time" do
+    shift = FactoryGirl.create(:shift, start_time: "2001-01-01 01:00:00", end_time: "2001-01-01 11:00:00")
+    shift.valid?
+    expect(shift).to be_valid
+  end
+
+  it "start_time is not earlier than end_time" do
+    expect{
+      shift = FactoryGirl.create(:shift, start_time: "2012-01-01 01:00:00", end_time: "2001-01-01 11:00:00")
+    }.to raise_exception("no es válido")
+  end
+
   pending "relations are nullified whtn the shift is detroyed"
   pending "it gives back the number of spaces available"
-  pending "start_time is earlier than end_time"
+  
 end
