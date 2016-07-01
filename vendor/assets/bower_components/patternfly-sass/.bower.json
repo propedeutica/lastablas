@@ -53,6 +53,6 @@
     "commit": "7efe1fc6c206b145e4add23c0d7f990b31d9e877"
   },
   "_source": "https://github.com/patternfly/patternfly-sass.git",
-  "_target": "^3.4.0",
+  "_target": "^3.5.0",
   "_originalSource": "patternfly-sass"
 }
