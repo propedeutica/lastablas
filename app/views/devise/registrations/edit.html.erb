@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Editar <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -25,11 +25,11 @@
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div>Actualmente esperando confirmación de: <%= resource.unconfirmed_email %></div>
   <% end %>
 
   <div class="form-group">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password %> <i>(déjelo vacío si no quiere cambiarlo)</i><br />
     <%= f.password_field :password, autocomplete: "off", class: 'form-control'%>
   </div>
 
@@ -39,17 +39,17 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password %> <i>(necesitamos su password actual para confirmar sus cambios)</i><br />
     <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update", class:"btn btn-primary btn-lg" %>
+    <%= f.submit "Actualizar", class:"btn btn-primary btn-lg" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Cerrar mi cuenta</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-warning btn-lg" %></p>
+<p>¿No está contento? <%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Etsá seguro?" }, method: :delete, class:"btn btn-warning btn-lg" %></p>
 
 <%= link_to "Back", :back %>
