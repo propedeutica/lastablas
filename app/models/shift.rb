@@ -10,6 +10,7 @@ class Shift < ActiveRecord::Base
   end
   validate :sites_available_gt_0
   validate :regexed_time
+  validate :time_continuity
   before_save :always_same_week
 
   def sites_available?
@@ -44,6 +45,15 @@ class Shift < ActiveRecord::Base
       end
       return true
 
+    end
+
+    def time_continuity
+      if (start_time < end_time)
+        return true
+      else
+        errors.add(:end_time, 'End time is ahead of start time')
+        return false
+      end 
     end
 
     def always_same_week
