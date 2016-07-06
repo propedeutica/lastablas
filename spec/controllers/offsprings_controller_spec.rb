@@ -21,21 +21,26 @@ RSpec.describe OffspringsController, type: :controller do
       user.offsprings << off
       expect {
         delete :destroy, id: off.id
-      }.to raise_error(NoMethodError, "undefined method `authenticate!' for nil:NilClass")
+      }.to raise_error(
+        NoMethodError,
+        "undefined method `authenticate!' for nil:NilClass"
+      ).and change(user.offsprings, :count).by(0)
     end
   end
 
   context "When authenticated," do
     let(:user) { FactoryGirl.create(:user) }
+    before(:each) do
+      sign_in user
+    end
+
     describe "#create" do
       it "allows creation of primary_first children" do
-        sign_in user
         expect {
           post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
         }.to change(user.offsprings, :count).by(1)
       end
       it "does not allow any other and redirects" do
-        sign_in user
         Offspring.grades.keys.each do |i|
           if i != 'primary_first'
             expect{
@@ -45,11 +50,17 @@ RSpec.describe OffspringsController, type: :controller do
           end
         end
       end
-      pending "#new shows view and fields for new offspring"
-      describe "#destroy" do # We don't know the real functionality, we'll see how it works and adapt the test to it
-        pending "allows destroying your offsprings"
-        pending "does not allow destroyinh other's offsrpings"
-      end
+    end
+    it "#new shows view for new offspring" do
+      get :new, {}
+      expect(response).to render_template(:new)
+    end
+    let(:off) { FactoryGirl.create(:offspring) }
+    it "#destroy allows destroying offspring" do
+      user.offsprings << off
+      expect {
+        delete :destroy, id: off.id
+      }.to change(user.offsprings, :count).by(-1)
     end
   end
 end
