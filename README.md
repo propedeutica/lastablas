@@ -2,9 +2,8 @@
 ## Introduction
 This application tries to make it possible to reserve places in aurch school or similar system. Parents can sign up and then add their offspring, and then ask for a particular shift where they want to be assigned.
 
-
 ##TODO
-There is a TODO file describing what is still missing
+There is a [**TODO**](TODO.md) file describing what is still missing
 
 ## Description
 Catequesis is a simple program to make it possible distributed assignment of shifts to students that can not do it by themselves, so their parents do it in their behalf.
@@ -21,6 +20,3 @@ Offsprings are related to parents and they are the subject that is assigned to a
 There are different rooms that can be assigned. Each one has different shifts that corresponds to a group of students and a teacher.
 
 An offspring can only be assigned to a shift in a single room.
-
-
-
