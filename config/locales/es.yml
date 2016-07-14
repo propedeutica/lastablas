@@ -24,6 +24,7 @@ es:
   log_in: "Autenticarse"
   sign_up: "Darse de alta"
   forgot_your_password?: "¿Olvidó su password?"
+  confirmation_instructions?: "¿No recibió las intrucciones para la confirmación?"
   characters_minimum: "caracteres como mínimo"
   create: "Dar de alta"
   we_need_your_current_password_to_confirm_your_changes: "Necesitamos su password actual para confirmar los cambios"
