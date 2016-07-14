@@ -5,6 +5,18 @@ This application tries to make it possible to reserve places in aurch school or 
 ##TODO
 There is a [**TODO**](TODO.md) file describing what is still missing
 
+## Configuration
+This application has been created to be deployed in OpenShift online v 2.
+You need:
+- An OpenShift online account
+- A Rails cartridge (currently only supported 4.1)
+- A PostgreSQL cartridge (to connect to)
+- Environment variables (rhc env set):
+  - GMAIL_DOMAIN
+  - GMAIL_PASSWORD
+  - GMAIL_USERNAME
+
+
 ## Description
 Catequesis is a simple program to make it possible distributed assignment of shifts to students that can not do it by themselves, so their parents do it in their behalf.
 There are different rooms that hold classes in parallel, and each of those rooms have a shift. A new student needs to be assigned to one of the shifts for the full course. Rooms have a capacity, but some of the shifts can have some places reserved (prebooked) for different reasons, and the parent is free to choose any shift that has some free space left.
