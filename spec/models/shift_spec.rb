@@ -55,24 +55,22 @@ RSpec.describe Shift, type: :model do
 
   it "start_time is not a wrong time" do
     expect{
-      shift = FactoryGirl.create(:shift, start_time: "24:00")
+      FactoryGirl.create(:shift, start_time: "24:00")
     }.to raise_exception("no es válido")
-    
+
     expect{
-      shift = FactoryGirl.create(:shift, start_time: "23:60")
+      FactoryGirl.create(:shift, start_time: "23:60")
     }.to raise_exception("no es válido")
-    
   end
 
   it "end_time is not a wrong time" do
     expect{
-      shift = FactoryGirl.create(:shift, end_time: "24:00")
+      FactoryGirl.create(:shift, end_time: "24:00")
     }.to raise_exception("no es válido")
-    
+
     expect{
-      shift = FactoryGirl.create(:shift, end_time: "23:60")
+      FactoryGirl.create(:shift, end_time: "23:60")
     }.to raise_exception("no es válido")
-    
   end
 
   it "start_time earlier than end_time is valid." do
@@ -83,7 +81,7 @@ RSpec.describe Shift, type: :model do
 
   it "start_time not earlier than end_time is invalid." do
     expect{
-      shift = FactoryGirl.create(:shift, start_time: "10:30", end_time: "10:00")
+      FactoryGirl.create(:shift, start_time: "10:30", end_time: "10:00")
     }.to raise_exception("no es válido")
   end
 
