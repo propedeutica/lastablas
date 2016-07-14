@@ -55,66 +55,35 @@ RSpec.describe Shift, type: :model do
 
   it "start_time is not a wrong time" do
     expect{
-      shift = FactoryGirl.create(:shift, start_time: "2001-01-01 24:00:00")
+      shift = FactoryGirl.create(:shift, start_time: "24:00")
     }.to raise_exception("no es válido")
     
     expect{
-      shift = FactoryGirl.create(:shift, start_time: "2001-01-01 23:60:00")
-    }.to raise_exception("no es válido")
-    
-    expect{
-      shift = FactoryGirl.create(:shift, start_time: "2001-01-01 23:00:60")
-    }.to raise_exception("no es válido")
-    
-    expect{
-      shift = FactoryGirl.create(:shift, start_time: "2001-01-00 23:00:00")
-    }.to raise_exception("no es válido")
-    
-    expect{
-      shift = FactoryGirl.create(:shift, start_time: "2001-00-01 23:00:00")
-    }.to raise_exception("no es válido")
-    
-    expect{
-      shift = FactoryGirl.create(:shift, start_time: "20010-01-01 23:00:00")
+      shift = FactoryGirl.create(:shift, start_time: "23:60")
     }.to raise_exception("no es válido")
     
   end
 
   it "end_time is not a wrong time" do
     expect{
-      shift = FactoryGirl.create(:shift, end_time: "2001-01-01 24:00:00")
+      shift = FactoryGirl.create(:shift, end_time: "24:00")
     }.to raise_exception("no es válido")
     
     expect{
-      shift = FactoryGirl.create(:shift, end_time: "2001-01-01 23:60:00")
+      shift = FactoryGirl.create(:shift, end_time: "23:60")
     }.to raise_exception("no es válido")
     
-    expect{
-      shift = FactoryGirl.create(:shift, end_time: "2001-01-01 23:00:60")
-    }.to raise_exception("no es válido")
-    
-    expect{
-      shift = FactoryGirl.create(:shift, end_time: "2001-01-00 23:00:00")
-    }.to raise_exception("no es válido")
-    
-    expect{
-      shift = FactoryGirl.create(:shift, end_time: "2001-00-01 23:00:00")
-    }.to raise_exception("no es válido")
-    
-    expect{
-      shift = FactoryGirl.create(:shift, end_time: "20010-01-01 23:00:00")
-    }.to raise_exception("no es válido")
   end
 
   it "start_time earlier than end_time is valid." do
-    shift = FactoryGirl.create(:shift, start_time: "2001-01-01 01:00:00", end_time: "2001-01-01 11:00:00")
+    shift = FactoryGirl.create(:shift, start_time: "10:00", end_time: "10:30")
     shift.valid?
     expect(shift).to be_valid
   end
 
   it "start_time not earlier than end_time is invalid." do
     expect{
-      shift = FactoryGirl.create(:shift, start_time: "2012-01-01 01:00:00", end_time: "2001-01-01 11:00:00")
+      shift = FactoryGirl.create(:shift, start_time: "10:30", end_time: "10:00")
     }.to raise_exception("no es válido")
   end
 
