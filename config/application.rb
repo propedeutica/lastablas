@@ -24,5 +24,6 @@ module Catequesis
        DeviseController.respond_to :html, :json
      end
     config.beginning_of_week = :monday
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
   end
 end
