@@ -12,10 +12,7 @@ FactoryGirl.define do
 
     # FactoryGirl.create(:user, :activated)
 
-    trait :activated do
-      activated true
-      activated_at Time.zone.now
-    end
+    confirmed_at Time.now
 
     # FactoryGirl.create(user, :administrator)
 
