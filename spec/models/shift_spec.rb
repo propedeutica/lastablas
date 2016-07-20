@@ -38,7 +38,7 @@ RSpec.describe Shift, type: :model do
     shift.prebooked = shift.room.capacity + 1
     shift.valid?
     expect(shift).not_to be_valid
-    expect(shift.errors[:shift]).to include "no puede ser mayor que la capacidad de la sala"
+    expect(shift.errors[:shift]).to include "Sites available under 0"
   end
 
   it "start_time is a time" do
@@ -99,10 +99,8 @@ RSpec.describe Shift, type: :model do
     shift.end_time = "10:00"
     shift.valid?
     expect(shift).not_to be_valid
-
   end
 
   pending "relations are nullified whtn the shift is detroyed"
   pending "it gives back the number of spaces available"
-  
 end
