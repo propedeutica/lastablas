@@ -1,4 +1,5 @@
 #TODO
+* Adding the capability for the administrator to stop changes in users. No new users will be added, no offspring, shifts won't be able to be changed or reassigned, except for the administrator. Users can delete their accounts in any case.
 * Configure devise to use email from an external provider
 * Configure devise to send onboarding email to active accounts
 * Configure devise to reset password
