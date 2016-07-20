@@ -1,6 +1,31 @@
-#
-# Overrides
-#
+AllCops:
+  # Include common Ruby source files.
+  Include:
+    - '**/*.gemspec'
+    - '**/*.podspec'
+    - '**/*.jbuilder'
+    - '**/*.rake'
+    - '**/*.opal'
+    - '**/config.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/Capfile'
+    - '**/Guardfile'
+    - '**/Podfile'
+    - '**/Thorfile'
+    - '**/Vagrantfile'
+    - '**/Berksfile'
+    - '**/Cheffile'
+    - '**/Vagabondfile'
+    - '**/Fastfile'
+    - '**/*Fastfile'
+  Exclude:
+    - 'vendor/**/*'
+    - 'lib/**/*'
+    - 'spec/spec_helper'
+    - 'spec/rails_helper'
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
 AbcSize:
   Severity: refactor
 AlignHash:
@@ -22,8 +47,8 @@ CyclomaticComplexity:
   Severity: refactor
 FormatString:
   EnforcedStyle: percent
-#HashSyntax:
-#  EnforcedStyle: hash_rockets
+HashSyntax:
+  EnforcedStyle: hash_rockets
 LineLength:
   Max: 120
   Severity: refactor
@@ -40,10 +65,10 @@ SignalException:
   EnforcedStyle: only_raise
 SingleLineMethods:
   AllowIfMethodIsEmpty: false
-SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
 TrivialAccessors:
   AllowPredicates: true
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
 #
 # Enabled/Disabled
 #
@@ -58,7 +83,7 @@ Encoding:
 EndAlignment:
   AutoCorrect: true
 ExtraSpacing:
-  AutoCorrect: false # https://github.com/bbatsov/rubocop/issues/2280
+  AutoCorrect: true
 FindEach:
   Enabled: false
 GuardClause:
@@ -81,6 +106,8 @@ SingleLineBlockParams:
   Enabled: false
 SpaceBeforeFirstArg:
   Enabled: false
+SpaceInsideHashLiteralBraces:
+  Enabled: false
 SpecialGlobalVars:
   AutoCorrect: false
 StringLiterals:
@@ -95,3 +122,5 @@ WhileUntilModifier:
   Enabled: false
 WordArray:
   AutoCorrect: false
+
+
