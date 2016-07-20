@@ -27,6 +27,8 @@ AllCops:
     - 'db/schema.rb'
     - 'db/migrate/**/*'
     - 'config.ru'
+    - 'config/initializers/devise.rb'
+    - 'Gemfile'
 AbcSize:
   Severity: refactor
 AlignHash:

@@ -8,8 +8,10 @@ install:
 addons:
   postgresql: '9.4'
 env:
-  - TEST_SUITE=rspec
-  - TEST_SUITE=rubocop
+  matrix:
+    - TEST_SUITE=rspec
+    allow_failures:
+      - TEST_SUITE=rubocop
 script:
 - bundle exec $TEST_SUITE
 notifications:

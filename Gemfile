@@ -5,7 +5,7 @@ gem 'rails', '~>4.1'
 ### OpenShift Online changes:
 
 # Fix the conflict with the system 'rake':
-#gem 'rake', '~> 0.9.6'
+# gem 'rake', '~> 0.9.6'
 
 # Executed bundle update rake in OpenShift to update it to 11.1.2
 gem 'rake'
@@ -20,7 +20,7 @@ gem 'rake'
 # $ rhc env set BUNDLE_WITHOUT="development test postgresql"
 #
 
-#gems for development
+# gems for development
 group :devel do
   gem 'web-console', "~>2.0"
   gem 'guard-rspec', :require => false
@@ -118,5 +118,3 @@ gem 'redcarpet', '~> 2.1.1'
 
 # Introducing Angular UI
 gem "angular-ui-bootstrap-rails",     "~>1.3.0"
-
-
