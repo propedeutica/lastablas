@@ -10,13 +10,14 @@ class Offspring < ActiveRecord::Base
   validates :last_name, presence: true, length: { within: 3..60 }
   validates :grade, presence: true
   validates :user, presence: true
-  validates_each :shift, allow_nil:true do |offspring|
-      offspring.errors.add(:shift, "no hay espacio") unless offspring.shift.sites_available?
+  validates_each :shift, allow_nil: true do |offspring|
+    offspring.errors.add(:shift, "no hay espacio") unless offspring.shift.sites_available?
   end
   validates_each :last_name do |offspring|
-    if offspring.user && offspring.user.offsprings.first then
-      offspring.errors.add(:last_name, "tiene que coincidir con el de sus hermanos") unless offspring.last_name==offspring.user.offsprings.first.last_name
+    if offspring.user && offspring.user.offsprings.first
+      unless offspring.last_name == offspring.user.offsprings.first.last_name
+        offspring.errors.add(:last_name, "tiene que coincidir con el de sus hermanos")
+      end
     end
   end
-
 end

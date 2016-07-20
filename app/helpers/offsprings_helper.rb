@@ -1,3 +1,3 @@
 module OffspringsHelper
- include Devise::Controllers::Helpers
+  include Devise::Controllers::Helpers
 end

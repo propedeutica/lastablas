@@ -6,9 +6,7 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.email, class: "gravatar")
   end
 
-
   def full_name_for(user)
-    return "#{user.first_name} #{user.last_name}"
+    "#{user.first_name} #{user.last_name}"
   end
-
 end
