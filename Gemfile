@@ -25,6 +25,7 @@ group :devel do
   gem 'web-console', "~>2.0"
   gem 'guard-rspec', :require => false
   gem 'listen', "~> 3.0.0" # Because of ruby 2.0
+  gem 'rubocop'
 end
 group :development, :test do
   gem 'sqlite3'

@@ -7,8 +7,11 @@ install:
   - bundle install
 addons:
   postgresql: '9.4'
+env:
+  - TEST_SUITE=rspec
+  - TEST_SUITE=rubocop
 script:
-- bundle exec rspec
+- bundle exec $TEST_SUITE
 notifications:
   webhooks:
     on_success: change
