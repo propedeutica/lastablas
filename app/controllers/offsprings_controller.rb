@@ -11,7 +11,8 @@ class OffspringsController < ApplicationController
   def create
     @offspring = current_user.offsprings.build(offsprings_params)
     unless @offspring.primary_first?
-      redirect_to static_pages_intructions_path && return
+      redirect_to static_pages_intructions_path
+      return
     end
     if @offspring.save
       flash[:success] = "Niño añadido"
