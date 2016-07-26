@@ -2,38 +2,65 @@ require 'rails_helper'
 # include Devise::TestHelpers # this should work without this
 
 RSpec.describe OffspringsController, type: :controller do
-  describe "get INDEX" do
-    before :all do
-      3.times do
-        FactoryGirl.create(:offspring)
-      end
+  context "When not authenticated," do
+    it "does not allow to create" do
+      expect{
+        post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
+      }.to raise_error(NoMethodError, "undefined method `authenticate!' for nil:NilClass")
     end
 
-    context "When not authenticated" do
-      pending "redirects to authentication" do
-        @request.env["devise.mapping"] = Devise.mappings[:user]
-        get :index, {}
-        expect(assigns).to eq(nil) # it does not go through the controller
-        expect(response).to redirect_to(new_user_session_path)
-      end
-      pending "visitor can't see the index of offsprings"
-      pending "visitor can't see offpsring@show"
-      pending "visitor can't see other users"
+    it "does not allow access new" do
+      expect{
+        get :new, {}
+      }.to raise_error(NoMethodError, "undefined method `authenticate!' for nil:NilClass")
     end
 
-    context "When authenticated" do
-      pending "shows index of offspring" do
-        get :index
-        expect(response).to have_http_status(:success)
-      end
-      pending "show offspring data"
-      pending "can delete its own offspring"
-      pending "fails when trying to delete other users offspring"
+    let(:user) { FactoryGirl.create(:user) }
+    let(:off) { FactoryGirl.create(:offspring) }
+    it "does not allow to destroy" do
+      user.offsprings << off
+      expect{
+        delete :destroy, id: off.id
+      }.to raise_error(
+        NoMethodError,
+        "undefined method `authenticate!' for nil:NilClass"
+      ).and change(user.offsprings, :count).by(0)
     end
-    context "When admin authenticated" do
-      pending "can see offspring data"
-      pending "can delete any offspring"
-      pending "can create offpsring to any user"
+  end
+
+  context "When authenticated," do
+    let(:user) { FactoryGirl.create(:user) }
+    before(:each) do
+      sign_in user
+    end
+
+    describe "#create" do
+      it "allows creation of primary_first children" do
+        expect{
+          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
+        }.to change(user.offsprings, :count).by(1)
+      end
+      it "does not allow any other and redirects" do
+        Offspring.grades.keys.each do |i|
+          if i != 'primary_first'
+            expect{
+              post :create, offspring: {first_name: "pepe", last_name: "kata", grade: i}
+            }.to change(user.offsprings, :count).by(0)
+            expect(response).to redirect_to(static_pages_intructions_path)
+          end
+        end
+      end
+    end
+    it "#new shows view for new offspring" do
+      get :new, {}
+      expect(response).to render_template(:new)
+    end
+    let(:off) { FactoryGirl.create(:offspring) }
+    it "#destroy allows destroying offspring" do
+      user.offsprings << off
+      expect{
+        delete :destroy, id: off.id
+      }.to change(user.offsprings, :count).by(-1)
     end
   end
 end
