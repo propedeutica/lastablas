@@ -10,6 +10,11 @@ RSpec.describe AdminController, type: :controller do
         expect(response).to have_http_status(:success)
       end
     end
+    describe "can block any change in the data" do
+      pending "succesfully"
+      pending "and unblock changes" 
+      pending ", users cas still delete their own account" 
+    end
   end
 
   let(:user) { FactoryGirl.create(:user) }
