@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Shift, type: :model do
+RSpec.describe Shift, :type => :model do
   let(:shift) { FactoryGirl.build(:shift) }
   it "has a valid model" do
     shift.valid?
@@ -55,14 +55,14 @@ RSpec.describe Shift, type: :model do
 
   it "start_time is not a wrong time" do
     expect{
-      FactoryGirl.create(:shift, start_time: "24:00")
+      FactoryGirl.create(:shift, :start_time => "24:00")
     }.to raise_exception("no es válido")
     shift.start_time = "24:00"
     shift.valid?
     expect(shift).not_to be_valid
 
     expect{
-      FactoryGirl.create(:shift, start_time: "23:60")
+      FactoryGirl.create(:shift, :start_time => "23:60")
     }.to raise_exception("no es válido")
     shift.start_time = "23:60"
     shift.valid?
@@ -71,14 +71,14 @@ RSpec.describe Shift, type: :model do
 
   it "end_time is not a wrong time" do
     expect{
-      FactoryGirl.create(:shift, end_time: "24:00")
+      FactoryGirl.create(:shift, :end_time => "24:00")
     }.to raise_exception("no es válido")
     shift.end_time = "24:00"
     shift.valid?
     expect(shift).not_to be_valid
 
     expect{
-      FactoryGirl.create(:shift, end_time: "23:60")
+      FactoryGirl.create(:shift, :end_time => "23:60")
     }.to raise_exception("no es válido")
     shift.end_time = "23:60"
     shift.valid?
@@ -86,14 +86,14 @@ RSpec.describe Shift, type: :model do
   end
 
   it "start_time earlier than end_time is valid." do
-    shift = FactoryGirl.create(:shift, start_time: "10:00", end_time: "10:30")
+    shift = FactoryGirl.create(:shift, :start_time => "10:00", :end_time => "10:30")
     shift.valid?
     expect(shift).to be_valid
   end
 
   it "start_time not earlier than end_time is invalid." do
     expect{
-      FactoryGirl.create(:shift, start_time: "10:30", end_time: "10:00")
+      FactoryGirl.create(:shift, :start_time => "10:30", :end_time => "10:00")
     }.to raise_exception("no es válido")
     shift.start_time = "10:30"
     shift.end_time = "10:00"
