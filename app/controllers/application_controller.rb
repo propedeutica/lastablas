@@ -15,4 +15,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :last_name
     devise_parameter_sanitizer.for(:sign_up) << :phone
   end
+
+  def authenticate_user!
+    begin
+      super
+    rescue NoMethodError
+      redirect_to 'home'
+    end
+  end
 end

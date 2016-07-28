@@ -4,15 +4,13 @@ require 'rails_helper'
 RSpec.describe OffspringsController, type: :controller do
   context "When not authenticated," do
     it "does not allow to create" do
-      expect{
-        post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
-      }.to raise_error(NoMethodError, "undefined method `authenticate!' for nil:NilClass")
+      post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
+      expect(response).to redirect_to('home')
     end
 
     it "does not allow access new" do
-      expect{
-        get :new, {}
-      }.to raise_error(NoMethodError, "undefined method `authenticate!' for nil:NilClass")
+      get :new, {}
+      expect(response).to redirect_to('home')
     end
 
     let(:user) { FactoryGirl.create(:user) }
@@ -21,10 +19,8 @@ RSpec.describe OffspringsController, type: :controller do
       user.offsprings << off
       expect{
         delete :destroy, id: off.id
-      }.to raise_error(
-        NoMethodError,
-        "undefined method `authenticate!' for nil:NilClass"
-      ).and change(user.offsprings, :count).by(0)
+      }.to change(user.offsprings, :count).by(0)
+      expect(response).to redirect_to('home')
     end
   end
 
