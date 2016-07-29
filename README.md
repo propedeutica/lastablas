@@ -17,6 +17,7 @@ You need:
   - GMAIL_PASSWORD
   - GMAIL_USERNAME
 
+If you are using gmail, you should use two-factor authentication to avoid the account to be considered as an spam account
 
 ## Description
 Catequesis (Las Tablas) is a simple program to make it possible distributed assignment of shifts to students that can not do it by themselves, so their parents do it in their behalf.
