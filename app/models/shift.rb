@@ -10,7 +10,6 @@ class Shift < ActiveRecord::Base
   validates_each :prebooked do |shift, _room|
     shift.errors.add(:shift, "no puede ser mayor que la capacidad de la sala") unless shift.sites_available?
   end
-  before_save :always_same_week
 
   def sites_available?
     room.capacity - prebooked - offsprings.count > 0
@@ -18,14 +17,5 @@ class Shift < ActiveRecord::Base
 
   def sites_available
     room.capacity - prebooked - offsprings.count
-  end
-
-  private
-
-  def always_same_week
-    self.day = day_of_week
-    # day = 1 unless (1..7).include?(day)
-    self.start_time ||= "00:00"
-    self.end_time ||= "01:00"
   end
 end

@@ -12,11 +12,27 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find_by_id(params[:id])
-    if user.nil? || !current_user.admin? || user == current_user
+    if delete_possible?(user)
+      user.destroy
+      flash[:warning] = "Usuario #{user.email} borrado"
+      # You can access the variable even if the database has been changed
+      redirect_to root_url
+    else
       redirect_to home_path
-      return
     end
-    user.destroy
-    flash[:warning] = "Usuario borrado"
-    redirect_to root_url
+  end
+
+  private
+
+  def delete_possible?(user)
+    if user.nil?
+      return false
+    elsif user != current_user
+      return false
+    elsif !current_user.admin?
+      return false
+    else
+      return true
+    end
+  end
 end
