@@ -19,12 +19,4 @@ class Shift < ActiveRecord::Base
     room.capacity - prebooked - offsprings.count
   end
 
-  private
-
-  def always_same_week
-    # self.day = day_of_week
-    # day = 1 unless (1..7).include?(day)
-    self.start_time ||= "00:00"
-    self.end_time ||= "01:00"
-  end
 end
