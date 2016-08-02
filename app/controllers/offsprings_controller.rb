@@ -11,6 +11,7 @@ class OffspringsController < ApplicationController
   def create
     @offspring = current_user.offsprings.build(offsprings_params)
     unless @offspring.primary_first?
+      flash[:alert] = "No se puedo añadir al niño"
       redirect_to static_pages_intructions_path
       return
     elsif @offspring.save
