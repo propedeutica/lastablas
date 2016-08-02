@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Offspring, type: :model do
-  let (:child) { FactoryGirl.build(:offspring) }
+  let(:child) { FactoryGirl.build(:offspring) }
   it "has a valid factory" do
     expect(child).to be_valid
   end
@@ -21,7 +21,10 @@ RSpec.describe Offspring, type: :model do
   end
 
   it "should have the same surname than the brothers" do
-    brother = FactoryGirl.build(:offspring, user: child.user, last_name:"aaassssddd")
+    parent = FactoryGirl.build(:user)
+    parent.offsprings << child
+    brother = FactoryGirl.build(:offspring, last_name: "aaassssddd")
+    parent.offsprings << brother
     brother.valid?
     expect(brother.errors[:last_name]).to include("tiene que coincidir con el de sus hermanos")
   end
