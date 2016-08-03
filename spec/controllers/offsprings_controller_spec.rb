@@ -1,5 +1,5 @@
 require 'rails_helper'
-include Devise::TestHelpers # this should work without this
+# include Devise::TestHelpers # this should work without this
 
 RSpec.describe OffspringsController, type: :controller do
   describe "get INDEX" do
