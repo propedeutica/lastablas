@@ -67,11 +67,18 @@
       <%end%>
         <%= link_to "Principal",root_path %>
       </li>
-      <%if url_for==rooms_path %>
+      <% if url_for== edit_user_registration_path %>
         <li class="active">
       <% else %>
         <li>
-      <%end%>
+      <% end %>
+        <%= link_to "Editar",edit_user_registration_path(current_user) %>
+      </li>
+      <% if url_for==rooms_path %>
+        <li class="active">
+      <% else %>
+        <li>
+      <% end %>
         <%= link_to "Horarios", rooms_path %>
       </li>
       <%if url_for==help_path %>
