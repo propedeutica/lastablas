@@ -11,7 +11,7 @@ class OffspringsController < ApplicationController
   def create
     @offspring = current_user.offsprings.build(offsprings_params)
     unless @offspring.primary_first?
-      flash[:alert] = "No se puedo añadir al niño"
+      flash[:warning] = "No se puedo añadir al niño"
       redirect_to static_pages_intructions_path
       return
     end
@@ -19,7 +19,7 @@ class OffspringsController < ApplicationController
       flash[:success] = "Niño añadido"
       redirect_to root_url
     else
-      flash[:alert] = "No se pudo añadir al niño"
+      flash[:danger] = "No se pudo añadir al niño"
       redirect_to root_path
     end
   end
@@ -27,7 +27,7 @@ class OffspringsController < ApplicationController
   def destroy
     offspring = Offspring.find_by_id(params[:id])
     offspring.destroy
-    flash[:warning] = "Niño borrado"
+    flash[:sucess] = "Niño borrado"
     redirect_to request.referrer || root_url
   end
 
