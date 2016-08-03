@@ -1,6 +1,6 @@
 <nav class="row">
-<%=link_to image_tag("logo.png", alt: "Parroquia de las tablas", class:"img-responsive"),
-            'http://www.archimadrid.es/lastablas/'%>
+<%= link_to image_tag("logo.png", alt: "Parroquia de las tablas", class:"img-responsive"),
+            'http://www.archimadrid.es/lastablas/' %>
 </nav>
 <nav class="navbar navbar-default navbar-pf" role="navigation">
   <div class="navbar-header">
@@ -16,99 +16,97 @@
   </div>
   <div class="collapse navbar-collapse navbar-collapse-1">
     <ul class="nav navbar-nav navbar-utility">
-      <%if !user_signed_in?%>
+      <% if !user_signed_in? %>
       <li>
-        <%=link_to "Entrar", new_user_session_path%>
+        <%= link_to "Entrar", new_user_session_path %>
       </li>
-      <%end%>
+      <% end %>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <span class="pficon pficon-user"></span>
-          <%if !!current_user%>
-          <%=current_user.first_name%><b class="fa fa-angle-down"> </b>
-          <%else%>
-          <%="Entrar "%><b class="fa fa-angle-down"> </b>
+          <% if !!current_user %>
+          <%= current_user.first_name %><b class="fa fa-angle-down"> </b>
+          <% else %>
+          <%= "Entrar " %><b class="fa fa-angle-down"> </b>
 
-          <%end%>
+          <% end %>
         </a>
 
         <ul class="dropdown-menu">
           <li>
-            <%=link_to " Principal ", home_path, class:"pficon pficon-home"%>
+            <%= link_to " Principal ", home_path, class:"pficon pficon-home" %>
           </li>
           <li class="divider">
           </li>
           <li>
 
-            <%=link_to " Ayuda ", help_path, class:"pficon pficon-help"%>
+            <%= link_to " Ayuda ", help_path, class:"pficon pficon-help" %>
           </li>
           <li class="divider"></li>
           <li>
-          <%=link_to "Acerca de",about_path%>
+          <%= link_to "Acerca de",about_path %>
           </li>
-          <%if user_signed_in?%>
+          <% if user_signed_in? %>
             <li>
-              <%=link_to "Editar perfil",  edit_user_registration_path(current_user)%>
+              <%= link_to "Editar perfil",  edit_user_registration_path(current_user) %>
             </li>
             <li class="divider"></li>
             <li>
-              <%=link_to " Salir ", destroy_user_session_path, method: :delete, class:"fa fa-power-off"%>
+              <%= link_to " Salir ", destroy_user_session_path, method: :delete, class:"fa fa-power-off" %>
             </li>
 
-          <%end%>
+          <% end %>
         </ul>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-primary">
-      <%if url_for==root_path%>
+      <%if url_for==root_path %>
         <li class="active">
-      <%else%>
+      <% else %>
         <li>
       <%end%>
-        <%=link_to "Principal",root_path%>
+        <%= link_to "Principal",root_path %>
       </li>
-
-      <%if url_for== edit_user_registration_path%>
+      <% if url_for== edit_user_registration_path %>
         <li class="active">
-      <%else%>
+      <% else %>
+        <li>
+      <% end %>
+        <%= link_to "Editar",edit_user_registration_path(current_user) %>
+      </li>
+      <% if url_for==rooms_path %>
+        <li class="active">
+      <% else %>
+        <li>
+      <% end %>
+        <%= link_to "Horarios", rooms_path %>
+      </li>
+      <%if url_for==help_path %>
+        <li class="active">
+      <% else %>
         <li>
       <%end%>
-        <%=link_to "Editar",edit_user_registration_path(current_user)%>
+        <%= link_to "Ayuda",help_path %>
       </li>
-
-      <%if url_for==rooms_path%>
-        <li class="active">
-      <%else%>
-        <li>
-      <%end%>
-        <%=link_to "Horarios", rooms_path%>
-      </li>
-      <%if url_for==help_path%>
-        <li class="active">
-      <%else%>
-        <li>
-      <%end%>
-        <%=link_to "Ayuda",help_path%>
-      </li>
-      <%if current_user.try(:admin?)%>
+      <% if current_user.try(:admin?) %>
       <li role="admin" class="dropdown">
 
-        <% if url_for == admin_path%>
+        <%if url_for==admin_path %>
 
           <li class="active">
-        <%else%>
+        <% else %>
           <li>
-        <%end%>
-            <%=link_to "Admin", admin_path%>
+        <% end %>
+            <%= link_to "Admin", admin_path %>
       </li>
-      <%end%>
+      <% end %>
       <li>
-        <%if url_for==about_path%>
+        <%if url_for==about_path %>
           <li class="active">
-        <%else%>
+        <% else %>
             <li>
-              <%end%>
-        <%=link_to "Acerca de",about_path%>
+              <% end %>
+        <%= link_to "Acerca de",about_path %>
       </li>
     </ul>
   </div>
