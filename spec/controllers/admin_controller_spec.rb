@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AdminController, type: :controller do
-  let(:user_admin) {FactoryGirl.create(:user, :administrator)}
+  let(:user_admin) { FactoryGirl.create(:user, :administrator) }
   context "admin user" do
     describe "GET #dashboard" do
       it "returns http success" do
@@ -12,17 +12,14 @@ RSpec.describe AdminController, type: :controller do
     end
   end
 
-  let(:user) {FactoryGirl.create(:user)}
+  let(:user) { FactoryGirl.create(:user) }
   context "non-admin user" do
     describe "GET #dashboard" do
       it "returns http error" do
-        sign_in user     
+        sign_in user
         get :dashboard
         expect(response).to redirect_to(home_path)
       end
     end
-
   end
-
-
 end

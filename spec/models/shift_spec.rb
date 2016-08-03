@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Shift, type: :model do
-  let (:shift) { shift = FactoryGirl.build(:shift) }
+  let(:shift) { FactoryGirl.build(:shift) }
   it "has a valid model" do
     shift.valid?
     expect(shift).to be_valid
@@ -35,7 +35,7 @@ RSpec.describe Shift, type: :model do
   end
 
   it "prebooked is lower than the capacity of the room it belongs to" do
-    shift.prebooked = shift.room.capacity+1
+    shift.prebooked = shift.room.capacity + 1
     shift.valid?
     expect(shift).not_to be_valid
     expect(shift.errors[:shift]).to include "no puede ser mayor que la capacidad de la sala"

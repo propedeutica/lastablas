@@ -11,7 +11,7 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe UsersHelper, type: :helper do
-  let(:user) {FactoryGirl.create(:user, first_name:"First", last_name:"Last")}
+  let(:user) { FactoryGirl.create(:user, first_name: "First", last_name: "Last") }
   it "creates a joint user name" do
     expect(full_name_for(user)).to eq("First Last")
   end

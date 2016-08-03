@@ -13,7 +13,7 @@ RSpec.describe OffspringsController, type: :controller do
       pending "redirects to authentication" do
         @request.env["devise.mapping"] = Devise.mappings[:user]
         get :index, {}
-        expect(assigns).to eq(nil) #it does not go through the controller
+        expect(assigns).to eq(nil) # it does not go through the controller
         expect(response).to redirect_to(new_user_session_path)
       end
       pending "visitor can't see the index of offsprings"

@@ -6,15 +6,14 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   context "valid offspring and/or shift" do
-    let(:offspring) { FactoryGirl.build(:offspring)}
-    let(:shift) { FactoryGirl.build(:shift)}
+    let(:offspring) { FactoryGirl.build(:offspring) }
+    let(:shift) { FactoryGirl.build(:shift) }
 
     it "should not allow a shift to be assigned when ther are no empty places" do
-      shift.prebooked=shift.room.capacity
-      offspring.shift=shift
+      shift.prebooked = shift.room.capacity
+      offspring.shift = shift
       expect(offspring).not_to be_valid
     end
-
   end
 
   describe "GET #new" do
@@ -23,6 +22,4 @@ RSpec.describe AssignmentsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
-
 end

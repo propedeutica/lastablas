@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let (:user) { user = FactoryGirl.build(:user) }
+  let(:user) { FactoryGirl.build(:user) }
 
   it "is valid with everything properly filled" do
     user.valid?
@@ -110,7 +110,7 @@ RSpec.describe User, type: :model do
 
   it "rejects invalid phone numbers" do
     invalid_telephone_numbers =
-      %w("6001" "+346001" "0034600" "1234567890" "abc" "6oo123456")
+      %w(6001 +346001 0034600 1234567890 abc 6oo123456)
     invalid_telephone_numbers.each do |invalid_telephone_number|
       user.phone = invalid_telephone_number
       user.valid?

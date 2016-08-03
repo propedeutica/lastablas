@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe StaticPagesController, type: :controller do
-
   describe "GET #home" do
     pending "returns http success" do
       get :home
@@ -26,5 +25,4 @@ RSpec.describe StaticPagesController, type: :controller do
   describe "GET #open_hours" do
     pending "returns http success"
   end
-
 end

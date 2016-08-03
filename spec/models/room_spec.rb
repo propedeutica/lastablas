@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  let (:room) { room = FactoryGirl.build(:room) }
+  let(:room) { FactoryGirl.build(:room) }
   it "has a valid constructor" do
     expect(room).to be_valid
   end
@@ -22,6 +22,5 @@ RSpec.describe Room, type: :model do
     room.capacity = -1
     expect(room).not_to be_valid
     expect(room.errors[:capacity]).to include "debe ser positivo"
-
   end
 end

@@ -2,12 +2,11 @@ require 'rails_helper'
 include Devise::TestHelpers # this should work without this
 
 RSpec.describe UsersController, type: :controller do
-
   describe "GET #show" do
-    let(:user) {FactoryGirl.create(:user)}
+    let(:user) { FactoryGirl.create(:user) }
     it "returns http success" do
       sign_in user
-      get :show, id:user.id
+      get :show, id: user.id
       expect(response).to have_http_status(:success)
     end
     pending "it shows the user data"
@@ -15,11 +14,11 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #index" do
-    let(:user) {FactoryGirl.create(:user)}
-    before(:all) {
+    let(:user) { FactoryGirl.create(:user) }
+    before(:all) do
       FactoryGirl.create(:offspring)
       FactoryGirl.create(:offspring)
-    }
+    end
     it "returns http success" do
       sign_in user
       get :index
@@ -27,5 +26,4 @@ RSpec.describe UsersController, type: :controller do
     end
     pending "it returns the list of users"
   end
-
 end
