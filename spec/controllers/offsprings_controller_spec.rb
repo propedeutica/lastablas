@@ -22,6 +22,10 @@ RSpec.describe OffspringsController, type: :controller do
       }.to change(user.offsprings, :count).by(0)
       expect(response).to redirect_to('home')
     end
+
+    pending "does not allow to see the index of offsprings"
+    pending "visitor can't see offpsring@show"
+    pending "visitor can't see other users"
   end
 
   context "When authenticated," do
@@ -51,12 +55,23 @@ RSpec.describe OffspringsController, type: :controller do
       get :new, {}
       expect(response).to render_template(:new)
     end
-    let(:off) { FactoryGirl.create(:offspring) }
-    it "#destroy allows destroying offspring" do
-      user.offsprings << off
-      expect{
-        delete :destroy, id: off.id
-      }.to change(user.offsprings, :count).by(-1)
+    describe "#destroy" do
+      let(:off) { FactoryGirl.create(:offspring) }
+      it "allows destroying offspring" do
+        user.offsprings << off
+        expect{
+          delete :destroy, id: off.id
+        }.to change(user.offsprings, :count).by(-1)
+      end
+      pending "does not allow destroying others' offsprings"
     end
+    pending "#show show its data"
+  end
+
+  context "When admin authenticated" do
+    # context should include specs based on its actions (create, new, show, etc)
+    pending "can see offspring data"
+    pending "can delete any offspring"
+    pending "can create offpsring to any user"
   end
 end
