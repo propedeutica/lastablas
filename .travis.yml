@@ -10,9 +10,6 @@ addons:
 env:
   - TEST_SUITE=rspec
   - TEST_SUITE=rubocop
-matrix:
-  allow_failures:
-    - env: TEST_SUITE=rubocop
 script:
 - bundle exec $TEST_SUITE
 notifications:
