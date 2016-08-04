@@ -17,9 +17,9 @@ RSpec.describe OffspringsController, type: :controller do
     let(:off) { FactoryGirl.create(:offspring) }
     it "does not allow to destroy" do
       user.offsprings << off
-      expect{
+      expect do
         delete :destroy, id: off.id
-      }.to change(user.offsprings, :count).by(0)
+      end.to change(user.offsprings, :count).by(0)
       expect(response).to redirect_to('home')
     end
 
@@ -36,18 +36,17 @@ RSpec.describe OffspringsController, type: :controller do
 
     describe "#create" do
       it "allows creation of primary_first children" do
-        expect{
+        expect do
           post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
-        }.to change(user.offsprings, :count).by(1)
+        end.to change(user.offsprings, :count).by(1)
       end
       it "does not allow any other and redirects" do
         Offspring.grades.keys.each do |i|
-          if i != 'primary_first'
-            expect{
-              post :create, offspring: {first_name: "pepe", last_name: "kata", grade: i}
-            }.to change(user.offsprings, :count).by(0)
-            expect(response).to redirect_to(static_pages_intructions_path)
-          end
+          next unless i != 'primary_first'
+          expect do
+            post :create, offspring: {first_name: "pepe", last_name: "kata", grade: i}
+          end.to change(user.offsprings, :count).by(0)
+          expect(response).to redirect_to(static_pages_intructions_path)
         end
       end
     end
@@ -59,9 +58,9 @@ RSpec.describe OffspringsController, type: :controller do
       let(:off) { FactoryGirl.create(:offspring) }
       it "allows destroying offspring" do
         user.offsprings << off
-        expect{
+        expect do
           delete :destroy, id: off.id
-        }.to change(user.offsprings, :count).by(-1)
+        end.to change(user.offsprings, :count).by(-1)
       end
       pending "does not allow destroying others' offsprings"
     end
