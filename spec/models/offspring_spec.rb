@@ -33,13 +33,12 @@ RSpec.describe Offspring, type: :model do
     expect(child.errors[:grade]).to include("no puede estar vacío")
   end
 
-  
   it "is invalid with grades that don't belong to the grade list" do
-    expect{ child.grade = 100 }.to raise_error(ArgumentError).with_message(/is not a valid grade/)
+    expect { child.grade = 100 }.to raise_error(ArgumentError).with_message(/is not a valid grade/)
   end
 
   it "is invalid without a user associated" do
-    child.user=nil
+    child.user = nil
     child.valid?
     expect(child.errors[:user]).to include("no puede faltar")
   end
