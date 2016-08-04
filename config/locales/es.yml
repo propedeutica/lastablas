@@ -79,6 +79,8 @@ es:
               not_an_integer: "tiene que ser entero"
               less_than_or_equal_to: "tiene que ser menor o igual a %{count}"
               greater_than_or_equal_to: "tiene que ser mayor o igual a %{count}"
+            user:
+              blank: "no puede faltar"
         room:
           attributes:
             name:
