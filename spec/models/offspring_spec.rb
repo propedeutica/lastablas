@@ -21,10 +21,8 @@ RSpec.describe Offspring, type: :model do
   end
 
   it "should have the same surname than the brothers" do
-    parent = FactoryGirl.build(:user)
-    parent.offsprings << child
-    brother = FactoryGirl.build(:offspring, last_name: "aaassssddd")
-    parent.offsprings << brother
+    child.save
+    brother = FactoryGirl.build(:offspring, user: child.user, last_name: "aaassssddd")
     brother.valid?
     expect(brother.errors[:last_name]).to include("tiene que coincidir con el de sus hermanos")
   end
