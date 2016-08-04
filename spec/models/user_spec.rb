@@ -119,6 +119,7 @@ RSpec.describe User, type: :model do
       expect(user.errors[:phone]).to include "no es válido"
     end
   end
+
   it "accepts valid phone numbers" do
     valid_telephone_numbers =
       %w(600123456 +34600123456 0034600123456 914270000 0034914270123)
@@ -129,6 +130,7 @@ RSpec.describe User, type: :model do
                       "#{valid_telephone_number.inspect} should be valid"
     end
   end
+
   it "is invalid without a password" do
     user.password = "  "
     user.valid?
@@ -140,6 +142,7 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:password]).to include "demasiado corto"
   end
+
   it "is invalid with a password too long" do
     user.password = "a" * 73
     user.valid?
