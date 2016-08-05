@@ -18,5 +18,4 @@ class Shift < ActiveRecord::Base
   def sites_available
     room.capacity - prebooked - offsprings.count
   end
-
 end

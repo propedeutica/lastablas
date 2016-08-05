@@ -17,10 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    begin
-      super
-    rescue NoMethodError
-      redirect_to 'home'
-    end
+    super
+  rescue NoMethodError
+    redirect_to 'home'
   end
 end
