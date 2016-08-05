@@ -12,7 +12,6 @@ class Shift < ActiveRecord::Base
   validate :sites_available_gt_0
   validate :regexed_time
   validate :time_continuity
-  before_save :always_same_week
 
   def sites_available?
     room.capacity - prebooked - offsprings.count > 0
