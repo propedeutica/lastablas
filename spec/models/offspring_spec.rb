@@ -8,14 +8,12 @@ RSpec.describe Offspring, type: :model do
 
   it "is invalid without a name" do
     child.first_name = nil
-    expect(child).not_to be_valid
     child.valid?
     expect(child.errors[:first_name]).to include("no puede estar vacío")
   end
 
   it "is invalid without a surname" do
     child.last_name = nil
-    expect(child).not_to be_valid
     child.valid?
     expect(child.errors[:last_name]).to include("no puede estar vacío")
   end
@@ -27,10 +25,8 @@ RSpec.describe Offspring, type: :model do
     expect(brother.errors[:last_name]).to include("tiene que coincidir con el de sus hermanos")
   end
 
-  it "is invalid wihout an course" do
+  it "is invalid wihout a grade" do
     child.grade = nil
-    expect(child).not_to be_valid
-    child.valid?
     expect(child.errors[:grade]).to include("no puede estar vacío")
   end
 
@@ -41,9 +37,13 @@ RSpec.describe Offspring, type: :model do
     end
   end
 
+  it "is invalid with grades that don't belong to the grade list" do
+    expect { child.grade = 100 }.to raise_error(ArgumentError).with_message(/is not a valid grade/)
+  end
+
   it "is invalid without a user associated" do
     child.user = nil
-    expect(child).not_to be_valid
+    expect(child.errors[:user]).to include("no puede faltar")
   end
 
   it "is destroyed when the user associated is" do
