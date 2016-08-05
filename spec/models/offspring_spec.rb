@@ -27,6 +27,7 @@ RSpec.describe Offspring, type: :model do
 
   it "is invalid wihout a grade" do
     child.grade = nil
+    child.valid?
     expect(child.errors[:grade]).to include("no puede estar vacío")
   end
 
@@ -43,6 +44,7 @@ RSpec.describe Offspring, type: :model do
 
   it "is invalid without a user associated" do
     child.user = nil
+    child.valid?
     expect(child.errors[:user]).to include("no puede faltar")
   end
 
