@@ -14,9 +14,10 @@ RSpec.describe OffspringsController, type: :controller do
     end
 
     let(:user) { FactoryGirl.create(:user) }
-    let(:off) { FactoryGirl.create(:offspring) }
+    let(:off) { FactoryGirl.create(:offspring, user: user) }
     it "does not allow to destroy" do
-      user.offsprings << off
+      user.save
+      off.save
       expect do
         delete :destroy, id: off.id
       end.to change(user.offsprings, :count).by(0)
