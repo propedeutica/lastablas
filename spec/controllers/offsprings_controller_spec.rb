@@ -39,6 +39,7 @@ RSpec.describe OffspringsController, type: :controller do
         expect do
           post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
         end.to change(user.offsprings, :count).by(1)
+        expect(response).to redirect_to(root_path)
       end
       it "does not allow any other and redirects" do
         Offspring.grades.keys.each do |i|
@@ -55,12 +56,13 @@ RSpec.describe OffspringsController, type: :controller do
       expect(response).to render_template(:new)
     end
     describe "#destroy" do
-      let(:off) { FactoryGirl.create(:offspring) }
+      let(:off) { FactoryGirl.create(:offspring, user: user) }
       it "allows destroying offspring" do
-        user.offsprings << off
+        off.save
         expect do
           delete :destroy, id: off.id
         end.to change(user.offsprings, :count).by(-1)
+        expect(response).to redirect_to(root_url)
       end
       pending "does not allow destroying others' offsprings"
     end
