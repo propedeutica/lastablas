@@ -1,5 +1,19 @@
-<p>Bienvenido <%= @email %>!</p>
+<h2>Bienvenido, <%= @email %>!</h2>
+
+<p>Gracias por haberse dado de alta en la aplicación</p>
+
+<p>El proceso es el siguiente</p>
+
+<ol>
+    <li> Debe confirmar la cuenta, para asegurarnos de que la dirección de correo es correcta, con el enlace que se incluye a continuación
+    <li> Una vez confirmada la cuenta, podrá entrar con el usuario y password elegido a la aplicación 
+    <li> Añada a sus hijos en el sistema. Debe ser tutor legal de los niños a los que quiere añadir.
+    <li> Verá un botón al lado del nombre de sus hijos para elegir hora. Haga click en una de las horas con plazas disponibles 
+    <li> Se le comunicará a la dirección indicada cuando puede pasar por la parroquia a confirmar la plaza
+</ol>
 
 <p>Puede confirmar su email a través del siguiente enlace:</p>
 
 <p><%= link_to 'Confirmar mi cuenta', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<h3> Unidos en Cristo </h3>
