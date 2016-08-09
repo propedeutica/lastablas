@@ -3,25 +3,28 @@ require 'rails_helper'
 
 RSpec.describe OffspringsController, type: :controller do
   context "When not authenticated," do
+    let(:user) { FactoryGirl.build_stubbed(:user) }
+    let(:off) { FactoryGirl.build_stubbed(:offspring, user: user) }
+
     it "does not allow to create" do
       post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
-      expect(response).to redirect_to('home')
+      expect(response).to redirect_to('/users/sign_in')
     end
 
     it "does not allow access new" do
       get :new, {}
-      expect(response).to redirect_to('home')
+      expect(response).to redirect_to('/users/sign_in')
     end
 
-    let(:user) { FactoryGirl.create(:user) }
-    let(:off) { FactoryGirl.create(:offspring, user: user) }
     it "does not allow to destroy" do
+      user = FactoryGirl.build(:user)
       user.save
+      off = FactoryGirl.build(:offspring, user: user)
       off.save
       expect do
         delete :destroy, id: off.id
       end.to change(user.offsprings, :count).by(0)
-      expect(response).to redirect_to('home')
+      expect(response).to redirect_to('/users/sign_in')
     end
 
     pending "does not allow to see the index of offsprings"
@@ -57,7 +60,7 @@ RSpec.describe OffspringsController, type: :controller do
       expect(response).to render_template(:new)
     end
     describe "#destroy" do
-      let(:off) { FactoryGirl.create(:offspring, user: user) }
+      let(:off) { FactoryGirl.create(:offspring, user: user) } # Needed to be persistant
       it "allows destroying offspring" do
         off.save
         expect do
