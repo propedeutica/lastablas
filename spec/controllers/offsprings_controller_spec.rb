@@ -8,19 +8,19 @@ RSpec.describe OffspringsController, type: :controller do
 
     it "does not allow to create" do
       post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     it "does not allow access new" do
       get :new, {}
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     it "does not allow to destroy" do
       expect do
         delete :destroy, id: off.id
       end.to change(user.offsprings, :count).by(0)
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     pending "does not allow to see the index of offsprings"
