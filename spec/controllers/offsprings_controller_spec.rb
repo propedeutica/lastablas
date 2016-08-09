@@ -17,10 +17,6 @@ RSpec.describe OffspringsController, type: :controller do
     end
 
     it "does not allow to destroy" do
-      user = FactoryGirl.build(:user)
-      user.save
-      off = FactoryGirl.build(:offspring, user: user)
-      off.save
       expect do
         delete :destroy, id: off.id
       end.to change(user.offsprings, :count).by(0)
@@ -33,7 +29,7 @@ RSpec.describe OffspringsController, type: :controller do
   end
 
   context "When authenticated," do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user) } # Necessary creat to sign in
     before(:each) do
       sign_in user
     end
@@ -60,7 +56,7 @@ RSpec.describe OffspringsController, type: :controller do
       expect(response).to render_template(:new)
     end
     describe "#destroy" do
-      let(:off) { FactoryGirl.create(:offspring, user: user) } # Needed to be persistant
+      let(:off) { FactoryGirl.create(:offspring, user: user) } # Necessary create to be deleted
       it "allows destroying offspring" do
         off.save
         expect do
