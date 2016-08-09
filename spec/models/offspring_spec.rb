@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Offspring, type: :model do
-  let(:child) { FactoryGirl.build(:offspring) }
-
+  let(:child) { FactoryGirl.build_stubbed(:offspring) }
   it "has a valid factory" do
     child.valid?
     expect(child).to be_valid
@@ -21,8 +20,9 @@ RSpec.describe Offspring, type: :model do
   end
 
   it "should have the same surname than the brothers" do
-    child.save
-    brother = FactoryGirl.build(:offspring, user: child.user, last_name: "aaassssddd")
+    sibling = FactoryGirl.build(:offspring, user: child.user, last_name: child.last_name)
+    sibling.save
+    brother = FactoryGirl.build(:offspring, user: sibling.user, last_name: "aaassssddd")
     brother.valid?
     expect(brother.errors[:last_name]).to include("tiene que coincidir con el de sus hermanos")
   end
@@ -31,6 +31,14 @@ RSpec.describe Offspring, type: :model do
     child.grade = nil
     child.valid?
     expect(child.errors[:grade]).to include("no puede estar vacío")
+  end
+
+  it 'is in any grade' do
+    Offspring.grades.keys.each do |i|
+      child.grade = i
+      child.valid?
+      expect(child).to be_valid
+    end
   end
 
   it "is invalid with grades that don't belong to the grade list" do

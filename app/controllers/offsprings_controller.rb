@@ -25,7 +25,7 @@ class OffspringsController < ApplicationController
   def destroy
     offspring = Offspring.find_by_id(params[:id])
     offspring.destroy
-    flash[:sucess] = "Niño borrado"
+    flash[:success] = "Niño borrado"
     redirect_to request.referer || root_url
   end
 
