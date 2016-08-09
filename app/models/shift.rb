@@ -1,4 +1,6 @@
 class Shift < ActiveRecord::Base
+  REGEX = /^([01]\d|2[0123]):[012345]\d$/
+  SCOPE = "activerecord.errors.models.shift".freeze
   belongs_to :room
   has_many :offsprings, dependent: :nullify
   validates :day_of_week, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1,
@@ -25,19 +27,18 @@ class Shift < ActiveRecord::Base
 
   def sites_available_gt_0
     return true if sites_available? && sites_available >= 0
-    errors.add(:shift, 'Sites available under 0')
+    errors.add(:shift, I18n.t("sites_available_under_0", scope: SCOPE))
     false
   end
 
   def regexed_time
-    regex = /([01]\d|2[0123]):[012345]\d$/
-    if start_time !~ regex
-      errors.add(:start_time, 'Wrong start time')
+    if start_time !~ REGEX
+      errors.add(:start_time, I18n.t("wrong_regex", scope: SCOPE))
       return false
     end
 
-    if end_time !~ regex
-      errors.add(:end_time, 'Wrong end time')
+    if end_time !~ REGEX
+      errors.add(:end_time, I18n.t("wrong_regex", scope: SCOPE))
       return false
     end
     true
@@ -45,7 +46,7 @@ class Shift < ActiveRecord::Base
 
   def time_continuity
     return true if start_time < end_time
-    errors.add(:end_time, 'End time is ahead of start time')
+    errors.add(:shift, I18n.t("bad_time_continuity", scope: SCOPE))
     false
   end
 end

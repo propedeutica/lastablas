@@ -38,7 +38,7 @@ RSpec.describe Shift, type: :model do
     shift.prebooked = shift.room.capacity + 1
     shift.valid?
     expect(shift).not_to be_valid
-    expect(shift.errors[:shift]).to include "Sites available under 0"
+    expect(shift.errors[:shift]).to include "tiene que haber 0 o más sitios disponibles"
   end
 
   it "start_time is a time" do
@@ -57,6 +57,7 @@ RSpec.describe Shift, type: :model do
     shift.start_time = "24:00"
     shift.valid?
     expect(shift).not_to be_valid
+    expect(shift.errors[:start_time]).to include "hora con formato erroneo"
     shift.start_time = "23:60"
     shift.valid?
     expect(shift).not_to be_valid
@@ -66,6 +67,7 @@ RSpec.describe Shift, type: :model do
     shift.end_time = "24:00"
     shift.valid?
     expect(shift).not_to be_valid
+    expect(shift.errors[:end_time]).to include "hora con formato erroneo"
     shift.end_time = "23:60"
     shift.valid?
     expect(shift).not_to be_valid
@@ -82,6 +84,7 @@ RSpec.describe Shift, type: :model do
     shift.end_time = "10:00"
     shift.valid?
     expect(shift).not_to be_valid
+    expect(shift.errors[:shift]).to include "la hora de empezar debe ser anterior a la de terminar"
   end
 
   pending "relations are nullified whtn the shift is detroyed"
