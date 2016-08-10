@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20160713183124) do
   add_index "offsprings", ["user_id"], name: "index_offsprings_on_user_id"
 
   create_table "rooms", force: true do |t|
-    t.string   "name",       default: ""
-    t.integer  "capacity",   default: 0,  null: false
+    t.string   "name"
+    t.integer  "capacity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

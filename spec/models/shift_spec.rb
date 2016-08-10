@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Shift, type: :model do
-  let(:shift) { FactoryGirl.build(:shift) }
+  let(:shift) { FactoryGirl.build_stubbed(:shift) }
   it "has a valid model" do
     shift.valid?
     expect(shift).to be_valid
@@ -38,14 +38,55 @@ RSpec.describe Shift, type: :model do
     shift.prebooked = shift.room.capacity + 1
     shift.valid?
     expect(shift).not_to be_valid
-    expect(shift.errors[:shift]).to include "no puede ser mayor que la capacidad de la sala"
+    expect(shift.errors[:shift]).to include "tiene que haber 0 o más sitios disponibles"
+  end
+
+  it "start_time is a time" do
+    expect(shift.start_time).to be_instance_of(String)
+    shift.valid?
+    expect(shift).to be_valid
+  end
+
+  it "end_time is a time" do
+    expect(shift.end_time).to be_instance_of(String)
+    shift.valid?
+    expect(shift).to be_valid
+  end
+
+  it "start_time is not a wrong time" do
+    shift.start_time = "24:00"
+    shift.valid?
+    expect(shift).not_to be_valid
+    expect(shift.errors[:start_time]).to include "hora con formato erroneo"
+    shift.start_time = "23:60"
+    shift.valid?
+    expect(shift).not_to be_valid
+  end
+
+  it "end_time is not a wrong time" do
+    shift.end_time = "24:00"
+    shift.valid?
+    expect(shift).not_to be_valid
+    expect(shift.errors[:end_time]).to include "hora con formato erroneo"
+    shift.end_time = "23:60"
+    shift.valid?
+    expect(shift).not_to be_valid
+  end
+
+  it "start_time earlier than end_time is valid." do
+    shift = FactoryGirl.build_stubbed(:shift, start_time: "10:00", end_time: "10:30")
+    shift.valid?
+    expect(shift).to be_valid
+  end
+
+  it "start_time later than end_time is invalid." do
+    shift.start_time = "10:30"
+    shift.end_time = "10:00"
+    shift.valid?
+    expect(shift).not_to be_valid
+    expect(shift.errors[:shift]).to include "la hora de empezar debe ser anterior a la de terminar"
   end
 
   pending "relations are nullified whtn the shift is detroyed"
   pending "it gives back the number of spaces available"
-  pending "start_time is defined as HH:MM"
-  pending "start_time is between 00:00 and 23:59"
-  pending "end_time is defined as HH:MM"
-  pending "start_time is earlier than end_time"
-  pending "end_time is between 00:00 and 23:59"
 end

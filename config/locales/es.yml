@@ -100,6 +100,9 @@ es:
               blank: "no puede estar vacío"
             prebooked:
               not_a_number: "tiene que ser un número entero"
+          wrong_regex: "la hora debe tener el formato 00:00"
+          sites_available_under_0: "tiene que haber sitios disponibles"
+          bad_time_continuity: "debe terminar después de la hora de comienzo"
 
       messages:
         record_invalid: "no es válido"
