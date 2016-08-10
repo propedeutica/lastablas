@@ -2,38 +2,77 @@ require 'rails_helper'
 # include Devise::TestHelpers # this should work without this
 
 RSpec.describe OffspringsController, type: :controller do
-  describe "get INDEX" do
-    before :all do
-      3.times do
-        FactoryGirl.create(:offspring)
-      end
+  context "When not authenticated," do
+    let(:user) { FactoryGirl.build_stubbed(:user) }
+    let(:off) { FactoryGirl.build_stubbed(:offspring, user: user) }
+
+    it "does not allow to create" do
+      post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
+      expect(response).to redirect_to(new_user_session_path)
     end
 
-    context "When not authenticated" do
-      pending "redirects to authentication" do
-        @request.env["devise.mapping"] = Devise.mappings[:user]
-        get :index, {}
-        expect(assigns).to eq(nil) # it does not go through the controller
-        expect(response).to redirect_to(new_user_session_path)
-      end
-      pending "visitor can't see the index of offsprings"
-      pending "visitor can't see offpsring@show"
-      pending "visitor can't see other users"
+    it "does not allow access new" do
+      get :new, {}
+      expect(response).to redirect_to(new_user_session_path)
     end
 
-    context "When authenticated" do
-      pending "shows index of offspring" do
-        get :index
-        expect(response).to have_http_status(:success)
+    it "does not allow to destroy" do
+      expect do
+        delete :destroy, id: off.id
+      end.to change(user.offsprings, :count).by(0)
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    pending "does not allow to see the index of offsprings"
+    pending "visitor can't see offpsring@show"
+    pending "visitor can't see other users"
+  end
+
+  context "When authenticated," do
+    let(:user) { FactoryGirl.create(:user) } # Necessary creat to sign in
+    before(:each) do
+      sign_in user
+    end
+
+    describe "#create" do
+      it "allows creation of primary_first children" do
+        expect do
+          post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
+        end.to change(user.offsprings, :count).by(1)
+        expect(response).to redirect_to(root_path)
       end
-      pending "show offspring data"
-      pending "can delete its own offspring"
-      pending "fails when trying to delete other users offspring"
+      it "does not allow any other and redirects" do
+        Offspring.grades.keys.each do |i|
+          next unless i != 'primary_first'
+          expect do
+            post :create, offspring: {first_name: "pepe", last_name: "kata", grade: i}
+          end.to change(user.offsprings, :count).by(0)
+          expect(response).to redirect_to(static_pages_intructions_path)
+        end
+      end
     end
-    context "When admin authenticated" do
-      pending "can see offspring data"
-      pending "can delete any offspring"
-      pending "can create offpsring to any user"
+    it "#new shows view for new offspring" do
+      get :new, {}
+      expect(response).to render_template(:new)
     end
+    describe "#destroy" do
+      let(:off) { FactoryGirl.create(:offspring, user: user) } # Necessary create to be deleted
+      it "allows destroying offspring" do
+        off.save
+        expect do
+          delete :destroy, id: off.id
+        end.to change(user.offsprings, :count).by(-1)
+        expect(response).to redirect_to(root_url)
+      end
+      pending "does not allow destroying others' offsprings"
+    end
+    pending "#show show its data"
+  end
+
+  context "When admin authenticated" do
+    # context should include specs based on its actions (create, new, show, etc)
+    pending "can see offspring data"
+    pending "can delete any offspring"
+    pending "can create offpsring to any user"
   end
 end
