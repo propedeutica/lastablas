@@ -4,6 +4,7 @@
   <li class="nav-item"><a class="nav-link" data-toggle="tab"  href="#menu2" >Catecúmenos</a></li>
   <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu3">Aulas</a></li>
   <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu4">Administración del Sistema</a></li>
+  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu5">Información del Sistema</a></li>
 </ul>
 </div>
 
@@ -50,6 +51,11 @@
     <%= render partial: 'system_admin_view' %>  
   </div>
 
+  <div id="menu5" class="tab-pane" role="tabpanel">
+    <%= render partial: 'system_admin_dashboard_view' %>  
+  </div>
+
+
 </div>
 
 
@@ -70,7 +76,7 @@ $(function() {
     }
 });</script>
 
-<script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script>
   // Initialize Datatables
   $(document).ready(function() {

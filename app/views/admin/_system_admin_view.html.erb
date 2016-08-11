@@ -1,25 +1,9 @@
 <div class="panel panel-default">
-  <div style="float: left; width: 50%">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%="Número de usuarios"%></h3>
-    </div>
-    <div class="panel-body">
-      <div class="container-fluid">
-        <p>
-          <ul class="list-group">
-            <li> Actualmente hay inscritos:
-              <ol>
-                <li> ___ usuarios. </li>
-              </ol>
-            </li>
-        </p>
-      </div>
-    </div>
-  </div>  
+  
 
-<div style="float: left; width: 50%;">
+<div style="clear:left; width: 50%;">
 <div class="panel-heading">
-    <h3 class="panel-title"><%="Bloqueo de cambios"%></h3>
+    <h3 id= "blocker_panel_title" class="panel-title"><%="Bloqueo de cambios"%></h3>
   </div>
   <div class="panel-body">
     <div class="container-fluid">
@@ -33,85 +17,28 @@
               <li> Cada usuario <b>SÍ</b> podrá borrar su cuenta. </li>
             </ol>
           </li>
+          <input type="checkbox" id="chbx" onchange="foo()">
+          <script type="text/javascript">
+            var checkbox = document.getElementById("chbx");
+
+            function foo(){
+              if(checkbox.checked){
+                alert("Checked!");
+                
+                document.getElementById("blocker_panel_title").innerHTML = "Bloqueo de cambios: Habilitado";
+                
+             }
+             else {
+                alert("UnChecked!");
+                document.getElementById("blocker_panel_title").innerHTML = "Bloqueo de cambios: Deshabilitado";
+            }
+          };
+        </script>
       </p>
     </div>
-      
-
-      <div>
-      <!-- Rounded switch -->
-        <label>
-          <input type="checkbox">
-          <div></div>
-        </label>
-      </div>
     </div>
   </div> 
 
-  <div style="float: left; width: 50%">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%="Usuarios con más de un hijo"%></h3>
-      </div>
-      <div class="panel-body">
-        <div class="container-fluid">
-          <p>
-            <ul class="list-group">
-              <li> Actualmente hay inscritos:
-                <ol>
-                  <li> ___ usuarios con más de un hijo. </li>
-                </ol>
-              </li>
-          </p>
-      </div>
-    </div>
-  </div> 
-
-  <div style="float: left; width: 50%">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%="Número de catecúmenos"%></h3>
-      </div>
-      <div class="panel-body">
-        <div class="container-fluid">
-          <p>
-            <ul class="list-group">
-              <li> Actualmente hay inscritos:
-                <ol>
-                  <li> ___ catecúmenos. </li>
-                </ol>
-              </li>
-          </p>
-      </div>
-    </div>
-  </div>   
-
-  <div style="float: left; width: 50%">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%="Número de usuarios sin hijos"%></h3>
-      </div>
-      <div class="panel-body">
-        <div class="container-fluid">
-          <p>
-            <ul class="list-group">
-              <li> Actualmente hay inscritos:
-                <ol>
-                  <li> ___ usuarios sin hijos. </li>
-                </ol>
-              </li>
-          </p>
-      </div>
-    </div>
-  </div> 
-  <p></p>
-  <div style="float: center; width: auto;">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%="Aulas"%></h3>
-      </div>
-      <div class="panel-body">
-        <div class="container-fluid">
-          <p>
-           
-          </p>
-      </div>
-    </div>
-  </div> 
+ 
 
 </div>  
