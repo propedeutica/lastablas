@@ -1,6 +1,6 @@
 {
   "name": "patternfly-sass",
-  "version": "3.5.1",
+  "version": "3.7.0",
   "license": "Apache-2.0",
   "homepage": "https://www.patternfly.org",
   "authors": [
@@ -46,13 +46,13 @@
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
     "moment": "~2.11.0"
   },
-  "_release": "3.5.1",
+  "_release": "3.7.0",
   "_resolution": {
     "type": "version",
-    "tag": "v3.5.1",
-    "commit": "7efe1fc6c206b145e4add23c0d7f990b31d9e877"
+    "tag": "v3.7.0",
+    "commit": "5db470f670e3ded3b698dfc2310258458ca6812c"
   },
   "_source": "https://github.com/patternfly/patternfly-sass.git",
-  "_target": "^3.5.0",
+  "_target": "^3.7.0",
   "_originalSource": "patternfly-sass"
 }
