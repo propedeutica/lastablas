@@ -8,17 +8,22 @@ module ApplicationHelper
     end
   end
 
-  def flash_class(messageType = "default")
-    "alert alert-#{messageType}"
+  def flash_class(messageType = "primary")
+    case messageType
+    when "default", "primary", "alert" then "alert alert-info"
+    when "notice", "success" then "alert alert-success"
+    when "alert", "warning" then "alert alert-warning"
+    else "alert alert-#{messageType}"
+    end
   end
 
-  def flash_icon(iconType = "default")
+  def flash_icon(iconType = "primary")
     case iconType
-    when "default", "primary" then "pficon pficon-help"
+    when "default", "primary", "alert" then "pficon pficon-help"
     when "info" then "pficon pficon-info"
-    when "success" then "pficon pficon-ok"
+    when "notice", "success" then "pficon pficon-ok"
     when "warning" then "pficon pficon-warning-triangle-o"
-    when "danger" then "pficon pficon-error-circle-o"
+    when "alert", "danger" then "pficon pficon-error-circle-o"
     end
   end
 
