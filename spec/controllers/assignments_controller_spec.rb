@@ -30,21 +30,23 @@ RSpec.describe AssignmentsController, type: :controller do
     describe "Shift," do
       it "should not allow a shift without day_of_week" do
         shift.day_of_week = nil
+        shift.valid?
         expect(shift).not_to be_valid
       end
       it "should not allow a shift without start_time" do
         shift.start_time = nil
+        shift.valid?
         expect(shift).not_to be_valid
       end
       it "should not allow a shift without end_time" do
         shift.end_time = nil
+        shift.valid?
         expect(shift).not_to be_valid
       end
       it "should not allow a shift without prebooked" do
-        expect{
-          shift.prebooked = nil
-          shift.valid?
-        }.to raise_exception("nil can't be coerced into Fixnum")
+        shift.prebooked = nil
+        shift.valid?
+        expect(shift).not_to be_valid
       end
     end
   end
