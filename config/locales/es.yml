@@ -99,6 +99,7 @@ es:
             end_time:
               blank: "no puede estar vacío"
             prebooked:
+              blank: "no puede estar vacío"
               not_a_number: "tiene que ser un número entero"
           wrong_regex: "la hora debe tener el formato 00:00"
           sites_available_under_0: "tiene que haber sitios disponibles"

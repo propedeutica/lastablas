@@ -9,21 +9,25 @@ RSpec.describe AssignmentsController, type: :controller do
       it "should not allow an offspring without first name" do
         offspring.first_name = nil
         expect(offspring).not_to be_valid
+        expect(offspring.errors[:first_name]).to include "no puede estar vacío"
       end
 
       it "should not allow an offspring without user" do
         offspring.user = nil
         expect(offspring).not_to be_valid
+        expect(offspring.errors[:user]).to include "no puede faltar"
       end
 
       it "should not allow an offspring without last name" do
         offspring.last_name = nil
         expect(offspring).not_to be_valid
+        expect(offspring.errors[:last_name]).to include "no puede estar vacío"
       end
 
       it "should not allow an offspring without grade" do
         offspring.grade = nil
         expect(offspring).not_to be_valid
+        expect(offspring.errors[:grade]).to include "no puede estar vacío"
       end
     end
 
@@ -32,21 +36,25 @@ RSpec.describe AssignmentsController, type: :controller do
         shift.day_of_week = nil
         shift.valid?
         expect(shift).not_to be_valid
+        expect(shift.errors[:day_of_week]).to include "no puede estar vacío"
       end
       it "should not allow a shift without start_time" do
         shift.start_time = nil
         shift.valid?
         expect(shift).not_to be_valid
+        expect(shift.errors[:start_time]).to include "no puede estar vacío"
       end
       it "should not allow a shift without end_time" do
         shift.end_time = nil
         shift.valid?
         expect(shift).not_to be_valid
+        expect(shift.errors[:end_time]).to include "no puede estar vacío"
       end
       it "should not allow a shift without prebooked" do
         shift.prebooked = nil
         shift.valid?
         expect(shift).not_to be_valid
+        expect(shift.errors[:prebooked]).to include "no puede estar vacío"
       end
     end
   end
