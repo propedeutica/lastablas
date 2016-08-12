@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find_by_id(params[:id])
+    debugger
     if delete_possible?(user)
       user.destroy
       flash[:warning] = "Usuario #{user.email} borrado"
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
   def delete_possible?(user)
     if user.nil?
       return false
-    elsif user != current_user
+    elsif user == current_user
       return false
     elsif !current_user.admin?
       return false
