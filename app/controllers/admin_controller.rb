@@ -10,7 +10,6 @@ class AdminController < ApplicationController
     @offsprings = Offspring.paginate(page: params[:offsprings_page])
     @rooms = Room.all
     @users_count = User.where(admin: false).count
-    
   end
 
   def offsprings
@@ -20,8 +19,6 @@ class AdminController < ApplicationController
   def rooms
     @rooms = Room.all
   end
-
-
 
   private
 

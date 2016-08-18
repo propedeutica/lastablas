@@ -4,7 +4,7 @@
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu2" >Catecúmenos</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu3">Aulas</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu4">Administración del Sistema</a></li>
-    <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#menu5">Información del Sistema</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu5">Información del Sistema</a></li>
   </ul>
 </div>
 
@@ -19,18 +19,10 @@
     });
   </script>
   
+ 
+ 
   <div id="menu1" class="tab-pane" role="tabpanel">
-  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-  
-  <script>
-    $('.tab-pane a').click(function(e){
-      $('.tab-pane').removeClass('active');
-      $(this).addClass('active');
-    });
-  </script>
-    <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
-    
-    
+      <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
     <div class="table-responsive">
       <table id= "user_table" class="datatable table table-striped table-bordered table-hover">
         <thead>
@@ -45,7 +37,7 @@
         </thead>
         <tbody>
             <%= render @users %>
-
+           
         </tbody>
       </table>
     </div>
@@ -87,7 +79,7 @@
     <%= render partial: 'system_admin_view' %>  
   </div>
 
-  <div id="menu5" class="tab-pane active" role="tabpanel">
+  <div id="menu5" class="tab-pane" role="tabpanel">
     <%= render partial: 'system_admin_dashboard_view' %>  
   </div>
 </div>

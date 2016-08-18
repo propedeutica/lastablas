@@ -10,8 +10,6 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
 
-
-  
   def destroy
     user = User.find_by_id(params[:id])
     if delete_possible?(user)
