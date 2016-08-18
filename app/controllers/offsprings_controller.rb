@@ -2,6 +2,7 @@
 # They can't be assigned themselves, and need the process to be done by the user
 class OffspringsController < ApplicationController
   def show
+    @offsprings = Offspring.paginate(page: params[:offsprings_page])
   end
 
   def new

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   authenticate :user do
     root to: "static_pages#home"
     get 'home' => 'static_pages#home'
-    resources :users, only: [:show, :index, :destroy]
+    resources :users, only: [:show, :index, :destroy, :num_of_users]
     resources :offsprings, only: [:new, :create, :destroy]
     resources :rooms, only: [:index]
     resources :assignments, only: [:new, :create, :destroy]

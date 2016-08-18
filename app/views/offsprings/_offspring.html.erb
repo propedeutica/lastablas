@@ -1,6 +1,27 @@
 <div>
-  <div class="list-group-item">
-    <div class="list-view-pf-actions">
+  <tr>
+    <td>
+      <div class="list-view-pf-body">
+      <%= offspring.first_name %>
+      </div>
+    </td>
+    <td>
+      <div class="list-view-pf-body">
+      <%= offspring.last_name %>
+    </div>
+    </td>
+    <td>
+        <div class="list-view-pf-body">
+          <%= I18n.t offspring.grade %>
+        </div>
+    </td>
+    <td>
+        <div class="list-view-pf-body">
+          <%= link_to full_name_for(offspring.user),offspring.user %>
+        </div>
+    </td>
+    <td>
+     <div class="list-view-pf-actions">
       <% if offspring.shift.nil? %>
       <%= link_to "Asignar horario", new_assignment_path(offspring), class: "btn btn-warning"%>
       <% else %>
@@ -8,21 +29,6 @@
       <% end %>
       <%= button_to "Borrar niño", { action: "destroy", controller: 'offsprings', id: offspring.id} , method: :delete, data: { confirm: 'Esta acción no puede cancelarse, ¿Está seguro?'} , class:"btn btn-primary"%>
     </div>
-
-    <div class="list-view-pf-body">
-      <%= offspring.first_name %>
-      </div>
-
-    <div class="list-view-pf-body">
-      <%= offspring.last_name %>
-    </div>
-
-    <div class="list-view-pf-body">
-      <%= I18n.t offspring.grade %>
-    </div>
-    <div class="list-view-pf-body">
-      <%= link_to full_name_for(offspring.user),offspring.user %>
-    </div>
-
-  </div>
-</div>
+    </td>
+  </tr>
+</div>  
