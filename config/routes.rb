@@ -9,13 +9,14 @@ Rails.application.routes.draw do
   authenticate :user do
     root to: "static_pages#home"
     get 'home' => 'static_pages#home'
-    resources :users, only: [:show, :index, :destroy]
-    resources :offsprings, only: [:new, :create, :destroy]
+    resources :users, only: [:show, :index, :destroy, :num_of_users]
+    resources :offsprings, only: [:new, :index, :create, :destroy]
     resources :rooms, only: [:index]
     resources :assignments, only: [:new, :create, :destroy]
     resources :shifts, only: [:show]
     get 'admin' => 'admin#dashboard'
     get 'offsprings' => 'admin#offsprings'
+    get 'users' => 'admin#users'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
