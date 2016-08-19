@@ -11,25 +11,45 @@
   </div>
 </h1>
 
-<% if @user.offsprings.any? %>
-    <h2>Niños: (<%= @user.offsprings.count %>)</h2>
-    <div class="panel panel-default">
-      <div class="panel-header">
-        <h4>Niños cuyo padre o tutor legal es el usuario:</h4>
-      </div>
-      <div class="panel-body">
-        <div class="list-group list-view-pf">
-          <%= render @user.offsprings %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+    
 
-    <div class="container-fluid">
+  <h2>Niños: (<%= @user.offsprings.count %>)</h2>
+    
+  <h4>Niños cuyo padre o tutor legal es el usuario:</h4>
+
+  <script src="/bower_components/datatables/media/js/jquery.dataTables.js"></script>
+  <script>
+    // Initialize Datatables
+    $(document).ready(function() {
+      $('.datatable').dataTable();
+    });
+  </script>
+  <% if @user.offsprings.any? %>
+   
+      <div class="table-responsive">    
+        <table id= "offspring_table" class="datatable table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Curso</th>
+              <th>Padre</th>
+              <th>Administrar</th>
+
+            </tr>
+          </thead>
+          <tbody>
+              <%= render @user.offsprings %>
+          </tbody>
+        </table>
+      </div>   
+    <% end %>
+  </div>
+
+
+<div class="container-fluid">
       <%= link_to "Añadir niño", new_offspring_path, class:"btn btn-lg btn-info" %>
     </div>
-
-
 <script>
   // Row Checkbox Selection
   $(document).ready(function () {
@@ -41,4 +61,4 @@
       }
     });
   });
-<script>
+</script>

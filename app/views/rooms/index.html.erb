@@ -1,6 +1,12 @@
 <% provide(:title, "Lista de aulas") %>
-
-
-<container class="container-fluid">
-<%= render @rooms %>
-</container>
+    <div class="table-responsive">
+      <table id= "user_table" class="datatable table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Aula</th>
+        </thead>
+        <tbody>
+            <%= render @rooms %>       
+        </tbody>
+      </table>
+    </div>

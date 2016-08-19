@@ -15,6 +15,15 @@
     "tests"
   ],
   "dependencies": {
-    "patternfly-sass": "^3.7.0"
+    "patternfly-sass": "^3.7.0",
+    "bootstrap": "~3.0.0",
+    "angular": "~1.0.7",
+    "angular-cookies": "~1.0.7",
+    "angular-loader": "~1.0.7",
+    "angular-resource": "~1.0.7",
+    "angular-sanitize": "~1.0.7",
+    "datatables.net-buttons-dt": "^1.2.2",
+    "datatables.net-buttons": "^1.2.2",
+    "datatables.net-buttons-bs": "^1.2.2"
   }
 }

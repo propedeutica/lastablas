@@ -1,73 +1,77 @@
-<div>
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu1">Padres</a></li>
-  <li class="nav-item"><a class="nav-link" data-toggle="tab"  href="#menu2" >Catecúmenos</a></li>
-  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu3">Aulas</a></li>
-</ul>
+<div id="navi_tabs">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu1">Padres</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu2" >Catecúmenos</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu3">Aulas</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu4">Administración del Sistema</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu5">Información del Sistema</a></li>
+  </ul>
 </div>
+
+      <script>
+        // Initialize Datatables
+        $(document).ready(function() {
+          $('.datatable').dataTable({"dom": '<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>', });
+        });
+      </script>
 
 <div class="tab-content">
-  <div id="menu1" class="tab-pane active" role="tabpanel">
-    <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
+  <div id="menu1" class="tab-pane" role="tabpanel">
     <div class="table-responsive">
-    <table class="datatable table table-striped table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Imagen</th>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Teléfono</th>
-          <th>Número de hijos</th>
-          <th>Borrar</th>
-        </tr>
-      </thead>
-      <tbody>
-          <%= render @users %>
-      </tbody>
-  </table>
-</div>
-    <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
+      
+      <table class="datatable table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Número de hijos</th>
+            <th>Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+            <%= render @users %>
+           
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div id="menu2" class="tab-pane" role="tabpanel">
-        <%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
+  
+  
+    <div id="menu2" class="tab-pane" role="tabpanel">
+      <div class="table-responsive">    
+        <table id= "offspring_table" class="datatable table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Curso</th>
+              <th>Padre</th>
+              <th>Administrar</th>
 
-            <div class="panel panel-default">
+            </tr>
+          </thead>
+          <tbody>
+              <%= render @offsprings %>
+          </tbody>
+        </table>
+        
+      </div>   
+      
+    </div> 
+  
+  
 
-                <div class="list-group list-view-pf">
-                  <%= render @offsprings %>
-
-              </div>
-            </div>
-
-    <%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
-  </div>
   <div id="menu3" class="tab-pane" role="tabpanel">
     <%= render partial: 'shift_view', collection: @rooms, as: :room %>
   </div>
+
+  <div id="menu4" class="tab-pane" role="tabpanel">
+    <%= render partial: 'system_admin_view' %>  
+  </div>
+
+  <div id="menu5" class="tab-pane active" role="tabpanel">
+    <%= render partial: 'system_admin_dashboard_view' %>  
+  </div>
 </div>
-
-
-
-
-<script>
-$(function() {
-    // for bootstrap 3 use 'shown.bs.tab', for bootstrap 2 use 'shown' in the next line
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        // save the latest tab; use cookies if you like 'em better:
-        localStorage.setItem('lastTab', $(this).attr('href'));
-    });
-
-    // go to the latest tab, if it exists:
-    var lastTab = localStorage.getItem('lastTab');
-    if (lastTab) {
-        $('[href="' + lastTab + '"]').tab('show');
-    }
-});</script>
-
-<script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script>
-  // Initialize Datatables
-  $(document).ready(function() {
-    $('.datatable').dataTable();
-  });
-</script>

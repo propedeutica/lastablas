@@ -11,12 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-
-
-//
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
+//= require_self
 // Require elements for patternfly to work
 //
 //= require bootstrap
 //= require patternfly
-
-
+//= require bootstrap-switch
+//= require datatables
+//= require datatables.net-buttons-bs

@@ -11,6 +11,11 @@
   a.last_name = "Forcada"
   a.email = "ana@example.com"
   a.save
+  b = FactoryGirl.build(:user, :administrator)
+  b.first_name = "kata"
+  b.last_name = "fira"
+  b.email = "kata@example.com"
+  b.save
   2.times do
     a.offsprings << FactoryGirl.build(:offspring, user: a, last_name: "Forcada")
   end
