@@ -21,3 +21,4 @@
 //= require patternfly
 //= require bootstrap-switch
 //= require datatables
+//= require datatables.net-buttons-bs

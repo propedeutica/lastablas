@@ -8,23 +8,18 @@
   </ul>
 </div>
 
+      <script>
+        // Initialize Datatables
+        $(document).ready(function() {
+          $('.datatable').dataTable({"dom": '<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>', });
+        });
+      </script>
 
 <div class="tab-content">
-  
-  <script src="/bower_components/datatables/media/js/jquery.dataTables.js"></script>
-  <script>
-    // Initialize Datatables
-    $(document).ready(function() {
-      $('.datatable').dataTable();
-    });
-  </script>
-  
- 
- 
   <div id="menu1" class="tab-pane" role="tabpanel">
-      <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
     <div class="table-responsive">
-      <table id= "user_table" class="datatable table table-striped table-bordered table-hover">
+      
+      <table class="datatable table table-striped table-bordered table-hover">
         <thead>
           <tr>
             <th>Imagen</th>
@@ -41,12 +36,10 @@
         </tbody>
       </table>
     </div>
-    <%= will_paginate @users, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :users_page %>
   </div>
   
   
     <div id="menu2" class="tab-pane" role="tabpanel">
-          <%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
       <div class="table-responsive">    
         <table id= "offspring_table" class="datatable table table-striped table-bordered table-hover">
           <thead>
@@ -66,7 +59,6 @@
         
       </div>   
       
-      <%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
     </div> 
   
   
@@ -79,7 +71,7 @@
     <%= render partial: 'system_admin_view' %>  
   </div>
 
-  <div id="menu5" class="tab-pane" role="tabpanel">
+  <div id="menu5" class="tab-pane active" role="tabpanel">
     <%= render partial: 'system_admin_dashboard_view' %>  
   </div>
 </div>

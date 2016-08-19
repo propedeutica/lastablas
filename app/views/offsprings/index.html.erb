@@ -1,8 +1,6 @@
 <% provide(:title, 'Lista de catecúmenos') %>
 <h1>Índice de catecúmenos</h1>
 
-<%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
-
 <table class="datatable table table-striped table-bordered table-hover">
   <thead>
     <tr>
@@ -17,12 +15,4 @@
   </tbody>
 </table>
 
-<script>
-  // Initialize Datatables
-  $(document).ready(function() {
-    $('.datatable').dataTable();
-  });
-</script>
-
-<%= will_paginate @offsprings, :previous_label => "Previo", :next_label => "Siguiente", :param_name => :offsprings_page %>
 
