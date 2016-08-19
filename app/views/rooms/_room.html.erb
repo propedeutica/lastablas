@@ -10,7 +10,8 @@
               <li class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></li>
               <% room.shifts.where(day_of_week: day).order("start_time").each do |shift| %>
               <li class="list-group-item-text">
-                <%= shift.start_time - shift.room.capacity - shift.prebooked - shift.offsprings.count%>
+                <%= shift.start_time %>,
+                <%= shift.room.capacity - shift.prebooked - shift.offsprings.count%>
                 plazas</li>
               <% end %>
             </ul>
