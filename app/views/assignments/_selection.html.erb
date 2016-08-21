@@ -13,8 +13,7 @@
                 <li class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></li>
                 <% room.shifts.where(day_of_week: day).order("start_time").each do |shift| %>
                 <li class="list-group-item-text">
-                <%= link_to "#{shift.start_time} ,
-                             #{shift.room.capacity - shift.prebooked - shift.offsprings.count} plazas",
+                <%= link_to_if shift.sites_available?, "#{shift.start_time} , #{pluralize(shift.sites_available, "plaza")}",
                     assignments_path(@offspring, shift: shift), method: :post %>
                  </li>
                   <% end %>
@@ -30,8 +29,7 @@
                 <li class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></li>
                 <% room.shifts.where(day_of_week: day).order("start_time").each do |shift| %>
                 <li class="list-group-item-text">
-                <%= link_to "#{shift.start_time} ,
-                             #{shift.room.capacity - shift.prebooked - shift.offsprings.count} plazas",
+                <%= link_to_if shift.sites_available?, "#{shift.start_time} , #{pluralize(shift.sites_available, "plaza")}",
                     assignments_path(@offspring, shift: shift), method: :post %>
               </li>
                   <% end %>
