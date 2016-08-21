@@ -54,7 +54,7 @@ end
 
 group :production, :postgresql do
 gem 'pg'
-gem 'rails_12factor'
+#gem 'rails_12factor'
 end
 
 ### / OpenShift changes
