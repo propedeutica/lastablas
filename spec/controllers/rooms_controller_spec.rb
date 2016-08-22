@@ -42,7 +42,11 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to redirect_to(new_admin_session_path)
     end
 
-    pending "#DELETE destroy"
+    it "#DELETE destroy" do
+      room = FactoryGirl.build_stubbed(:room)
+      expect { delete :destroy, id: room.id }.to change(Room.all, :count).by(0)
+      expect(response).to redirect_to(new_admin_session_path)
+    end
   end
 
   context "When admin logged in" do
@@ -118,11 +122,22 @@ RSpec.describe RoomsController, type: :controller do
         put :update, id: room.id, room: {name: "Aula 666", capacity: 666}
         expect(response).to have_http_status(:success)
       end
+      it "non-existing room" do
+        put :update, id: -1, room: {name: "Aula 666", capacity: 666}
+        expect(response).to redirect_to(rooms_path)
+      end
     end
 
     describe "#DELETE destroy" do
-      pending "succesfully"
-      pending "non-existing room"
+      it "succesfully" do
+        room = FactoryGirl.create(:room)
+        expect { delete :destroy, id: room.id }.to change(Room.all, :count).by(-1)
+        expect(response).to redirect_to(rooms_path)
+      end
+      it "non-existing room" do
+        expect { delete :destroy, id: -1 }.to change(Room.all, :count).by(0)
+        expect(response).to redirect_to(rooms_path)
+      end
     end
   end
 
@@ -162,6 +177,10 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to redirect_to(new_admin_session_path)
     end
 
-    pending "#DELETE destroy"
+    it "#DELETE destroy" do
+      room = FactoryGirl.build_stubbed(:room)
+      expect { delete :destroy, id: room.id }.to change(Room.all, :count).by(0)
+      expect(response).to redirect_to(new_admin_session_path)
+    end
   end
 end

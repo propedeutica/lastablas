@@ -32,8 +32,7 @@ class RoomsController < ApplicationController
     if @room.nil?
       flash[:danger] = I18n.t("edit_wrong", scope: SCOPE)
       redirect_to home_path
-    else
-      flash[:success] = I18n.t("edit_correct", scope: SCOPE)
+      return
     end
   end
 
@@ -47,19 +46,37 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find_by_id(params["id"])
-    if @room.update_attributes(room_params)
-      flash[:success] = I18n.t("update_correct", scope: SCOPE)
-      render 'edit'
+    if @room.nil?
+      flash[:danger] = I18n.t("room_non-existing", scope: SCOPE)
+      redirect_to request.referer || rooms_path
     else
-      flash[:danger] = I18n.t("update_wrong", scope: SCOPE)
-      redirect_to request.referer || room_path(@room)
+      update_room_attributes(@room)
     end
   end
 
   def destroy
+    room = Room.find_by_id(params[:id])
+    if room.nil?
+      flash[:danger] = I18n.t("room_non-existing", scope: SCOPE)
+    elsif room.destroy
+      flash[:success] = I18n.t("room_destroy_correct", scope: SCOPE)
+    else
+      flash[:danger] = I18n.t("room_destroy_wrong", scope: SCOPE)
+    end
+    redirect_to rooms_url
   end
 
   private
+
+  def update_room_attributes(r)
+    if r.update_attributes(room_params)
+      flash[:success] = I18n.t("update_correct", scope: SCOPE)
+      render 'edit'
+      return
+    end
+    flash[:danger] = I18n.t("update_wrong", scope: SCOPE)
+    redirect_to request.referer || rooms_path
+  end
 
   def room_params
     params.require(:room).permit(:name, :capacity)
