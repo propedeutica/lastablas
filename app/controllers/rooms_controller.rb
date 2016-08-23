@@ -27,20 +27,20 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-    @room = Room.find_by_id(params[:id])
-    if @room.nil?
-      flash[:danger] = I18n.t("edit_wrong", scope: SCOPE)
-      redirect_to home_path
-      return
-    end
-  end
-
   def show
     @room = Room.find_by_id(params[:id])
     if @room.nil?
       flash[:danger] = I18n.t("show_wrong", scope: SCOPE)
       redirect_to home_path
+    end
+  end
+
+  def edit
+    @room = Room.find_by_id(params[:id])
+    if @room.nil?
+      flash[:danger] = I18n.t("edit_wrong", scope: SCOPE)
+      redirect_to request.referer || home_path
+      return
     end
   end
 
