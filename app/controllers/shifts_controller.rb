@@ -12,7 +12,7 @@ class ShiftsController < ApplicationController
   end
 
   def new
-    @Shift = Shift.new
+    @shift = Shift.new
   end
 
   def create
@@ -54,7 +54,7 @@ class ShiftsController < ApplicationController
   def destroy
   end
 
-  private 
+  private
 
   def update_shift_attributes(s)
     if s.update_attributes(shift_params)
