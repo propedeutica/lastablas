@@ -54,14 +54,14 @@ end
 
 group :production, :postgresql do
 gem 'pg'
-gem 'rails_12factor'
+#gem 'rails_12factor'
 end
 
 ### / OpenShift changes
 
 # Use SCSS for stylesheets and patternfly
 # Install it wil bower, not as a gem, to install JS dependencies
-gem 'patternfly-sass', '~> 3.7.0'
+gem 'patternfly-sass', '~> 3.8.0'
 gem 'sass-rails', '>= 3.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -117,4 +117,4 @@ gem 'devise', "~> 3.0" # 4.0 needs ruby 2.2
 gem 'redcarpet', '~> 2.1.1'
 
 # Introducing Angular UI
-gem "angular-ui-bootstrap-rails",     "~>1.3.0"
+#gem "angular-ui-bootstrap-rails",     "~>1.3.0"

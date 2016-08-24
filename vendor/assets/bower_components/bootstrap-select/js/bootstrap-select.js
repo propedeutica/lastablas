@@ -264,7 +264,7 @@
     this.init();
   };
 
-  Selectpicker.VERSION = '1.7.7';
+  Selectpicker.VERSION = '1.10.0';
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
@@ -304,6 +304,7 @@
     actionsBox: false,
     iconBase: 'glyphicon',
     tickIcon: 'glyphicon-ok',
+    showTick: false,
     template: {
       caret: '<span class="caret"></span>'
     },
@@ -322,17 +323,22 @@
           id = this.$element.attr('id');
 
       this.$element.addClass('bs-select-hidden');
+
       // store originalIndex (key) and newIndex (value) in this.liObj for fast accessibility
       // allows us to do this.$lis.eq(that.liObj[index]) instead of this.$lis.filter('[data-original-index="' + index + '"]')
       this.liObj = {};
       this.multiple = this.$element.prop('multiple');
       this.autofocus = this.$element.prop('autofocus');
       this.$newElement = this.createView();
-      this.$element.after(this.$newElement);
+      this.$element
+        .after(this.$newElement)
+        .appendTo(this.$newElement);
       this.$button = this.$newElement.children('button');
       this.$menu = this.$newElement.children('.dropdown-menu');
       this.$menuInner = this.$menu.children('.inner');
       this.$searchbox = this.$menu.find('input');
+
+      this.$element.removeClass('bs-select-hidden');
 
       if (this.options.dropdownAlignRight)
         this.$menu.addClass('dropdown-menu-right');
@@ -371,6 +377,32 @@
         }
       });
 
+      if (that.$element[0].hasAttribute('required')) {
+        this.$element.on('invalid', function () {
+          that.$button
+            .addClass('bs-invalid')
+            .focus();
+          
+          that.$element.on({
+            'focus.bs.select': function () {
+              that.$button.focus();
+              that.$element.off('focus.bs.select');
+            },
+            'shown.bs.select': function () {
+              that.$element
+                .val(that.$element.val()) // set the value to hide the validation message in Chrome when menu is opened
+                .off('shown.bs.select');
+            },
+            'rendered.bs.select': function () {
+              // if select is no longer invalid, remove the bs-invalid class
+              if (this.validity.valid) that.$button.removeClass('bs-invalid');
+              that.$element.off('rendered.bs.select');
+            }
+          });
+          
+        });
+      }
+
       setTimeout(function () {
         that.$element.trigger('loaded.bs.select');
       });
@@ -378,8 +410,8 @@
 
     createDropdown: function () {
       // Options
-      // If we are multiple, then add the show-tick class by default
-      var multiple = this.multiple ? ' show-tick' : '',
+      // If we are multiple or showTick option is set, then add the show-tick class
+      var showTick = (this.multiple || this.options.showTick) ? ' show-tick' : '',
           inputGroup = this.$element.parent().hasClass('input-group') ? ' input-group-btn' : '',
           autofocus = this.autofocus ? ' autofocus' : '';
       // Elements
@@ -412,7 +444,7 @@
       '</div>'
           : '';
       var drop =
-          '<div class="btn-group bootstrap-select' + multiple + inputGroup + '">' +
+          '<div class="btn-group bootstrap-select' + showTick + inputGroup + '">' +
           '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + '>' +
           '<span class="filter-option pull-left"></span>&nbsp;' +
           '<span class="bs-caret">' +
@@ -524,13 +556,14 @@
             tokens = $this.data('tokens') ? $this.data('tokens') : null,
             subtext = typeof $this.data('subtext') !== 'undefined' ? '<small class="text-muted">' + $this.data('subtext') + '</small>' : '',
             icon = typeof $this.data('icon') !== 'undefined' ? '<span class="' + that.options.iconBase + ' ' + $this.data('icon') + '"></span> ' : '',
-            isDisabled = this.disabled || (this.parentNode.tagName === 'OPTGROUP' && this.parentNode.disabled);
+            isOptgroup = this.parentNode.tagName === 'OPTGROUP',
+            isDisabled = this.disabled || (isOptgroup && this.parentNode.disabled);
 
         if (icon !== '' && isDisabled) {
           icon = '<span>' + icon + '</span>';
         }
 
-        if (that.options.hideDisabled && isDisabled) {
+        if (that.options.hideDisabled && isDisabled && !isOptgroup) {
           liIndex--;
           return;
         }
@@ -540,7 +573,7 @@
           text = icon + '<span class="text">' + text + subtext + '</span>';
         }
 
-        if (this.parentNode.tagName === 'OPTGROUP' && $this.data('divider') !== true) {
+        if (isOptgroup && $this.data('divider') !== true) {
           var optGroupClass = ' ' + this.parentNode.className || '';
 
           if ($this.index() === 0) { // Is it the first option of the optgroup?
@@ -560,6 +593,12 @@
             liIndex++;
             _li.push(generateLI(label, null, 'dropdown-header' + optGroupClass, optID));
           }
+
+          if (that.options.hideDisabled && isDisabled) {
+            liIndex--;
+            return;
+          }
+
           _li.push(generateLI(generateA(text, 'opt ' + optionClass + optGroupClass, inline, tokens), index, '', optID));
         } else if ($this.data('divider') === true) {
           _li.push(generateLI('', index, 'divider'));
@@ -925,14 +964,14 @@
             });
           };
 
-      this.$newElement.on('click', function () {
+      this.$button.on('click', function () {
         var $this = $(this);
 
         if (that.isDisabled()) {
           return;
         }
 
-        getPlacement($this);
+        getPlacement(that.$newElement);
 
         that.$bsContainer
           .appendTo(that.options.container)
@@ -997,10 +1036,13 @@
     },
 
     tabIndex: function () {
-      if (this.$element.is('[tabindex]')) {
+      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') && 
+        (this.$element.attr('tabindex') !== -98 && this.$element.attr('tabindex') !== '-98')) {
         this.$element.data('tabindex', this.$element.attr('tabindex'));
         this.$button.attr('tabindex', this.$element.data('tabindex'));
       }
+      
+      this.$element.attr('tabindex', -98);
     },
 
     clickListener: function () {
@@ -1020,22 +1062,23 @@
         }
       });
 
-      this.$newElement.on('click', function () {
+      this.$button.on('click', function () {
         that.setSize();
-        that.$element.on('shown.bs.select', function () {
-          if (!that.options.liveSearch && !that.multiple) {
-            that.$menuInner.find('.selected a').focus();
-          } else if (!that.multiple) {
-            var selectedIndex = that.liObj[that.$element[0].selectedIndex];
+      });
 
-            if (typeof selectedIndex !== 'number' || that.options.size === false) return;
+      this.$element.on('shown.bs.select', function () {
+        if (!that.options.liveSearch && !that.multiple) {
+          that.$menuInner.find('.selected a').focus();
+        } else if (!that.multiple) {
+          var selectedIndex = that.liObj[that.$element[0].selectedIndex];
 
-            // scroll to selected option
-            var offset = that.$lis.eq(selectedIndex)[0].offsetTop - that.$menuInner[0].offsetTop;
-            offset = offset - that.$menuInner[0].offsetHeight/2 + that.sizeInfo.liHeight/2;
-            that.$menuInner[0].scrollTop = offset;
-          }
-        });
+          if (typeof selectedIndex !== 'number' || that.options.size === false) return;
+
+          // scroll to selected option
+          var offset = that.$lis.eq(selectedIndex)[0].offsetTop - that.$menuInner[0].offsetTop;
+          offset = offset - that.$menuInner[0].offsetHeight/2 + that.sizeInfo.liHeight/2;
+          that.$menuInner[0].scrollTop = offset;
+        }
       });
 
       this.$menuInner.on('click', 'li a', function (e) {
@@ -1133,9 +1176,10 @@
 
           // Trigger select 'change'
           if ((prevValue != that.$element.val() && that.multiple) || (prevIndex != that.$element.prop('selectedIndex') && !that.multiple)) {
-            that.$element.triggerNative('change');
             // $option.prop('selected') is current option state (selected/unselected). state is previous option state.
-            that.$element.trigger('changed.bs.select', [clickedIndex, $option.prop('selected'), state]);
+            that.$element
+              .trigger('changed.bs.select', [clickedIndex, $option.prop('selected'), state])
+              .triggerNative('change');
           }
         }
       });
@@ -1185,7 +1229,6 @@
         } else {
           that.deselectAll();
         }
-        that.$element.triggerNative('change');
       });
 
       this.$element.change(function () {
@@ -1197,7 +1240,7 @@
       var that = this,
           $no_results = $('<li class="no-results"></li>');
 
-      this.$newElement.on('click.dropdown.data-api touchstart.dropdown.data-api', function () {
+      this.$button.on('click.dropdown.data-api touchstart.dropdown.data-api', function () {
         that.$menuInner.find('.active').removeClass('active');
         if (!!that.$searchbox.val()) {
           that.$searchbox.val('');
@@ -1308,6 +1351,10 @@
       $(selectedOptions).prop('selected', status);
 
       this.render(false);
+
+      this.$element
+        .trigger('changed.bs.select')
+        .triggerNative('change');
     },
 
     selectAll: function () {
@@ -1316,6 +1363,14 @@
 
     deselectAll: function () {
       return this.changeAll(false);
+    },
+
+    toggle: function (e) {
+      e = e || window.event;
+      
+      if (e) e.stopPropagation();
+
+      this.$button.trigger('click');
     },
 
     keydown: function (e) {
@@ -1389,7 +1444,7 @@
 
       $items = $('[role=menu] li', $parent);
 
-      isActive = that.$menu.parent().hasClass('open');
+      isActive = that.$newElement.hasClass('open');
 
       if (!isActive && (e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode >= 96 && e.keyCode <= 105 || e.keyCode >= 65 && e.keyCode <= 90)) {
         if (!that.options.container) {
@@ -1397,7 +1452,7 @@
           that.$menu.parent().addClass('open');
           isActive = true;
         } else {
-          that.$newElement.trigger('click');
+          that.$button.trigger('click');
         }
         that.$searchbox.focus();
       }
@@ -1531,8 +1586,7 @@
     },
 
     mobile: function () {
-      this.$element.addClass('mobile-device').appendTo(this.$newElement);
-      if (this.options.container) this.$menu.hide();
+      this.$element.addClass('mobile-device');
     },
 
     refresh: function () {
@@ -1562,8 +1616,8 @@
       this.$element.remove();
     },
 
-    destroy: function() {
-        this.$newElement.remove();
+    destroy: function () {
+        this.$newElement.before(this.$element).remove();
 
         if (this.$bsContainer) {
             this.$bsContainer.remove();

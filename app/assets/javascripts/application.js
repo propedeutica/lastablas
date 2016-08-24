@@ -11,12 +11,15 @@
 // about supported directives.
 //
 //= require jquery
-
+//= require jquery_ujs
+//= require turbolinks
 
 //
 // Require elements for patternfly to work
 //
 //= require bootstrap
 //= require patternfly
+
+
 
 
