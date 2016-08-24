@@ -11,7 +11,7 @@ RSpec.describe AdminController, type: :controller do
         expect(response).to have_http_status(:success)
       end
     end
-    describe "#POST switch_lock_admin" do
+    describe "POST #switch_lock_admin" do
       before(:each) do # we want to make sure we are starting in switch lock with false value
         sign_in user_admin
         post :switch_lock_admin if ApplicationHelper.status_lock?
