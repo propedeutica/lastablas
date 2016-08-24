@@ -2,7 +2,6 @@
 # Offsprings are dependent on them
 # They are the ones that need to perform the process on behalf of the offspring
 class UsersController < ApplicationController
-  before_action :authenticate_user!
   def show
     @user = User.find_by_id(params[:id]) || current_user
   end
