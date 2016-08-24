@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :offsprings, dependent: :destroy
 
   def no_offspring?
-    offsprings.nil? || offsprings.count == 0
+    offsprings.nil? || offsprings.count.zero?
   end
 
   def more_than_2_offspring?
