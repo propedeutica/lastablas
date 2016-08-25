@@ -17,9 +17,7 @@ class OffspringsController < ApplicationController
     elsif @offspring.save
       flash[:success] = "Niño añadido"
     else
-      @offspring.errors.each do |x,y|
-        flash[:danger] = "No se pudo añadir al niño"
-      end
+      flash[:danger] = "No se pudo añadir al niño"
     end
     redirect_to root_path
   end
