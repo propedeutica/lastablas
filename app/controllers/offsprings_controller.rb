@@ -11,13 +11,15 @@ class OffspringsController < ApplicationController
   def create
     @offspring = current_user.offsprings.build(offsprings_params)
     if !@offspring.primary_first?
-      flash[:warning] = "No se puedo añadir al niño"
+      flash[:warning] = "Sólo puede añadir a niños de 1º de Primaria"
       redirect_to static_pages_intructions_path
       return
     elsif @offspring.save
       flash[:success] = "Niño añadido"
     else
-      flash[:danger] = "No se pudo añadir al niño"
+      @offspring.errors.each do |x,y|
+        flash[:danger] = "No se pudo añadir al niño"
+      end
     end
     redirect_to root_path
   end
