@@ -13,13 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-
-//
 // Require elements for patternfly to work
 //
 //= require bootstrap
 //= require patternfly
-
-
-
-
+//= require bootstrap-switch
+//= require datatables
