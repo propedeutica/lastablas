@@ -4,6 +4,9 @@ class OffspringsController < ApplicationController
   def show
   end
 
+  def index
+  end
+  
   def new
     @offspring = current_user.offsprings.build
   end
