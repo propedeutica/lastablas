@@ -5,10 +5,12 @@ class AssignmentsController < ApplicationController
   end
 
   def create
-    of = Offspring.find_by_id(params["format"])
-    of.shift = Shift.find_by_id(params["shift"])
-    of.save
-    redirect_to root_url
+    Offspring.transaction do
+      of = Offspring.lock.find_by_id(params["format"])
+      of.shift = Shift.find_by_id(params["shift"])
+      of.save
+      redirect_to root_url
+    end
   end
 
   def destroy

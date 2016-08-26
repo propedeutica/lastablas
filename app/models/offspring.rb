@@ -11,12 +11,12 @@ class Offspring < ActiveRecord::Base
   validates :grade, presence: true
   validates :user, presence: true
   validates_each :shift, allow_nil: true do |offspring|
-    offspring.errors.add(:shift, "no hay espacio") unless offspring.shift.sites_available?
+    offspring.errors.add(:shift, :no_space, message: "no hay espacio") unless offspring.shift.sites_available?
   end
   validates_each :last_name do |offspring|
     if offspring.user && offspring.user.offsprings.first
       unless offspring.last_name == offspring.user.offsprings.first.last_name
-        offspring.errors.add(:last_name, "tiene que coincidir con el de sus hermanos")
+        offspring.errors.add(:last_name, :last_name, message: "tiene que coincidir con el de sus hermanos")
       end
     end
   end
