@@ -15,15 +15,12 @@ class OffspringsController < ApplicationController
   def create
     if admin_allows_changes?
       @offspring = current_user.offsprings.build(offsprings_params)
-      if !@offspring.primary_first?
+      unless @offspring.primary_first?
         flash[:warning] = "Sólo puede añadir a niños de 1º de Primaria"
         redirect_to static_pages_intructions_path
         return
-      elsif @offspring.save
-        flash[:success] = "Niño añadido"
-      else
-        flash[:danger] = "No se pudo añadir al niño"
       end
+      save_offspring(@offspring)
     else
       flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
     end
@@ -45,6 +42,14 @@ class OffspringsController < ApplicationController
 
   def offsprings_params
     params.require(:offspring).permit(:first_name, :last_name, :grade)
+  end
+
+  def save_offspring(off)
+    if off.save
+      flash[:success] = "Niño añadido"
+    else
+      flash[:danger] = "No se pudo añadir al niño"
+    end
   end
 
   def admin_allows_changes?
