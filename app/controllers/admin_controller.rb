@@ -9,6 +9,10 @@ class AdminController < ApplicationController
     @users = User.paginate(page: params[:users_page])
     @offsprings = Offspring.paginate(page: params[:offsprings_page])
     @rooms = Room.all
+    @users_count = User.where(admin: false).count
+    @offspring_count = Offspring.all.count
+   # @users_with_at_least_2_offspring = 
+    
   end
 
   def offsprings
@@ -20,7 +24,6 @@ class AdminController < ApplicationController
   end
 
   private
-
   def admin_user?
     unless current_user.admin?
       redirect_to home_path
