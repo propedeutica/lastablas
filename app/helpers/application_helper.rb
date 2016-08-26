@@ -33,10 +33,10 @@ module ApplicationHelper
   end
 
   def self.status_lock?
-    return Rails.application.config.lock.status  
+    Rails.application.config.lock.status
   end
 
   def self.switch_lock
-    Rails.application.config.lock.status = ! Rails.application.config.lock.status
+    Rails.application.config.lock.status = !Rails.application.config.lock.status
   end
 end
