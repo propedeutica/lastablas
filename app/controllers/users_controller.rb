@@ -2,6 +2,7 @@
 # Offsprings are dependent on them
 # They are the ones that need to perform the process on behalf of the offspring
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def show
     @user = User.find_by_id(params[:id]) || current_user
   end
@@ -25,11 +26,11 @@ class UsersController < ApplicationController
   private
 
   def delete_possible?(user)
-    if user.nil?
+    if admin_signed_in?
+      return true
+    elsif user.nil?
       return false
     elsif user == current_user
-      return false
-    elsif !current_user.admin?
       return false
     else
       return true

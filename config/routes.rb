@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  root to: "static_pages#home"
+  devise_for :admins
+  # when admin is authenticated
+  authenticate :admins do
+    get 'home' => 'static_pages#home'
+    get 'admin' => 'admin#dashboard'
+    get 'offsprings' => 'admin#offsprings'
+    get 'rooms' => 'admin#rooms'
+    post 'switch_lock_admin' => 'admin#switch_lock_admin'
+    resources :rooms, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :shifts, only: [:new, :create, :show, :edit, :update, :destroy]
+  end
   # Instructions for the apo
   get 'static_pages/intructions'
   get 'help' => 'static_pages#help'
@@ -7,16 +19,12 @@ Rails.application.routes.draw do
   devise_for :users
   # when user is authenticated
   authenticate :user do
-    root to: "static_pages#home"
     get 'home' => 'static_pages#home'
     resources :users, only: [:show, :index, :destroy]
     resources :offsprings, only: [:new, :create, :destroy]
     resources :rooms, only: [:index]
     resources :assignments, only: [:new, :create, :destroy]
     resources :shifts, only: [:show]
-    get 'admin' => 'admin#dashboard'
-    get 'offsprings' => 'admin#offsprings'
-    get 'users' => 'admin#users'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
