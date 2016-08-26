@@ -19,6 +19,14 @@ class AdminController < ApplicationController
     @rooms = Room.all
   end
 
+  def status_lock_in_changes
+
+  end
+  
+  def switch_lock_in_changes
+
+  end
+
   private
 
   def admin_user?
