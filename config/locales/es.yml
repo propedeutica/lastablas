@@ -111,6 +111,9 @@ es:
         shift:
           create_correct: "Turno creado correctamente"
           no_room: "Debe asignar el turno a un aula existente"
+          shift_non-existing: "No existe el turno que quiere eliminar"
+          shift_destroy_correct: "Turno eliminado correctamente"
+          shift_destroy_wrong: "Hubo un error eliminando el turno. Inténtelo de nuevo"
         room:
           create_correct: "Aula creada correctamente"
           create_wrong: "No fue posible crear el aula"

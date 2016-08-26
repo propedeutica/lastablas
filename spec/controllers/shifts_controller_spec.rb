@@ -88,14 +88,14 @@ RSpec.describe ShiftsController, type: :controller do
     end
 
     describe "#DELETE destroy" do
-      xit "succesfully" do
+      it "succesfully" do
         shift = FactoryGirl.create(:shift)
         expect { delete :destroy, id: shift.id }.to change(Shift.all, :count).by(-1)
         expect(response).to redirect_to(shifts_path)
       end
-      xit "non-existing shift" do
+      it "non-existing shift" do
         expect { delete :destroy, id: -1 }.to change(Shift.all, :count).by(0)
-        expect(response).to redirect_to(shifts_path)
+        expect(response).to redirect_to(home_path)
       end
     end
   end

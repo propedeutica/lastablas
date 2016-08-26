@@ -52,6 +52,17 @@ class ShiftsController < ApplicationController
   end
 
   def destroy
+    shift = Shift.find_by_id(params[:id])
+    if shift.nil?
+      flash[:danger] = I18n.t("shift_non-existing", scope: SCOPE)
+      redirect_to home_path
+    elsif shift.destroy
+      flash[:success] = I18n.t("shift_destroy_correct", scope: SCOPE)
+      redirect_to shifts_path
+    else
+      flash[:danger] = I18n.t("shift_destroy_wrong", scope: SCOPE)
+      redirect_to home_path
+    end
   end
 
   private
