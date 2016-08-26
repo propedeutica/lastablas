@@ -1,22 +1,16 @@
 class ShiftsController < ApplicationController
   SCOPE = "activerecord.errors.controllers.shift".freeze # Necessary to acces locales file
   skip_before_action :authenticate_user!
-  before_action :authenticate_admin!, except: [:index]
-
-  def index
-    if user_signed_in? || admin_signed_in? # authenticate user or admin
-      @shifts = Shift.all
-    else
-      redirect_to new_user_session_path
-    end
-  end
+  before_action :authenticate_admin!, except: [:show]
 
   def new
     @shift = Shift.new
   end
 
   def create
+    debugger
     @shift = Shift.new(shift_params)
+    @shift.room = Room.find_by_id(params[:shift][:room])
     if @shift.save
       flash[:success] = I18n.t("create_correct", scope: SCOPE)
       render 'new'
@@ -27,9 +21,13 @@ class ShiftsController < ApplicationController
   end
 
   def show
-    @shift = Shift.find_by_id(params["id"])
-    redirect_to home_path if @shift.nil?
-    @offsprings = @shift.offsprings
+    if user_signed_in? || admin_signed_in? # authenticate user or admin
+      @shift = Shift.find_by_id(params["id"])
+      redirect_to home_path if @shift.nil?
+      @offsprings = @shift.offsprings
+    else
+      redirect_to new_admin_session_path
+    end
   end
 
   def edit
