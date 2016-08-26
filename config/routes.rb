@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :shifts, only: [:show]
     get 'admin' => 'admin#dashboard'
     get 'offsprings' => 'admin#offsprings'
+    get 'users' => 'admin#users'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
