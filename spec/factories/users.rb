@@ -12,10 +12,5 @@ FactoryGirl.define do
 
     confirmed_at Time.current
 
-    # FactoryGirl.create(user, :administrator)
-
-    trait :administrator do
-      admin true
-    end
   end
 end
