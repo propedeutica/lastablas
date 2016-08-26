@@ -108,6 +108,9 @@ es:
         record_invalid: "no es válido"
 
       controllers:
+        shift:
+          create_correct: "Turno creado correctamente"
+          no_room: "Debe asignar el turno a un aula existente"
         room:
           create_correct: "Aula creada correctamente"
           create_wrong: "No fue posible crear el aula"

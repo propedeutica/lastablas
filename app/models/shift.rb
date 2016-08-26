@@ -10,11 +10,16 @@ class Shift < ActiveRecord::Base
   validates :end_time, presence: true
   validates :end_time, format: { with: REGEX, message: I18n.t("wrong_regex", scope: SCOPE) }
   validates_each :end_time do |shift|
-    shift.errors.add(:shift, I18n.t("bad_time_continuity", scope: SCOPE)) if shift.start_time > shift.end_time
+    unless shift.errors.any? # Not running this validation until all previous succeed
+      shift.errors.add(:shift, I18n.t("bad_time_continuity", scope: SCOPE)) if shift.start_time > shift.end_time
+    end
   end
-  validates :prebooked, numericality: { only_integer: true }
+  validates :prebooked, presence: true, numericality: { only_integer: true }
+  validates :room, presence: true
   validates_each :prebooked do |shift|
-    shift.errors.add(:shift, I18n.t("sites_available_under_0", scope: SCOPE)) if shift.sites_available < 0
+    unless shift.errors.any? # Not running this validation until all previous succeed
+      shift.errors.add(:shift, I18n.t("sites_available_under_0", scope: SCOPE)) if shift.sites_available < 0
+    end
   end
 
   def sites_available?

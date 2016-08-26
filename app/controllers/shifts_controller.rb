@@ -9,15 +9,24 @@ class ShiftsController < ApplicationController
 
   def create
     @shift = Shift.new(shift_params)
-    @shift.room = Room.find_by_id(params[:shift][:room])
-    save_shift @shift
+    if @shift.save
+      flash[:success] = I18n.t("create_correct", scope: SCOPE)
+      render 'new'
+    else
+      flash[:danger] = I18n.t("create_wrong", scope: SCOPE)
+      redirect_to request.referer || new_shift_path
+    end
   end
 
   def show
-    if user_signed_in? || admin_signed_in? # authenticate user or admin
+    if signed_in? # authenticate user or admin
       @shift = Shift.find_by_id(params["id"])
-      redirect_to home_path if @shift.nil?
-      @offsprings = @shift.offsprings
+      if @shift.nil?
+        redirect_to home_path
+        return
+      else
+        @offsprings = @shift.offsprings
+      end
     else
       redirect_to new_admin_session_path
     end
@@ -48,13 +57,6 @@ class ShiftsController < ApplicationController
   private
 
   def save_shift(s)
-    if s.save
-      flash[:success] = I18n.t("create_correct", scope: SCOPE)
-      render 'new'
-    else
-      flash[:danger] = I18n.t("create_wrong", scope: SCOPE)
-      redirect_to request.referer || new_shift_path
-    end
   end
 
   def update_shift_attributes(s)
@@ -68,6 +70,6 @@ class ShiftsController < ApplicationController
   end
 
   def shift_params
-    params.require(:shift).permit(:day_of_week, :start_time, :end_time)
+    params.require(:shift).permit(:day_of_week, :start_time, :end_time, :room_id)
   end
 end
