@@ -8,16 +8,9 @@ class ShiftsController < ApplicationController
   end
 
   def create
-    debugger
     @shift = Shift.new(shift_params)
     @shift.room = Room.find_by_id(params[:shift][:room])
-    if @shift.save
-      flash[:success] = I18n.t("create_correct", scope: SCOPE)
-      render 'new'
-    else
-      flash[:danger] = I18n.t("create_wrong", scope: SCOPE)
-      redirect_to request.referer || new_shift_path
-    end
+    save_shift @shift
   end
 
   def show
@@ -53,6 +46,16 @@ class ShiftsController < ApplicationController
   end
 
   private
+
+  def save_shift(s)
+    if s.save
+      flash[:success] = I18n.t("create_correct", scope: SCOPE)
+      render 'new'
+    else
+      flash[:danger] = I18n.t("create_wrong", scope: SCOPE)
+      redirect_to request.referer || new_shift_path
+    end
+  end
 
   def update_shift_attributes(s)
     if s.update_attributes(shift_params)

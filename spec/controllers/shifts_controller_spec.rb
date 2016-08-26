@@ -15,7 +15,7 @@ RSpec.describe ShiftsController, type: :controller do
     end
 
     describe "#POST create" do
-      before(:each)do
+      before(:each) do
         @room = FactoryGirl.create(:room)
         @room.save
       end
@@ -26,7 +26,7 @@ RSpec.describe ShiftsController, type: :controller do
         expect(response).to have_http_status(:success)
       end
       it "without day_of_week" do
-        debugger
+        # debugger
         expect do
           post :create, shift: {start_time: "10:00", end_time: "11:00", room: @room}
         end.to change(Shift.all, :count).by(0)
