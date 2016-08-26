@@ -2,7 +2,53 @@ require 'rails_helper'
 
 RSpec.describe ShiftsController, type: :controller do
   context "When user logged in" do
+    let(:user) { FactoryGirl.create(:user) }
+    before(:each) do
+      sign_in user
+      @shift = FactoryGirl.create(:shift)
+    end
+
+    it "#GET new" do
+      get :new
+      expect(response).to redirect_to new_admin_session_path
+    end
+
+    it "#POST create is not available" do
+      room = FactoryGirl.create(:room)
+      room.save
+      expect do
+        post :create, shift: {day_of_week: 2, start_time: "10:00", end_time: "11:00", room_id: room}
+      end.to change(Shift.all, :count).by(0)
+      expect(response).to redirect_to new_admin_session_path
+    end
+
+    describe "#GET show" do
+      it "existing shift" do
+        get :show, id: @shift.id
+        expect(response).to have_http_status(:success)
+      end
+      it "non-existing shift" do
+        get :show, id: -1
+        expect(response).to redirect_to home_path
+      end
+    end
+
+    it "#GET edit is not available" do
+      get :edit, id: @shift.id
+      expect(response).to redirect_to new_admin_session_path
+    end
+
+    it "#PUT update is not available" do
+      put :update, id: @shift.id, shift: {day_of_week: 1, start_time: "10:00", end_time: "11:00"}
+      expect(response).to redirect_to new_admin_session_path
+    end
+
+    it "#DELETE destroy is not available" do
+      expect { delete :destroy, id: @shift.id }.to change(Shift.all, :count).by(0)
+      expect(response).to redirect_to new_admin_session_path
+    end
   end
+
   context "When admin logged in" do
     let(:admin) { FactoryGirl.create(:admin) }
     before(:each) do
