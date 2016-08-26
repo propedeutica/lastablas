@@ -1,7 +1,7 @@
 require 'rails_helper'
+SCOPE_CONTROLLERS = "activerecord.errors.controllers".freeze
 
 RSpec.describe AdminController, type: :controller do
-  
   let(:user_admin) { FactoryGirl.create(:admin) }
   context "admin user" do
     describe "GET #dashboard" do
@@ -12,7 +12,7 @@ RSpec.describe AdminController, type: :controller do
       end
     end
     describe "#POST switch_lock_admin" do
-      before(:each)do # we want to make sure we are starting in switch lock with false value
+      before(:each) do # we want to make sure we are starting in switch lock with false value
         sign_in user_admin
         post :switch_lock_admin if ApplicationHelper.status_lock?
       end
@@ -23,26 +23,26 @@ RSpec.describe AdminController, type: :controller do
         expect(ApplicationHelper.status_lock?).to be false
       end
       describe ",when enabled," do
-        before(:each)do
+        before(:each) do
           post :switch_lock_admin unless ApplicationHelper.status_lock?
         end
-        before(:all)do 
+        before(:all) do
           user = FactoryGirl.build(:user)
           user.save
         end
 
-        it "users cannot add offspring" do
+        it "users cannot #CREATE offspring" do
           ref = @controller # Storing pointer to current controller
           @controller = OffspringsController.new # Setting User controller to call
           sign_in user # Start user session
           expect do
             post :create, offspring: {first_name: "pepe", last_name: "kata", grade: :primary_first}
           end.to change(user.offsprings, :count).by(0)
-          expect(response).to redirect_to(static_pages_intructions_path)
+          expect(response).to redirect_to(root_path)
           @controller = ref # Restoring previous admin controller
         end
 
-        it "users cannot delete offspring"do
+        it "users cannot #DESTROY offspring" do
           off = FactoryGirl.build(:offspring, user: user)
           off.save
           ref = @controller # Storing pointer to current controller
@@ -51,10 +51,11 @@ RSpec.describe AdminController, type: :controller do
           expect do
             delete :destroy, id: off.id
           end.to change(user.offsprings, :count).by(0)
+          expect(response).to redirect_to(root_path)
           @controller = ref # Restoring previous admin controller
         end
 
-        it "users cannot assign offspring"do
+        it "users cannot assign offspring" do
           off = FactoryGirl.build(:offspring, user: user)
           off.save
           shi = FactoryGirl.build(:shift)
@@ -65,6 +66,7 @@ RSpec.describe AdminController, type: :controller do
           expect do
             post :create, format: off.id, shift: shi.id
           end.to change(shi.offsprings, :count).by(0)
+          expect(response).to redirect_to(root_path)
           @controller = ref # Restoring previous admin controller
         end
 
@@ -73,10 +75,14 @@ RSpec.describe AdminController, type: :controller do
           ref = @controller # Storing pointer to current controller
           @controller = UsersController.new # Setting User controller to call
           sign_in user # Start user session
-          expect do 
+          expect do
             delete :destroy, id: user.id
-            end.to change{User.count}.by(-1)
+          end.to change { User.count }.by(-1)
           @controller = ref # Restoring previous admin controller
+        end
+
+        after(:all) do
+          ApplicationHelper.switch_lock if ApplicationHelper.status_lock?
         end
       end
     end
@@ -85,7 +91,7 @@ RSpec.describe AdminController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   context "non-admin user" do
     describe "GET #dashboard" do
-      pending "returns http error" 
+      pending "returns http error"
     end
   end
 end
