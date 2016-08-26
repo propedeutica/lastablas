@@ -11,6 +11,5 @@ FactoryGirl.define do
     # FactoryGirl.create(:user, :activated)
 
     confirmed_at Time.current
-
   end
 end
