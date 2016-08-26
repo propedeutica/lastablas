@@ -1,18 +1,25 @@
 class ShiftsController < ApplicationController
-  before_action :admin_user?
+  skip_before_action :authenticate_user!
+  before_action :authenticate_admin!
+
+  def index
+  end
+
+  def new
+  end
+
+  def create
+  end
+
   def show
     @shift = Shift.find_by_id(params["id"])
-    if @shift.nil?
-      redirect_to home_path
-    end
+    redirect_to home_path if @shift.nil?
     @offsprings = @shift.offsprings
   end
 
-  private
+  def update
+  end
 
-  def admin_user?
-    unless current_user.admin?
-      redirect_to home_path
-    end
+  def destroy
   end
 end

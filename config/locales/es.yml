@@ -108,6 +108,14 @@ es:
         record_invalid: "no es válido"
 
       controllers:
+        room:
+          create_correct: "Aula creada correctamente"
+          create_wrong: "No fue posible crear el aula"
+          update_correct: "Aula modificada correctamente"
+          update_wrong: "No fue posible modificar los datos del aula"
+          edit_correct: "Editó el aula correctamente"
+          edit_wrong: "No puede editar un aula que no existe"
+          show_wrong: "No existe el aula que quiere ver"
         offspring:
           admin_locked_create: "No se puedo añadir al niño en este momento, espere."
           admin_locked_destroy: "No se puedo destruir al niño en este momento, espere."

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     get 'offsprings' => 'admin#offsprings'
     get 'rooms' => 'admin#rooms'
     post 'switch_lock_admin' => 'admin#switch_lock_admin'
+    resources :rooms, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :shifts, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   end
   # Instructions for the apo
   get 'static_pages/intructions'
