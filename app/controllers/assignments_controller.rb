@@ -1,4 +1,5 @@
 class AssignmentsController < ApplicationController
+  SCOPE = "activerecord.errors.controllers.assignment".freeze # Necessary to acces locales file
   def new
     @offspring = Offspring.find_by_id(params[:format])
     @rooms = Room.all
@@ -12,7 +13,7 @@ class AssignmentsController < ApplicationController
       of.save
     end
     else
-      flash[:alert] = "No se puedo añadir al niño en este momento, espere."
+      flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
     end
     redirect_to root_url
   end
