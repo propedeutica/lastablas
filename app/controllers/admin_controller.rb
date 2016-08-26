@@ -11,7 +11,8 @@ class AdminController < ApplicationController
     @rooms = Room.all
     @users_count = User.where(admin: false).count
     @offspring_count = Offspring.all.count
-    # @users_with_at_least_2_offspring =
+    @zero_offspring_count = user_0_offspr_count
+    @users_with_at_least_2_offspring = user_2_offspr_count
   end
 
   def offsprings
@@ -28,5 +29,21 @@ class AdminController < ApplicationController
     unless current_user.admin?
       redirect_to home_path
     end
+  end
+
+  def user_0_offspr_count
+    count = 0
+    User.all.each do |u|
+      count += 1 if u.no_offspring?
+    end
+    count
+  end
+
+  def user_2_offspr_count
+    count = 0
+    User.all.each do |u|
+      count += 1 if u.more_than_2_offspring?
+    end
+    count
   end
 end
