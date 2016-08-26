@@ -13,7 +13,7 @@ class OffspringsController < ApplicationController
   end
 
   def create
-    if admin_allows_changes?
+    if access_control?
       @offspring = current_user.offsprings.build(offsprings_params)
       unless @offspring.primary_first?
         flash[:warning] = "Sólo puede añadir a niños de 1º de Primaria"
@@ -28,7 +28,7 @@ class OffspringsController < ApplicationController
   end
 
   def destroy
-    if admin_allows_changes?
+    if access_control?
       offspring = Offspring.find_by_id(params[:id])
       offspring.destroy
       flash[:success] = "Niño borrado"
@@ -52,7 +52,7 @@ class OffspringsController < ApplicationController
     end
   end
 
-  def admin_allows_changes?
+  def access_control?
     !ApplicationHelper.status_lock?
   end
 end
