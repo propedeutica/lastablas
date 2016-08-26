@@ -8,10 +8,10 @@ class AssignmentsController < ApplicationController
   def create
     if admin_allows_changes?
       Offspring.transaction do
-      of = Offspring.lock.find_by_id(params["format"])
-      of.shift = Shift.find_by_id(params["shift"])
-      of.save
-    end
+        of = Offspring.lock.find_by_id(params["format"])
+        of.shift = Shift.find_by_id(params["shift"])
+        of.save
+      end
     else
       flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
     end
