@@ -123,3 +123,6 @@ es:
         first_name: "Nombre"
         last_name: "Apellidos"
         grade: "Curso"
+    controllers:
+      assignment:
+        admin_locked_create: "No se puedo añadir al niño en este momento, espere."
