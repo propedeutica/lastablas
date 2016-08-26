@@ -3,7 +3,8 @@
 # They have an speicific layout to reflec this
 class AdminController < ApplicationController
   layout 'admin'
-  before_action :admin_user?
+  skip_before_action :authenticate_user!
+  before_action :authenticate_admin!
 
   def dashboard
     @users = User.paginate(page: params[:users_page])
@@ -19,19 +20,8 @@ class AdminController < ApplicationController
     @rooms = Room.all
   end
 
-  def status_lock_in_changes
-
-  end
-  
-  def switch_lock_in_changes
-
-  end
-
-  private
-
-  def admin_user?
-    unless current_user.admin?
-      redirect_to home_path
-    end
+  def switch_lock_admin
+    ApplicationHelper.switch_lock
+    render nothing: true
   end
 end
