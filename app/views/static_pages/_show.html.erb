@@ -10,24 +10,22 @@
     </lu>
   </div>
 </h1>
-
-<% if @user.offsprings.any? %>
-    <h2>Niños: (<%= @user.offsprings.count %>)</h2>
-    <div class="panel panel-default">
-      <div class="panel-header">
+<div class="table">
+  <h2>Niños: (<%= @user.offsprings.count %>)</h2>
+  <table class="datatable table table-striped table-bordered">
+    <% if @user.offsprings.any? %>
+      <thead>
         <h4>Niños cuyo padre o tutor legal es el usuario:</h4>
-      </div>
-      <div class="panel-body">
-        <div class="list-group list-view-pf">
-          <%= render @user.offsprings %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-    <div class="container-fluid">
-      <%= link_to "Añadir niño", new_offspring_path, class:"btn btn-lg btn-info" %>
-    </div>
+      </thead>
+      <tbody>
+        <%= render partial: 'users/offspring', collection: @user.offsprings %>
+      </tbody>
+    <% end %>
+  </table>
+  <p>
+    <%= link_to "Añadir niño", new_offspring_path, class:"btn btn-lg btn-info" %>
+  </p>
+</div>
 
 
 <script>
@@ -42,3 +40,9 @@
     });
   });
 <script>
+<script>
+  // Initialize Datatables
+  $(document).ready(function() {
+    $('.datatable').dataTable();
+  });
+</script>
