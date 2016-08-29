@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "static_pages#home"
   devise_for :admins
   # when admin is authenticated
   authenticate :admins do
@@ -16,7 +17,6 @@ Rails.application.routes.draw do
   devise_for :users
   # when user is authenticated
   authenticate :user do
-    root to: "static_pages#home"
     get 'home' => 'static_pages#home'
     resources :users, only: [:show, :index, :destroy]
     resources :offsprings, only: [:new, :create, :destroy]
