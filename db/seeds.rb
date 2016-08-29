@@ -6,19 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 1.times do
-  a = FactoryGirl.build(:user)
+  a = FactoryGirl.build(:user, :administrator)
   a.first_name = "Ana"
   a.last_name = "Forcada"
   a.email = "ana@example.com"
   a.save
-end
-
-1.times do
-  a = FactoryGirl.build(:admin)
-  a.first_name = "Alberto"
-  a.last_name = "Ramos"
-  a.email = "alberto@example.com"
-  a.save
+  2.times do
+    a.offsprings << FactoryGirl.build(:offspring, user: a, last_name: "Forcada")
+  end
 end
 
 99.times do

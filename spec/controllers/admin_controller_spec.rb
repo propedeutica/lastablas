@@ -2,7 +2,7 @@ require 'rails_helper'
 SCOPE_CONTROLLERS = "activerecord.errors.controllers".freeze
 
 RSpec.describe AdminController, type: :controller do
-  let(:user_admin) { FactoryGirl.create(:admin) }
+  let(:user_admin) { FactoryGirl.create(:user, :administrator) }
   context "admin user" do
     describe "GET #dashboard" do
       it "returns http success" do
@@ -74,6 +74,7 @@ RSpec.describe AdminController, type: :controller do
           expect(ApplicationHelper.status_lock?).to be true
           ref = @controller # Storing pointer to current controller
           @controller = UsersController.new # Setting User controller to call
+          sign_out user_admin
           sign_in user # Start user session
           expect do
             delete :destroy, id: user.id

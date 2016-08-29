@@ -3,8 +3,7 @@
 # They have an speicific layout to reflec this
 class AdminController < ApplicationController
   layout 'admin'
-  skip_before_action :authenticate_user!
-  before_action :authenticate_admin!
+  before_action :admin_user?
 
   def dashboard
     @users = User.all
@@ -23,5 +22,13 @@ class AdminController < ApplicationController
   def switch_lock_admin
     ApplicationHelper.switch_lock
     render nothing: true
+  end
+
+  private
+
+  def admin_user?
+    unless current_user.admin?
+      redirect_to home_path
+    end
   end
 end
