@@ -12,17 +12,16 @@
     </lu>
   </div>
 </h1>
+<% if !admin_signed_in? && @user.offsprings.any? %>
   <div class="table">
     <h2>Niños: (<%= @user.offsprings.count %>)</h2>
     <table class="datatable table table-striped table-bordered">
-      <% if !admin_signed_in? && @user.offsprings.any? %>
         <thead>
           <h4>Niños cuyo padre o tutor legal es el usuario:</h4>
         </thead>
         <tbody>
           <%= render partial: 'users/offspring', collection: @user.offsprings %>
         </tbody>
-      <% end %>
     </table>
   </div>
 <% end %>
