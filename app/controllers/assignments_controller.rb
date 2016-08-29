@@ -1,21 +1,16 @@
 class AssignmentsController < ApplicationController
-  SCOPE = "activerecord.errors.controllers.assignment".freeze # Necessary to acces locales file
   def new
     @offspring = Offspring.find_by_id(params[:format])
     @rooms = Room.all
   end
 
   def create
-    if access_control?
-      Offspring.transaction do
-        of = Offspring.lock.find_by_id(params["format"])
-        of.shift = Shift.find_by_id(params["shift"])
-        of.save
-      end
-    else
-      flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
+    Offspring.transaction do
+      of = Offspring.lock.find_by_id(params["format"])
+      of.shift = Shift.find_by_id(params["shift"])
+      of.save
+      redirect_to root_url
     end
-    redirect_to root_url
   end
 
   def destroy
@@ -23,11 +18,5 @@ class AssignmentsController < ApplicationController
     of.shift = nil
     of.save
     redirect_to new_assignment_path(of)
-  end
-
-  private
-
-  def access_control?
-    !ApplicationHelper.status_lock?
   end
 end

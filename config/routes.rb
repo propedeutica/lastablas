@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     get 'admin' => 'admin#dashboard'
     get 'offsprings' => 'admin#offsprings'
     get 'rooms' => 'admin#rooms'
-    post 'switch_lock_admin' => 'admin#switch_lock_admin'
   end
   # Instructions for the apo
   get 'static_pages/intructions'

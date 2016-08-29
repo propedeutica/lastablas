@@ -31,12 +31,4 @@ module ApplicationHelper
     week = {1 => 'Lunes', 2 => 'Martes', 3 => 'Miércoles', 4 => 'Jueves', 5 => 'Viernes', 6 => 'Sábado', 7 => 'Domingo'}
     week[day] || 'Ninguno'
   end
-
-  def self.status_lock?
-    Rails.application.config.lock.status
-  end
-
-  def self.switch_lock
-    Rails.application.config.lock.status = !Rails.application.config.lock.status
-  end
 end

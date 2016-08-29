@@ -19,9 +19,4 @@ class AdminController < ApplicationController
   def rooms
     @rooms = Room.all
   end
-
-  def switch_lock_admin
-    ApplicationHelper.switch_lock
-    render nothing: true
-  end
 end
