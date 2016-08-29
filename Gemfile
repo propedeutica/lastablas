@@ -107,9 +107,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Create multi-language
 # gem "rails-i18n",                                                     :git => "git://github.com/svenfuchs/rails-i18n.git", :branch => "master"
 
-# Paginate helper gem
-gem 'bootstrap-will_paginate'
-# Devise
 gem 'devise', "~> 3.0" # 4.0 needs ruby 2.2
 
 # Let's get a copy of documentation
