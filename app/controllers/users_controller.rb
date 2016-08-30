@@ -24,6 +24,8 @@ class UsersController < ApplicationController
 
   private
 
+
+# This is not used by non admin user. It needs fixing and specs to test it.
   def delete_possible?(user)
     if user.nil?
       return false
