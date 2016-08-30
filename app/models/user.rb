@@ -17,4 +17,12 @@ class User < ActiveRecord::Base
   validates :phone, format: { with: VALID_TELEPHONE_REGEX}
   # The offspring need to have a parent, they will be destroyed if the parent is
   has_many :offsprings, dependent: :destroy
+
+  def no_offspring?
+    offsprings.nil? || offsprings.count.zero?
+  end
+
+  def more_than_2_offspring?
+    !offsprings.nil? && offsprings.count >= 2
+  end
 end

@@ -1,39 +1,28 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%="Aula #{room.name}, capacidad: #{room.capacity}"%></h3>
-  </div>
+<div class="table-responsive">
+  <table class="datatable table table-striped table-bordered table-hover" >
+    <tr>
+        <div class="list-view-pf-body">
+        <h3><%="Aula #{room.name}, capacidad: #{room.capacity}"%></h3>
+        </div>
+    </tr>
 
-  <div class="panel-body">
-     <div class="col-md-6">
-       <div class="row">
-        <% (1..4).each do |day| %>
-          <div class="col-lg-3">
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></li>
+
+    <td>
+      <div>
+        <% (1..7).each do |day| %>
+            <div class="list-view-pf-body">
+              <td>
+                <ul class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></ul>
                 <% room.shifts.where(day_of_week: day).order("start_time").each do |shift| %>
-                <li class="list-group-item-text">
-                  <%= "#{shift.start_time} , #{pluralize(shift.sites_available, "plaza")}"%>
-                </li>
-                  <% end %>
-          </div>
+                <ul class="list-group-item-text">
+                  <%= shift.start_time %>,
+                  <%= shift.room.capacity - shift.prebooked - shift.offsprings.count%>
+                  plazas <%=pluralize shift.offsprings.count, 'catecúmeno'%></ul>
+                <% end %>
+              </td>
+
+            </div>
         <% end %>
-       </div>
-     </div>
-    <div class="col-md-6">
-       <div class="row">
-        <% (5..7).each do |day| %>
-          <div class="col-lg-3">
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></li>
-                <% room.shifts.where(day_of_week: day).order("start_time").each do |shift| %>
-                <li class="list-group-item-text">
-                  <%= "#{shift.start_time} , #{pluralize(shift.sites_available, "plaza")}"%>
-                  <% end %>
-          </div>
-        <% end %>
-       </div>
       </div>
-    </div>
-  </div>
+    </td>
 </div>
-

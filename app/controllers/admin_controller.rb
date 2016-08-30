@@ -6,17 +6,13 @@ class AdminController < ApplicationController
   before_action :admin_user?
 
   def dashboard
-    @users = User.paginate(page: params[:users_page])
-    @offsprings = Offspring.paginate(page: params[:offsprings_page])
+    @users = User.all
+    @offsprings = Offspring.all
     @rooms = Room.all
-  end
-
-  def offsprings
-    @offsprings = Offspring.paginate(page: params[:page])
-  end
-
-  def rooms
-    @rooms = Room.all
+    @users_count = User.where(admin: false).count
+    @offspring_count = Offspring.all.count
+    @zero_offspring_count = user_0_offspr_count
+    @users_with_at_least_2_offspring = user_2_offspr_count
   end
 
   private
@@ -25,5 +21,21 @@ class AdminController < ApplicationController
     unless current_user.admin?
       redirect_to home_path
     end
+  end
+
+  def user_0_offspr_count
+    count = 0
+    User.all.each do |u|
+      count += 1 if u.no_offspring?
+    end
+    count
+  end
+
+  def user_2_offspr_count
+    count = 0
+    User.all.each do |u|
+      count += 1 if u.more_than_2_offspring?
+    end
+    count
   end
 end

@@ -1,7 +1,7 @@
 <% provide(:title, 'Lista de usuarios') %>
 <h1>Índice de usuarios</h1>
 
-<%= will_paginate :previous_label => "Previo", :next_label => "Siguiente"%>
+
 <table class="datatable table table-striped table-bordered table-hover">
   <thead>
     <tr>
@@ -23,4 +23,15 @@
     });
   </script>
 
-<%= will_paginate :previous_label => "Previo", :next_label => "Siguiente"%>
+<% provide(:title, "Lista de aulas") %>
+    <div class="table-responsive">
+      <table id= "user_table" class="datatable table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Aula</th>
+        </thead>
+        <tbody>
+            <%= render @rooms %>       
+        </tbody>
+      </table>
+</div>
