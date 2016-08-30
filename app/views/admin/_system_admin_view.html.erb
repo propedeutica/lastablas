@@ -18,11 +18,20 @@
             </ol>
           </li>
           <div>
-
-          <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" checked>
+          <%if ApplicationHelper.status_lock?%>    
+            <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" checked>
+          <%else%>
+            <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" unchecked>
+          <%end%>
           <script>
-            jQuery(".bootstrap-switch").bootstrapSwitch();
+            jQuery(".bootstrap-switch").bootstrapSwitch().on('switchChange.bootstrapSwitch', function () {
+                $.ajax({
+                  url: "/switch_lock_admin%22",
+                  type: 'POST'
+                });
+            });
           </script>
+
           </div>
         </p>
       </div>
