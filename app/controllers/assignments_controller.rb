@@ -5,13 +5,14 @@ class AssignmentsController < ApplicationController
     @rooms = Room.all
   end
 
-  def create
+  def create    
     if access_control?
       Offspring.transaction do
         of = Offspring.lock.find_by_id(params["format"])
         of.shift = Shift.find_by_id(params["shift"])
         of.save
       end
+      flash[:success] = I18n.t("assignment_create_success", scope: SCOPE)
     else
       flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
     end
@@ -28,6 +29,10 @@ class AssignmentsController < ApplicationController
   private
 
   def access_control?
-    !ApplicationHelper.status_lock?
+    if current_user.admin? 
+      true
+    else
+      !ApplicationHelper.status_lock?
+    end
   end
 end
