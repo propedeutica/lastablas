@@ -1,15 +1,9 @@
 # Contoller for Rooms, where the user can see and assing shifts
 class RoomsController < ApplicationController
   SCOPE = "activerecord.errors.controllers.room".freeze # Necessary to acces locales file
-  skip_before_action :authenticate_user!
-  before_action :authenticate_admin!, except: [:index]
 
   def index
-    if user_signed_in? || admin_signed_in? # authenticate user or admin
-      @rooms = Room.all
-    else
-      redirect_to new_user_session_path
-    end
+    @rooms = Room.all
   end
 
   def new
@@ -80,5 +74,9 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :capacity)
+  end
+
+  def access_control?
+    ApplicationHelper.status_lock?
   end
 end

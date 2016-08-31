@@ -50,7 +50,7 @@ RSpec.describe RoomsController, type: :controller do
   end
 
   context "When admin logged in" do
-    let(:admin) { FactoryGirl.create(:admin) }
+    let(:admin) { FactoryGirl.create(:user, :administratoe) }
     before(:each) do
       sign_in admin
     end

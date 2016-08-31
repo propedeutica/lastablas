@@ -1,7 +1,5 @@
 class ShiftsController < ApplicationController
   SCOPE = "activerecord.errors.controllers.shift".freeze # Necessary to acces locales file
-  skip_before_action :authenticate_user!
-  before_action :authenticate_admin!, except: [:show]
 
   def new
     @shift = Shift.new
@@ -19,25 +17,26 @@ class ShiftsController < ApplicationController
   end
 
   def show
-    if signed_in? # authenticate user or admin
-      @shift = Shift.find_by_id(params["id"])
-      if @shift.nil?
-        redirect_to home_path
-        return
-      else
-        @offsprings = @shift.offsprings
-      end
+    @shift = Shift.find_by_id(params["id"])
+    if @shift.nil?
+      redirect_to home_path
+      return
     else
-      redirect_to new_admin_session_path
+      @offsprings = @shift.offsprings
     end
+    redirect_to new_admin_session_path
   end
 
   def edit
-    @shift = Shift.find_by_id(params[:id])
-    if @shift.nil?
-      flash[:danger] = I18n.t("edit_wrong", scope: SCOPE)
-      redirect_to request.referer || home_path
-      return
+    if access_control?
+      @shift = Shift.find_by_id(params[:id])
+      if @shift.nil?
+        flash[:danger] = I18n.t("edit_wrong", scope: SCOPE)
+        redirect_to request.referer || home_path
+        return
+      end
+    else
+      flash[:danger] = I18n.t("admin_locked_edit", scope: SCOPE)
     end
   end
 

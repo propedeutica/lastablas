@@ -110,6 +110,7 @@ es:
       controllers:
         shift:
           create_correct: "Turno creado correctamente"
+          admin_locked_edit: "No puede editar el turno, el administrador ha bloqueado esta operación"
           no_room: "Debe asignar el turno a un aula existente"
           shift_non-existing: "No existe el turno que quiere eliminar"
           shift_destroy_correct: "Turno eliminado correctamente"
@@ -125,8 +126,11 @@ es:
           room_destroy_wrong: "No se pudo eliminar el aula"
           room_non-existing: "No existe el aula"
         offspring:
-          admin_locked_create: "No se puedo añadir al niño en este momento, espere."
-          admin_locked_destroy: "No se puedo destruir al niño en este momento, espere."
+          create_correct: "Niño añadido"
+          admin_locked_create: "El sistema está bloqueado, no se puedo añadir al niño en este momento"
+          destroy_correct: "Niño borrado"
+          destroy_wrong: "Error al eliminar al niño, vuelva a intentarlo"
+          admin_locked_destroy: "El sistema está bloqueado, no se puedo destruir al niño en este momento"
         assignment:
           admin_locked_create: "No se puedo añadir al niño en este momento, espere."
     attributes:
