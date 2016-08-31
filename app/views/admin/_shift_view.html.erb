@@ -1,47 +1,24 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div>
-      <h3 class="panel-title"><%="Aula #{room.name}, capacidad: #{room.capacity}"%></h3>
-      <div style="float:right; width: 50%;">
-
-        <div class="panel-body">
-          <div class="container-fluid">
-            <p>
-              <div class="list-group">
-
-                <button class="btn btn-secondary btn-lg" type="button" onclick="myFunction()">Nuevo Turno</button>               
-                <script>
-                  function myFunction() {
-                    alert("I am an alert box!");
-                  }
-                </script>
-              </div>  
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>      
+    <h3 class="panel-title"><%="Aula #{room.name}, capacidad: #{room.capacity}"%></h3>
   </div>
-
   <div class="panel-body">
-    <div class="col-md-6">
-      <div class="row" style="float:auto; width: auto;">
-        <% (1..7).each do |day| %>
-        <div class="col-lg-3">
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></li>
-            <% room.shifts.where(day_of_week: day).order("start_time").each do |shift| %>
-            <li class="list-group-item-text">
-              <%= link_to "#{shift.start_time} ,
-              #{shift.room.capacity - shift.prebooked - shift.offsprings.count} plazas, #{ pluralize shift.offsprings.count, 'catecúmeno'}",
-              shift_path(shift) %>
-            </li>
-            <% end %>
-          </ul>
+    <div class="container-fluid">
+      <% (1..5).each do |day| %>
+          <div class="col-sm-2">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-heading active"><%= week_day_convert(day) %></li>
+              <% room.shifts.where(day_of_week: day).order("start_time").each do |shift| %>
+              <li class="list-group-item-text">
+                <%= link_to "#{shift.start_time} ,
+                             #{shift.room.capacity - shift.prebooked - shift.offsprings.count} plazas, #{ pluralize shift.offsprings.count, 'catecúmeno'}",
+                    shift_path(shift) %>
+              </li>
+              <% end %>
+            </ul>
 
-        </div>
-        <% end %>
-      </div>  
+          </div>
+      <% end %>
     </div>
   </div>
 </div>
