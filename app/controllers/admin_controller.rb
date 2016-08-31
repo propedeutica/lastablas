@@ -7,13 +7,13 @@ class AdminController < ApplicationController
   before_action :authenticate_admin!
 
   def dashboard
-    @users = User.paginate(page: params[:users_page])
-    @offsprings = Offspring.paginate(page: params[:offsprings_page])
+    @users = User.all
+    @offsprings = Offspring.all
     @rooms = Room.all
   end
 
   def offsprings
-    @offsprings = Offspring.paginate(page: params[:page])
+    @offsprings = Offspring.all
   end
 
   def rooms
