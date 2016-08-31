@@ -112,6 +112,10 @@ es:
         offspring:
           admin_locked_create: "No se puedo añadir al niño en este momento, espere."
           admin_locked_destroy: "No se puedo destruir al niño en este momento, espere."
+          offspring_deleted: "El niño ha sido elimidado con éxito."
+          condition_primary_grade: "Sólo puede añadir a niños de 1º de Primaria"
+          add_offspring_success: "El niño ha sido añadido con éxito"
+          add_offspring_failure: "No ha sido posible añadir al niño."
         assignment:
           admin_locked_create: "No se puedo añadir al niño en este momento, espere."
           assignment_create_success: "Niño asignado correctamente"
@@ -129,4 +133,3 @@ es:
         first_name: "Nombre"
         last_name: "Apellidos"
         grade: "Curso"
-    

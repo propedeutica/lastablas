@@ -16,7 +16,7 @@ class OffspringsController < ApplicationController
     if access_control?
       @offspring = current_user.offsprings.build(offsprings_params)
       unless @offspring.primary_first?
-        flash[:warning] = "Sólo puede añadir a niños de 1º de Primaria"
+        flash[:warning] = I18n.t("condition_primary_grade", scope: SCOPE)
         redirect_to static_pages_intructions_path
         return
       end
@@ -31,7 +31,7 @@ class OffspringsController < ApplicationController
     if access_control?
       offspring = Offspring.find_by_id(params[:id])
       offspring.destroy
-      flash[:success] = "Niño borrado"
+      flash[:success] = I18n.t("offspring_deleted", scope: SCOPE)
     else
       flash[:alert] = I18n.t("admin_locked_destroy", scope: SCOPE)
     end
@@ -46,9 +46,9 @@ class OffspringsController < ApplicationController
 
   def save_offspring(off)
     if off.save
-      flash[:success] = "Niño añadido"
+      flash[:success] = I18n.t("add_offspring_success", scope: SCOPE)
     else
-      flash[:danger] = "No se pudo añadir al niño"
+      flash[:danger] = I18n.t("add_offspring_failure", scope: SCOPE)
     end
   end
 
