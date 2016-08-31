@@ -176,7 +176,6 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
-    redcarpet (2.1.1)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rspec (3.5.0)
@@ -281,7 +280,6 @@ DEPENDENCIES
   rack (= 1.5.2)
   rails (~> 4.1)
   rake
-  redcarpet (~> 2.1.1)
   rspec-rails (~> 3.4)
   rubocop
   sass-rails (>= 3.5)

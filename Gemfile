@@ -112,7 +112,7 @@ gem 'devise', "~> 3.0" # 4.0 needs ruby 2.2
 
 # Let's get a copy of documentation
 # Generating guides requires Redcarpet 2.1.1+.
-gem 'redcarpet', '~> 2.1.1'
+# gem 'redcarpet', '~> 2.1.1'
 
 # Introducing Angular UI
 #gem "angular-ui-bootstrap-rails",     "~>1.3.0"
