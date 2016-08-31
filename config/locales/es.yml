@@ -63,7 +63,9 @@ es:
               too_long: "demasiado largo"
               invalid: "no es válido"
               taken: "ya existe"
-            remember_me: "Recordarle"
+              remember_me: "Recordarle"
+            current_password:
+              blank: "no puede estar vacío"
         offspring:
           attributes:
             first_name:
