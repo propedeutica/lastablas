@@ -1,6 +1,6 @@
 # Catequesis
 [![security](https://hakiri.io/github/propedeutica/lastablas/master.svg)](https://hakiri.io/github/propedeutica/lastablas/master)
-
+[![Build Status](https://travis-ci.org/propedeutica/lastablas.svg?branch=master)](https://travis-ci.org/propedeutica/lastablas)
 ## Introduction
 This application tries to make it possible to reserve places in church school or similar system. Parents can sign up and then add their offspring, and then ask for a particular shift where they want to be assigned.
 
