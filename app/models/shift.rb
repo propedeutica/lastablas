@@ -14,6 +14,7 @@ class Shift < ActiveRecord::Base
       shift.errors.add(:shift, I18n.t("bad_time_continuity", scope: SCOPE)) if shift.start_time > shift.end_time
     end
   end
+  validates :room, presence: true
   validates :prebooked, presence: true, numericality: { only_integer: true }
   validates_each :prebooked do |shift|
     unless shift.errors.any? # Not running this validation until all previous succeed

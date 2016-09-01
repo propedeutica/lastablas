@@ -101,7 +101,6 @@ es:
             end_time:
               blank: "no puede estar vacío"
             prebooked:
-              blank: "no puede estar vacío"
               not_a_number: "tiene que ser un número entero"
           wrong_regex: "la hora debe tener el formato 00:00"
           sites_available_under_0: "tiene que haber sitios disponibles"
@@ -109,6 +108,35 @@ es:
 
       messages:
         record_invalid: "no es válido"
+
+      controllers:
+        shift:
+          create_correct: "Turno creado correctamente"
+          admin_locked_edit: "No puede editar el turno, el administrador ha bloqueado esta operación"
+          no_room: "Debe asignar el turno a un aula existente"
+          shift_non-existing: "No existe el turno que quiere eliminar"
+          shift_destroy_correct: "Turno eliminado correctamente"
+          shift_destroy_wrong: "Hubo un error eliminando el turno. Inténtelo de nuevo"
+          not_admin: "Solo un admin puede hacer esta acción"
+        room:
+          create_correct: "Aula creada correctamente"
+          create_wrong: "No fue posible crear el aula"
+          update_correct: "Aula modificada correctamente"
+          update_wrong: "No fue posible modificar los datos del aula"
+          edit_wrong: "No puede editar un aula que no existe"
+          show_wrong: "No existe el aula que quiere ver"
+          room_destroy_correct: "Aula elimnada correctamente"
+          room_destroy_wrong: "No se pudo eliminar el aula"
+          room_non-existing: "No existe el aula"
+          not_admin: "Solo un admin puede hacer esta acción"
+        offspring:
+          create_correct: "Niño añadido"
+          admin_locked_create: "El sistema está bloqueado, no se puedo añadir al niño en este momento"
+          destroy_correct: "Niño borrado"
+          destroy_wrong: "Error al eliminar al niño, vuelva a intentarlo"
+          admin_locked_destroy: "El sistema está bloqueado, no se puedo destruir al niño en este momento"
+        assignment:
+          admin_locked_create: "No se puedo añadir al niño en este momento, espere."
     attributes:
       user:
         first_name: "Nombre"
@@ -123,3 +151,4 @@ es:
         first_name: "Nombre"
         last_name: "Apellidos"
         grade: "Curso"
+    

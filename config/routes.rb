@@ -11,10 +11,11 @@ Rails.application.routes.draw do
     get 'home' => 'static_pages#home'
     resources :users, only: [:show, :index, :destroy]
     resources :offsprings, only: [:new, :create, :destroy]
-    resources :rooms, only: [:index]
+    resources :rooms, only: [:index, :show, :new, :create, :edit, :update, :destroy]
     resources :assignments, only: [:new, :create, :destroy]
-    resources :shifts, only: [:show]
+    resources :shifts, only: [:show, :new, :create, :edit, :update, :destroy]
     get 'admin' => 'admin#dashboard'
+    post 'switch_lock_admin"' => 'admin#switch_lock_admin'
     get 'offsprings' => 'admin#offsprings'
     get 'users' => 'admin#users'
   end
