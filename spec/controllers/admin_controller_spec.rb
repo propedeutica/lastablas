@@ -1,5 +1,5 @@
 require 'rails_helper'
-SCOPE_CONTROLLERS = "activerecord.errors.controllers".freeze
+SCOPE_CONTROLLERS = "activerecord.errors.controllers"
 
 RSpec.describe AdminController, type: :controller do
   let(:user_admin) { FactoryGirl.create(:user, :administrator) }
