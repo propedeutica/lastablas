@@ -17,9 +17,9 @@
             </li>
             <div>
               <%if ApplicationHelper.status_lock?%>    
-              <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" checked>
+                <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" checked>
               <%else%>
-              <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" unchecked>
+                <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" unchecked>
               <%end%>
               <script>
                 jQuery(".bootstrap-switch").bootstrapSwitch().on('switchChange.bootstrapSwitch', function () {
