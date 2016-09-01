@@ -116,7 +116,9 @@ es:
           admin_locked_destroy: "No se puedo destruir al niño en este momento, espere."
         assignment:
           admin_locked_create: "No se puedo añadir al niño en este momento, espere."
+
           assignment_create_success: "Niño asignado correctamente"
+
     attributes:
       user:
         first_name: "Nombre"
@@ -131,7 +133,6 @@ es:
         first_name: "Nombre"
         last_name: "Apellidos"
         grade: "Curso"
-
     controllers:
       assignment:
         admin_locked_create: "No se puedo añadir al niño en este momento, espere."
