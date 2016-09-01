@@ -3,7 +3,8 @@
 # They have an speicific layout to reflec this
 class AdminController < ApplicationController
   layout 'admin'
-  before_action :admin_user?
+  skip_before_action :authenticate_user!
+  before_action :authenticate_admin!
 
   def dashboard
     @users = User.all
@@ -17,13 +18,5 @@ class AdminController < ApplicationController
 
   def rooms
     @rooms = Room.all
-  end
-
-  private
-
-  def admin_user?
-    unless current_user.admin?
-      redirect_to home_path
-    end
   end
 end

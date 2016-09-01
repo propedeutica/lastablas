@@ -6,26 +6,32 @@
       <li class="list-group-item"><%= @user.first_name %></li>
       <li class="list-group-item"><%= @user.last_name %></li>
       <li class="list-group-item"><%= @user.email%></li>
+      <% unless admin_signed_in? %>
       <li class="list-group-item"><%= @user.phone%></li>
+      <% end %>
     </lu>
   </div>
 </h1>
-<div class="table">
-  <h2>Niños: (<%= @user.offsprings.count %>)</h2>
-  <table class="datatable table table-striped table-bordered">
-    <% if @user.offsprings.any? %>
-      <thead>
-        <h4>Niños cuyo padre o tutor legal es el usuario:</h4>
-      </thead>
-      <tbody>
-        <%= render partial: 'users/offspring', collection: @user.offsprings %>
-      </tbody>
-    <% end %>
-  </table>
-  <p>
-    <%= link_to "Añadir niño", new_offspring_path, class:"btn btn-lg btn-info" %>
-  </p>
-</div>
+<% if !admin_signed_in? && @user.offsprings.any? %>
+  <div class="table">
+    <h2>Niños: (<%= @user.offsprings.count %>)</h2>
+    <table class="datatable table table-striped table-bordered">
+        <thead>
+          <h4>Niños cuyo padre o tutor legal es el usuario:</h4>
+        </thead>
+        <tbody>
+          <%= render partial: 'users/offspring', collection: @user.offsprings %>
+        </tbody>
+    </table>
+  </div>
+<% end %>
+<% if admin_signed_in? %>
+    <p>Bienvenido Admin (añadir contenido solo para admin)</p>
+  <% else %>
+    <p>
+      <%= link_to "Añadir niño", new_offspring_path, class:"btn btn-lg btn-info" %>
+    </p>
+<% end %>
 
 <script>
   // Initialize Datatables
