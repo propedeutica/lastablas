@@ -1,7 +1,6 @@
 <% provide(:title, 'Lista de usuarios') %>
 <h1>Índice de usuarios</h1>
 
-<%= will_paginate :previous_label => "Previo", :next_label => "Siguiente"%>
 <table class="datatable table table-striped table-bordered table-hover">
   <thead>
     <tr>
@@ -22,5 +21,3 @@
       $('.datatable').dataTable();
     });
   </script>
-
-<%= will_paginate :previous_label => "Previo", :next_label => "Siguiente"%>

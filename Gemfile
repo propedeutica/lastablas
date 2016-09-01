@@ -89,7 +89,7 @@ end
 # Add rack specific version to fix deployment error
 # in OpenShift online
 
-gem 'rack', '1.5.2'
+gem 'rack'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
@@ -112,7 +112,7 @@ gem 'devise', "~> 3.0" # 4.0 needs ruby 2.2
 
 # Let's get a copy of documentation
 # Generating guides requires Redcarpet 2.1.1+.
-gem 'redcarpet', '~> 2.1.1'
+# gem 'redcarpet', '~> 2.1.1'
 
 # Introducing Angular UI
 #gem "angular-ui-bootstrap-rails",     "~>1.3.0"

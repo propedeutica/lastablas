@@ -1,4 +1,5 @@
 <div class="panel panel-default">
+<<<<<<< HEAD
   
 
 <div style="float:left; width: 50%;">
@@ -38,24 +39,56 @@
     </div>
   </div> 
 
+=======
+>>>>>>> b2aac19f380a5af8fe393e0b2108ca56601ea8dc
   <div style="float:left; width: 50%;">
     <div class="panel-heading">
-      <h3 id= "blocker_panel_title" class="panel-title"><%="Borrado de la base de datos"%></h3>
+      <h3 id= "blocker_panel_title" class="panel-title"><%="Bloqueo de cambios"%></h3>
     </div>
     <div class="panel-body">
       <div class="container-fluid">
         <p>
           <ul class="list-group">
-            <li> Ésta acción permite al administrador eliminar la base de datos. </li>
-              
-            <button class="btn btn-danger btn-lg" type="button" onclick="myFunction()">Borrar BBDD</button>               
-            <script>
-            function myFunction() {
-                alert("I am an alert box!");
-            }
-            </script>
-        </p>
+            <li> Ésta acción permite al administrador bloquear cambios que puedan hacer los usuarios.
+              <ol>
+                <li> No se podrán añadir usuarios nuevos. </li>
+                <li> No se podrán agregar hijos. </li>
+                <li> No podrán cambiar o reasignar aulas/turnos a no ser que seas administrador. </li>
+                <li> Cada usuario <b>SÍ</b> podrá borrar su cuenta. </li>
+              </ol>
+            </li>
+            <div>
+              <%if ApplicationHelper.status_lock?%>    
+                <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" checked>
+              <%else%>
+                <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" unchecked>
+              <%end%>
+              <script>
+                jQuery(".bootstrap-switch").bootstrapSwitch().on('switchChange.bootstrapSwitch', function () {
+                  $.ajax({
+                    url: "/switch_lock_admin%22",
+                    type: 'POST'
+                  });
+                });
+              </script>
+            </div>
+          </p>
+        </div>
+      </div>
+    </div> 
+
+    <div style="float:left; width: 50%;">
+      <div class="panel-heading">
+        <h3 id= "blocker_panel_title" class="panel-title"><%="Borrado de la base de datos"%></h3>
+      </div>
+      <div class="panel-body">
+        <div class="container-fluid">
+          <p>
+            <ul class="list-group">
+              <li> Ésta acción permite al administrador eliminar la base de datos. </li>
+              <button class="btn btn-danger btn-lg" type="button" onclick="myFunction()">Borrar BBDD</button>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div> 
-</div>

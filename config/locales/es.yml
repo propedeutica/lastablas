@@ -63,7 +63,9 @@ es:
               too_long: "demasiado largo"
               invalid: "no es válido"
               taken: "ya existe"
-            remember_me: "Recordarle"
+              remember_me: "Recordarle"
+            current_password:
+              blank: "no puede estar vacío"
         offspring:
           attributes:
             first_name:
@@ -112,10 +114,13 @@ es:
         offspring:
           admin_locked_create: "No se puedo añadir al niño en este momento, espere."
           admin_locked_destroy: "No se puedo destruir al niño en este momento, espere."
+<<<<<<< HEAD
           offspring_deleted: "El niño ha sido elimidado con éxito."
           condition_primary_grade: "Sólo puede añadir a niños de 1º de Primaria"
           add_offspring_success: "El niño ha sido añadido con éxito"
           add_offspring_failure: "No ha sido posible añadir al niño."
+=======
+>>>>>>> b2aac19f380a5af8fe393e0b2108ca56601ea8dc
         assignment:
           admin_locked_create: "No se puedo añadir al niño en este momento, espere."
           assignment_create_success: "Niño asignado correctamente"
@@ -133,3 +138,6 @@ es:
         first_name: "Nombre"
         last_name: "Apellidos"
         grade: "Curso"
+    controllers:
+      assignment:
+        admin_locked_create: "No se puedo añadir al niño en este momento, espere."
