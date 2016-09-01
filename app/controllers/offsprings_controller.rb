@@ -19,7 +19,7 @@ class OffspringsController < ApplicationController
     else
       flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
     end
-    redirect_to root_path
+    redirect_to root_path and return
   end
 
   def destroy
