@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  # when admin is authenticated
+  authenticate :admins do
+    root to: "static_pages#home"
+    get 'home' => 'static_pages#home'
+    get 'admin' => 'admin#dashboard'
+    get 'offsprings' => 'admin#offsprings'
+  end
   # Instructions for the apo
   get 'static_pages/intructions'
   get 'help' => 'static_pages#help'
