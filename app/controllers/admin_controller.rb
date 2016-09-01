@@ -9,14 +9,10 @@ class AdminController < ApplicationController
     @users = User.all
     @offsprings = Offspring.all
     @rooms = Room.all
-  end
-
-  def offsprings
-    @offsprings = Offspring.all
-  end
-
-  def rooms
-    @rooms = Room.all
+    @users_count = User.where(admin: false).count
+    @offspring_count = Offspring.all.count
+    @zero_offspring_count = User.count - User.joins(:offsprings).uniq.count
+    @users_with_at_least_2_offspring = user_2_offspr_count
   end
 
   private
@@ -25,5 +21,13 @@ class AdminController < ApplicationController
     unless current_user.admin?
       redirect_to home_path
     end
+  end
+
+  def user_2_offspr_count
+    count = 0
+    User.all.each do |u|
+      count += 1 if u.more_than_2_offspring?
+    end
+    count
   end
 end
