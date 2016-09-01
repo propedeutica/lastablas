@@ -2,7 +2,8 @@ require 'rails_helper'
 SCOPE_CONTROLLERS = "activerecord.errors.controllers"
 
 RSpec.describe AdminController, type: :controller do
-  let(:user_admin) { FactoryGirl.create(:user, :administrator) }
+  
+  let(:user_admin) { FactoryGirl.create(:admin) }
   context "admin user" do
     describe "GET #dashboard" do
       it "returns http success" do
