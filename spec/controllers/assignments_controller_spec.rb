@@ -1,5 +1,5 @@
-require 'rails_helper'  
-SCOPE_SHIFT = "activerecord.errors.models.shift.attributes" # Necessary to acces locales file
+require 'rails_helper'
+SCOPE_SHIFT = "activerecord.errors.models.shift.attributes".freeze # Necessary to acces locales file
 
 RSpec.describe AssignmentsController, type: :controller do
   context "invalid " do

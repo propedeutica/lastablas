@@ -117,6 +117,7 @@ es:
           shift_non-existing: "No existe el turno que quiere eliminar"
           shift_destroy_correct: "Turno eliminado correctamente"
           shift_destroy_wrong: "Hubo un error eliminando el turno. Inténtelo de nuevo"
+          not_admin: "Solo un admin puede hacer esta acción"
         room:
           create_correct: "Aula creada correctamente"
           create_wrong: "No fue posible crear el aula"
