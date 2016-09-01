@@ -15,12 +15,11 @@ class OffspringsController < ApplicationController
   def create
     if access_control?
       @offspring = current_user.offsprings.build(offsprings_params)
-      validate_offspring(@offspring)
+      return unless validate_create_offspring? @offspring
     else
       flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
     end
     redirect_to root_path
-    return
   end
 
   def destroy
@@ -52,12 +51,13 @@ class OffspringsController < ApplicationController
     !ApplicationHelper.status_lock?
   end
 
-  def validate_offspring(off)
+  def validate_create_offspring?(off)
     unless off.primary_first?
       flash[:warning] = I18n.t("condition_primary_grade", scope: SCOPE)
       redirect_to static_pages_intructions_path
-      return
+      return false
     end
     save_offspring(off)
+    return true
   end
 end
