@@ -58,6 +58,6 @@ class OffspringsController < ApplicationController
       return false
     end
     save_offspring(off)
-    return true
+    true
   end
 end
