@@ -5,7 +5,7 @@ class AssignmentsController < ApplicationController
     @rooms = Room.all
   end
 
-  def create
+  def create    
     if access_control?
       Offspring.transaction do
         of = Offspring.lock.find_by_id(params["format"])
