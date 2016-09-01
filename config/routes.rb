@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'home' => 'static_pages#home'
     resources :users, only: [:show, :index, :destroy]
     resources :offsprings, only: [:new, :create, :destroy]
-    resources :rooms, only: [:index]
+    resources :rooms, only: [:index, :show, :new, :create, :edit, :update, :destroy]
     resources :assignments, only: [:new, :create, :destroy]
     resources :shifts, only: [:show]
     get 'admin' => 'admin#dashboard'

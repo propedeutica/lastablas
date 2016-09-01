@@ -1,4 +1,5 @@
-require 'rails_helper'
+require 'rails_helper'  
+SCOPE_SHIFT = "activerecord.errors.models.shift.attributes" # Necessary to acces locales file
 
 RSpec.describe AssignmentsController, type: :controller do
   context "invalid " do
@@ -54,7 +55,7 @@ RSpec.describe AssignmentsController, type: :controller do
         shift.prebooked = nil
         shift.valid?
         expect(shift).not_to be_valid
-        expect(shift.errors[:prebooked]).to include "no puede estar vacío"
+        expect(shift.errors[:prebooked]).to include I18n.t("prebooked.not_a_number", scope: SCOPE_SHIFT)
       end
     end
   end
