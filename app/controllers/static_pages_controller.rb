@@ -1,11 +1,7 @@
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :about, :help]
+  skip_before_action :authenticate_user!, only: [:about, :help]
   def home
-    unless signed_in?
-      redirect_to new_user_session_path
-      return
-    end
-    @user = current_user || current_admin
+    @user = current_user
   end
 
   def about
