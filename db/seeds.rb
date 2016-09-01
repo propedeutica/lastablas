@@ -15,12 +15,10 @@ end
 
 1.times do
   a = FactoryGirl.build(:admin)
-  a.name = "Alberto"
+  a.first_name = "Alberto"
+  a.last_name = "Ramos"
   a.email = "alberto@example.com"
   a.save
-  2.times do
-    a.offsprings << FactoryGirl.build(:offspring, user: a, last_name: "Unamuno")
-  end
 end
 
 99.times do
