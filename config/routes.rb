@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :assignments, only: [:new, :create, :destroy]
     resources :shifts, only: [:show]
     get 'admin' => 'admin#dashboard'
+    post 'switch_lock_admin"' => 'admin#switch_lock_admin'
     get 'offsprings' => 'admin#offsprings'
     get 'users' => 'admin#users'
   end
