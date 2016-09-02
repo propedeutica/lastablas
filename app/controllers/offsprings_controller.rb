@@ -15,16 +15,7 @@ class OffspringsController < ApplicationController
   def create
     if access_control?
       @offspring = current_user.offsprings.build(offsprings_params)
-<<<<<<< HEAD
       return unless validate_create_offspring? @offspring
-=======
-      unless @offspring.primary_first?
-        flash[:warning] = "Sólo puede añadir a niños de 1º de Primaria"
-        redirect_to static_pages_intructions_path
-        return
-      end
-      save_offspring(@offspring)
->>>>>>> b2aac19f380a5af8fe393e0b2108ca56601ea8dc
     else
       flash[:alert] = I18n.t("admin_locked_create", scope: SCOPE)
     end
@@ -35,11 +26,7 @@ class OffspringsController < ApplicationController
     if access_control?
       offspring = Offspring.find_by_id(params[:id])
       offspring.destroy
-<<<<<<< HEAD
       flash[:success] = I18n.t("offspring_deleted", scope: SCOPE)
-=======
-      flash[:success] = "Niño borrado"
->>>>>>> b2aac19f380a5af8fe393e0b2108ca56601ea8dc
     else
       flash[:alert] = I18n.t("admin_locked_destroy", scope: SCOPE)
     end
@@ -54,22 +41,15 @@ class OffspringsController < ApplicationController
 
   def save_offspring(off)
     if off.save
-<<<<<<< HEAD
       flash[:success] = I18n.t("add_offspring_success", scope: SCOPE)
     else
       flash[:danger] = I18n.t("add_offspring_failure", scope: SCOPE)
-=======
-      flash[:success] = "Niño añadido"
-    else
-      flash[:danger] = "No se pudo añadir al niño"
->>>>>>> b2aac19f380a5af8fe393e0b2108ca56601ea8dc
     end
   end
 
   def access_control?
     !ApplicationHelper.status_lock?
   end
-<<<<<<< HEAD
 
   def validate_create_offspring?(off)
     unless off.primary_first?
@@ -80,6 +60,4 @@ class OffspringsController < ApplicationController
     save_offspring(off)
     true
   end
-=======
->>>>>>> b2aac19f380a5af8fe393e0b2108ca56601ea8dc
 end
