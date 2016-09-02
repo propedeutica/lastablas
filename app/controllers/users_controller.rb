@@ -25,12 +25,14 @@ class UsersController < ApplicationController
   private
 
   def delete_possible?(user)
-    if user.nil?
+    if current_user.admin?
+      return true
+    elsif user.nil?
       return false
-    elsif user == current_user
+    elsif user != current_user
       return false
-    elsif !current_user.admin?
-      return false
+    elsif current_user.admin?
+      return true
     else
       return true
     end
