@@ -3,7 +3,6 @@
     <div class="panel-heading">
       <h3 id= "blocker_panel_title" class="panel-title"><%="Bloqueo de cambios"%></h3>
     </div>
-
     <div class="panel-body">
       <div class="container-fluid">
         <p>
@@ -16,17 +15,25 @@
                 <li> Cada usuario <b>SÍ</b> podrá borrar su cuenta. </li>
               </ol>
             </li>
-          </ul>
-          <div>
-            <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" checked>
-            <script>
-              jQuery(".bootstrap-switch").bootstrapSwitch();
-            </script>
-          </div>
-        </p>
+            <div>
+              <%if ApplicationHelper.status_lock?%>    
+                <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" checked>
+              <%else%>
+                <input class="bootstrap-switch" id="bootstrap-switch-state" type="checkbox" unchecked>
+              <%end%>
+              <script>
+                jQuery(".bootstrap-switch").bootstrapSwitch().on('switchChange.bootstrapSwitch', function () {
+                  $.ajax({
+                    url: "/switch_lock_admin%22",
+                    type: 'POST'
+                  });
+                });
+              </script>
+            </div>
+          </p>
+        </div>
       </div>
-    </div>
-  </div>
+    </div> 
 
     <div style="float:left; width: 50%;">
       <div class="panel-heading">
@@ -42,4 +49,4 @@
           </div>
         </div>
       </div>
-</div>
+    </div>
