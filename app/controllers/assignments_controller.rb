@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-  SCOPE = "activerecord.errors.controllers.assignment".freeze # Necessary to acces locales file
+  SCOPE = "activerecord.errors.controllers.assignment"
   def new
     @offspring = Offspring.find_by_id(params[:format])
     @rooms = Room.all

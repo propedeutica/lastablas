@@ -112,10 +112,10 @@ es:
 
       controllers:
         offspring:
-          admin_locked_create: "No se puedo añadir al niño en este momento, espere."
-          admin_locked_destroy: "No se puedo destruir al niño en este momento, espere."
+          admin_locked_create: "El sistema está bloqueado y no permite cambios en este momento"
+          admin_locked_destroy: "El sistema está bloqueado y no permite cambios en este momento"
         assignment:
-          admin_locked_create: "No se puedo añadir al niño en este momento, espere."
+          admin_locked_create: "El sistema está bloqueado y no permite asinar en este momento"
           assignment_create_success: "Niño asignado correctamente"
     attributes:
       user:
@@ -133,4 +133,4 @@ es:
         grade: "Curso"
     controllers:
       assignment:
-        admin_locked_create: "No se puedo añadir al niño en este momento, espere."
+        admin_locked_create: "El sistema está bloqueado y no permite cambios en este momento"
