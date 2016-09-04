@@ -1,6 +1,6 @@
 class Shift < ActiveRecord::Base
   REGEX = /\A([01]\d|2[0123]):[012345]\d\z/
-  SCOPE = "activerecord.errors.models.shift"
+  SCOPE = "activerecord.errors.models.shift".freeze
   belongs_to :room
   has_many :offsprings, dependent: :nullify
   validates :day_of_week, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1,

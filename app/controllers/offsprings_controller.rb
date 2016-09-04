@@ -1,7 +1,7 @@
 # Offsprings are dependent on users and are the ones that get assigned to shifts
 # They can't be assigned themselves, and need the process to be done by the user
 class OffspringsController < ApplicationController
-  SCOPE = "activerecord.errors.controllers.offspring"
+  SCOPE = "activerecord.errors.controllers.offspring".freeze
   def show
   end
 

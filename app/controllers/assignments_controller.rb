@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-  SCOPE = "activerecord.errors.controllers.assignment"
+  SCOPE = "activerecord.errors.controllers.assignment".freeze
   def new
     @offspring = Offspring.find_by_id(params[:format])
     @rooms = Room.all
