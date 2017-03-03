@@ -1,3 +1,6 @@
+# THIS PROJECT IS NO LONGER MAINTAINED, AS THERE IS A NEW VERSION CALLED SHIFT-RESERVATION (AND AN ANGULAR VERSION BASED ON THAT ONE)
+# PLEASE USE THE NEW VERSION INSTEAD O F THIS
+
 # Catequesis
 [![security](https://hakiri.io/github/propedeutica/lastablas/master.svg)](https://hakiri.io/github/propedeutica/lastablas/master)
 [![Build Status](https://travis-ci.org/propedeutica/lastablas.svg?branch=master)](https://travis-ci.org/propedeutica/lastablas)
