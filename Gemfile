@@ -89,7 +89,7 @@ end
 # Add rack specific version to fix deployment error
 # in OpenShift online
 
-gem 'rack', '1.5.2'
+gem 'rack'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
